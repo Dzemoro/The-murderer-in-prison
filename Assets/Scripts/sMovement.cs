@@ -18,6 +18,11 @@ public class sMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        transform.up = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y); 
+
+
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
