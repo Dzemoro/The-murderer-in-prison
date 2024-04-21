@@ -5,14 +5,13 @@ using UnityEngine;
 public class sMovement : MonoBehaviour
 {
 
-    private float speed;
+    [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 movementDirection;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 4f;
     }
 
     // Update is called once per frame
@@ -22,19 +21,19 @@ public class sMovement : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.up = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y); 
 
-
-        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        movementDirection.Normalize();
     }
 
     private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            rb.velocity = movementDirection * (speed/3);
+            rb.MovePosition(rb.position + movementDirection * (speed / 3) * Time.fixedDeltaTime);
         }
         else
         {
-            rb.velocity = movementDirection * speed;
+            rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
         }
     }
 }
