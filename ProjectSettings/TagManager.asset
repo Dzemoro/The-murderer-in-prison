@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: X1
+    uniqueID: 1835119265
+    locked: 0
+  - name: X2
+    uniqueID: 4075932349
+    locked: 0
+  - name: Walls
+    uniqueID: 266535579
+    locked: 0
