@@ -8,11 +8,13 @@ public class sNPC : MonoBehaviour
 {
     public NPCConversation Conversation;
     private bool _playerIsClose;
+    public string PrisonerName;
+    public string PrisonerRole;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        PrisonerRole = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().GetRole(PrisonerName);
     }
 
     // Update is called once per frame
