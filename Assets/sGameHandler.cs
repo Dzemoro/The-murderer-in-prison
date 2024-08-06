@@ -25,6 +25,11 @@ public class sGameHandler : MonoBehaviour
         //PrisonerList.Add(new PrisonerRole("Gene Roddenberry", "Totaly OK")); <- Just for testing the loading of pre-existing values of the list
     }
 
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
