@@ -13,7 +13,7 @@ public enum PrisonerRole
     /// </summary>
     Murderer,
     /// <summary>
-    /// Confirms someones aliby
+    /// Confirms someones alibi
     /// </summary>
     Verifier,
     /// <summary>
