@@ -8,10 +8,12 @@ public class sMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 movementDirection;
+    public bool _freeToAct;
 
     // Start is called before the first frame update
     void Start()
     {
+        _freeToAct = true;
     }
 
     void Awake()
@@ -22,21 +24,24 @@ public class sMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        transform.up = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y); 
+        if (_freeToAct)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            transform.up = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
 
-        movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        movementDirection.Normalize();
+            movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            movementDirection.Normalize();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (_freeToAct && Input.GetKey(KeyCode.LeftShift))
         {
             rb.MovePosition(rb.position + movementDirection * (speed / 3) * Time.fixedDeltaTime);
         }
-        else
+        else if (_freeToAct)
         {
             rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
         }
