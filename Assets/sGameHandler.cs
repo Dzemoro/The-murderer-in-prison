@@ -70,6 +70,7 @@ public class sGameHandler : MonoBehaviour
         {
             _tempPrisoner.GetComponent<sNPC>().GetPrisonerData(GetPrisoner(_tempPrisoner.GetComponent<sNPC>().GetNPCName()));
             //Here we assign the dialogue before all the roles are handed out. Maybe it will require a second foreach? TBC
+            //Here we assign the dialogue before all the roles are handed out. Maybe it will require a second foreach? TBC
             _tempPrisoner.GetComponent<sNPC>().FillConversation(_tempPrisoner.GetComponent<sNPC>().PrisonerData.RoleDialogue);
         }
     }
