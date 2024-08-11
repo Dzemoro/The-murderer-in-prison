@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4348304559966825734}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Conversation: {fileID: 7807158731777009988}
+  Name: 
 --- !u!1 &4980838508684157214
 GameObject:
   m_ObjectHideFlags: 0

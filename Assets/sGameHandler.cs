@@ -56,14 +56,22 @@ public class sGameHandler : MonoBehaviour
         { PrisonerRole.None, new[] { "I didn't do it! I don't know who did." } },
         { PrisonerRole.Murderer, new[] { "I didn't do it! I don't know who did." } },
         { PrisonerRole.Verifier, new[] { "It couldn't be {0}." } },
-        { PrisonerRole.Witness, new[] { "I was {0}." } },
+        { PrisonerRole.Witness, new[] { "It was {0}." } },
         { PrisonerRole.Informant, new[] { "{0} might know something." } },
     };
 
     // Start is called before the first frame update
     void Start()
     {
-         //PrisonerList.Add(new PrisonerRole("Gene Roddenberry", "Totaly OK")); <- Just for testing the loading of pre-existing values of the list
+        //PrisonerList.Add(new PrisonerRole("Gene Roddenberry", "Totaly OK")); <- Just for testing the loading of pre-existing values of the list
+       
+        GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
+        foreach (GameObject _tempPrisoner in _allPrisoners)
+        {
+            _tempPrisoner.GetComponent<sNPC>().GetPrisonerData(GetPrisoner(_tempPrisoner.GetComponent<sNPC>().GetNPCName()));
+            //Here we assign the dialogue before all the roles are handed out. Maybe it will require a second foreach? TBC
+            _tempPrisoner.GetComponent<sNPC>().FillConversation(_tempPrisoner.GetComponent<sNPC>().PrisonerData.RoleDialogue);
+        }
     }
 
     void Awake()

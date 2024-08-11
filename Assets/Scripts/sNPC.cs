@@ -13,8 +13,8 @@ public class sNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().GetPrisoner(Name);
-        FillConversation(PrisonerData.RoleDialogue);
+        //PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().GetPrisoner(Name);
+        //FillConversation(PrisonerData.RoleDialogue);
     }
 
     // Update is called once per frame
@@ -39,7 +39,17 @@ public class sNPC : MonoBehaviour
         }
     }
 
-    private void FillConversation(string text)
+    public string GetNPCName()
+    {
+        return Name;
+    }
+
+    public void GetPrisonerData(Prisoner _prisonerData)
+    {
+        PrisonerData = _prisonerData;
+    }
+
+    public void FillConversation(string text)
     {
         var conv = this.Conversation.DeserializeForEditor();
         conv.GetRootNode().Name = Name;
