@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -43,14 +44,9 @@ public class Prisoner
 
 public class sGameHandler : MonoBehaviour
 {
-    private Dictionary<string, Prisoner> _prisoners = new();
-
     [SerializeField] private int WitnessCount;
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
-    [SerializeField] private int AllPrisonersCount;
-    public IReadOnlyDictionary<string, Prisoner> Prisoners => _prisoners;
-    private RoleNumber[] _leftRoles;
     private Dictionary<PrisonerRole, IReadOnlyList<string>> _dialogueDictionary = new()
     {
         { PrisonerRole.None, new[] { "I didn't do it! I don't know who did." } },
@@ -60,19 +56,27 @@ public class sGameHandler : MonoBehaviour
         { PrisonerRole.Informant, new[] { "{0} might know something." } },
     };
 
+
+    private IReadOnlyDictionary<string, Prisoner> _prisoners = new Dictionary<string, Prisoner>();
+
+    /// <summary>
+    /// Dictionary of all prisoners names with roles assigned to them.
+    /// </summary>
+    public IReadOnlyDictionary<string, Prisoner> Prisoners
+    {
+        get 
+        {
+            if (!_prisoners.Any())
+                _prisoners = CreateRolesDictionary(GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>().GetNPCName()));
+            return _prisoners;
+        } 
+    }
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        //PrisonerList.Add(new PrisonerRole("Gene Roddenberry", "Totaly OK")); <- Just for testing the loading of pre-existing values of the list
-       
-        GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
-        foreach (GameObject _tempPrisoner in _allPrisoners)
-        {
-            _tempPrisoner.GetComponent<sNPC>().GetPrisonerData(GetPrisoner(_tempPrisoner.GetComponent<sNPC>().GetNPCName()));
-            //Here we assign the dialogue before all the roles are handed out. Maybe it will require a second foreach? TBC
-            //Here we assign the dialogue before all the roles are handed out. Maybe it will require a second foreach? TBC
-            _tempPrisoner.GetComponent<sNPC>().FillConversation(_tempPrisoner.GetComponent<sNPC>().PrisonerData.RoleDialogue);
-        }
+        
     }
 
     void Awake()
@@ -92,47 +96,63 @@ public class sGameHandler : MonoBehaviour
         } // Debug to check list of prisoners*/
     }
 
-    public Prisoner GetPrisoner(string name)
+    private string GetRandomDialogue(PrisonerRole role, string relationName)
     {
-        if (_leftRoles is null)
-            _leftRoles = new RoleNumber[] { new(1, PrisonerRole.Murderer), new(WitnessCount, PrisonerRole.Witness), new(InformantCount, PrisonerRole.Informant), new(VerifierCount, PrisonerRole.Verifier) };
-
-        if (_prisoners.ContainsKey(name))
-            return _prisoners[name];
-
-        var number = Random.Range(0, AllPrisonersCount);
-        var lastTarget = -1;
-        foreach ( var role in _leftRoles )
-        {
-            if (role.NumberLeft > 0)
-            {
-                if (number >= lastTarget + 1 && number <= lastTarget + role.NumberLeft)
-                {
-                    role.NumberLeft--;
-                    AllPrisonersCount--;
-                    _prisoners.Add(name, new Prisoner(name, role.Role, _dialogueDictionary[role.Role][Random.Range(0, _dialogueDictionary[role.Role].Count())]));
-                    System.Diagnostics.Debug.WriteLine($"{name} is {_prisoners[name].Role}.");
-                    return _prisoners[name];
-                }
-                else
-                    lastTarget += role.NumberLeft;
-            }
-        }
-        AllPrisonersCount--;
-        _prisoners.Add(name, new Prisoner(name, PrisonerRole.None, _dialogueDictionary[PrisonerRole.None][Random.Range(0, _dialogueDictionary[PrisonerRole.None].Count())]));
-        System.Diagnostics.Debug.WriteLine($"{name} is {_prisoners[name].Role}.");
-        return _prisoners[name];
+        var templates = _dialogueDictionary[role];
+        if (string.IsNullOrWhiteSpace(relationName))
+            return templates[Random.Range(0, templates.Count)];
+        return string.Format(templates[Random.Range(0, templates.Count)], relationName);
     }
 
-    private record RoleNumber
+    private IReadOnlyDictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
     {
-        public readonly PrisonerRole Role;
-        public int NumberLeft;
+        IList<string> namesList = names is IList<string> ? names as IList<string> : names.ToList();
 
-        public RoleNumber(int numberLeft, PrisonerRole role)
+        var availableRoles = new Dictionary<PrisonerRole, int>() //WARNING: The order of entries here is important!
         {
-            Role = role;
-            NumberLeft = numberLeft;
+            { PrisonerRole.Murderer, 1 },
+            { PrisonerRole.Witness, WitnessCount },
+            { PrisonerRole.Informant, InformantCount },
+            { PrisonerRole.None, namesList.Count - (1 + WitnessCount + InformantCount + VerifierCount)},
+            { PrisonerRole.Verifier, VerifierCount }
+        };
+
+        var prisonersDictionary = new Dictionary<string, Prisoner>();
+        
+        foreach (var role in availableRoles.Keys.ToList())
+        {
+            while (availableRoles[role] > 0)
+            {
+                var nameIndex = Random.Range(0, namesList.Count);
+                var name = namesList[nameIndex];
+                var relation = GetRandomRelation(prisonersDictionary.Values, role);
+                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogue(role, relation)));
+                System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {relation}.");
+                namesList.RemoveAt(nameIndex);
+                availableRoles[role]--;
+            }
+        }
+
+        return prisonersDictionary;
+    }
+
+    private string GetRandomRelation(IEnumerable<Prisoner> prisoners, PrisonerRole role)
+    {
+        return role switch
+        {
+            PrisonerRole.Witness => PickName(p => p.Role == PrisonerRole.Murderer), 
+            PrisonerRole.Informant => PickName(p => p.Role == PrisonerRole.Witness),
+            PrisonerRole.Verifier => PickName(p => p.Role != PrisonerRole.Murderer), //WARNING: The usage of this function without full list of prisoners and their roles makes some of the combinations impossible
+            _ => string.Empty
+        };
+
+
+        string PickName(System.Func<Prisoner, bool> predicate)
+        {
+            if (predicate is null)
+                return prisoners.ElementAt(Random.Range(0, prisoners.Count())).Name;
+            var list = prisoners.Where(p => predicate(p)).ToList();
+            return list[Random.Range(0, list.Count)].Name;
         }
     }
 }
