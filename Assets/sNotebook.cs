@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class sNotebook : MonoBehaviour
@@ -9,6 +10,7 @@ public class sNotebook : MonoBehaviour
 
     public Dictionary<string, string> _entries = new ();
     private string _tempEntryConsolidate;
+    private string _crimeClue;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +50,10 @@ public class sNotebook : MonoBehaviour
 
     private void FillNotebook()
     {
-        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "";
+        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was bruttaly murdered. " +
+                                                                                         "We are sure that is was one of the other inmates but we currently don't know who might have done such a thing. " +
+                                                                                         "Please help us find out before future crimes are commited.\nWe might have a clue:" +
+                                                                                         _crimeClue + "\n\n\n";
         foreach (var _entry in _entries)
         {
             GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text += "<u>" + _entry.Key + "</u>\n" + _entry.Value + "\n\n\n";
@@ -60,5 +65,12 @@ public class sNotebook : MonoBehaviour
         _entries[_prisonerName] += "\nHeard from: " + _stringAppend;
 
         FillNotebook();
-    }    
+    }
+    
+    public void UpdateClue(string _clue)
+    {
+        _crimeClue = _clue;
+
+        FillNotebook() ;
+    }
 }
