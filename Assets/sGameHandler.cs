@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -47,14 +48,7 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int WitnessCount;
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
-    private Dictionary<PrisonerRole, IReadOnlyList<string>> _dialogueDictionary = new()
-    {
-        { PrisonerRole.None, new[] { "I didn't do it! I don't know who did." } },
-        { PrisonerRole.Murderer, new[] { "I didn't do it! I don't know who did." } },
-        { PrisonerRole.Verifier, new[] { "It couldn't be {0}." } },
-        { PrisonerRole.Witness, new[] { "It was {0}." } },
-        { PrisonerRole.Informant, new[] { "{0} might know something." } },
-    };
+    private IReadOnlyDictionary<string, IReadOnlyDictionary<PrisonerRole, string[]>> _dialogueDictionary = ReadDialogueFile();
 
 
     private IReadOnlyDictionary<string, Prisoner> _prisoners = new Dictionary<string, Prisoner>();
@@ -96,12 +90,12 @@ public class sGameHandler : MonoBehaviour
         } // Debug to check list of prisoners*/
     }
 
-    private string GetRandomDialogue(PrisonerRole role, string relationName)
+    private string GetRandomDialogue(string name, PrisonerRole role, string relationName)
     {
-        var templates = _dialogueDictionary[role];
+        var templates = _dialogueDictionary[name][role];
         if (string.IsNullOrWhiteSpace(relationName))
-            return templates[Random.Range(0, templates.Count)];
-        return string.Format(templates[Random.Range(0, templates.Count)], relationName);
+            return templates[Random.Range(0, templates.Length)];
+        return string.Format(templates[Random.Range(0, templates.Length)], relationName);
     }
 
     private IReadOnlyDictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
@@ -126,7 +120,7 @@ public class sGameHandler : MonoBehaviour
                 var nameIndex = Random.Range(0, namesList.Count);
                 var name = namesList[nameIndex];
                 var relation = GetRandomRelation(prisonersDictionary.Values, role);
-                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogue(role, relation)));
+                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogue(name, role, relation)));
                 System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {relation}.");
                 namesList.RemoveAt(nameIndex);
                 availableRoles[role]--;
@@ -154,5 +148,33 @@ public class sGameHandler : MonoBehaviour
             var list = prisoners.Where(p => predicate(p)).ToList();
             return list[Random.Range(0, list.Count)].Name;
         }
+    }
+
+    private static IReadOnlyDictionary<string, IReadOnlyDictionary<PrisonerRole, string[]>> ReadDialogueFile()
+    {
+        var text = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialogues.tsv")).Select(x => x.Split('\t'));
+        var headerIndexes = text.First()
+            .Select((value, index) => new { Value = value, Index = index })
+            .ToDictionary(x => x.Index, x => x.Value);
+        var lines = text.Skip(1)
+            .Select(x => x.Select((value, index) => new { Value = value, Header = headerIndexes[index] }));
+        var result = new Dictionary<string, IReadOnlyDictionary<PrisonerRole, string[]>>();
+        foreach (var line in lines)
+        {
+            var prisonerDict = new Dictionary<PrisonerRole, string[]>();
+            string key = string.Empty;
+            foreach (var item in line)
+            {
+                if (item.Header == "Prisoner Name")
+                    key = item.Value;
+                else
+                {
+                    var role = (PrisonerRole)System.Enum.Parse(typeof(PrisonerRole), item.Header);
+                    prisonerDict.Add(role, item.Value.Split(';'));
+                }
+            }
+            result.Add(key, prisonerDict);
+        }
+        return result;
     }
 }
