@@ -61,10 +61,5 @@ public class sNPC : MonoBehaviour
             speechNode.Text = dialogue.Text;
         }
         this.Conversation.Serialize(conv);
-        foreach (var dialogue in dialogues.Where(x => (int)x.DialogueType > 0))
-        {
-            var eventHolder = this.Conversation.GetNodeData((int)dialogue.DialogueType);
-            var uniEvent = eventHolder.Event;
-        }
     }
 }
