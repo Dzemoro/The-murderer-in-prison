@@ -10,6 +10,11 @@ public class sNPC : MonoBehaviour
     public Prisoner PrisonerData;
     [SerializeField] private string Name;
 
+    //NPC Information for notebook
+    public string _location;
+    public string _background;
+    public string _crime;
+
     // Start is called before the first frame update
     void Start()
     {
