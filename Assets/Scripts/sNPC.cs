@@ -1,4 +1,6 @@
 using DialogueEditor;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,7 +21,7 @@ public class sNPC : MonoBehaviour
     void Start()
     {
         PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().Prisoners[Name];
-        FillConversation(PrisonerData.RoleDialogue);
+        FillConversation(PrisonerData.RoleDialogues);
     }
 
     // Update is called once per frame
@@ -49,12 +51,20 @@ public class sNPC : MonoBehaviour
         return Name;
     }
 
-    private void FillConversation(string text)
+    private void FillConversation(IEnumerable<Dialogue> dialogues)
     {
         var conv = this.Conversation.DeserializeForEditor();
         conv.GetRootNode().Name = Name;
-        var speechNode = conv.SpeechNodes.Single(x => x.Text == "0");
-        speechNode.Text = text;
+        foreach (var dialogue in dialogues.Where(x => (int)x.DialogueType > 0))
+        {
+            var speechNode = conv.GetSpeechByUID((int)dialogue.DialogueType);
+            speechNode.Text = dialogue.Text;
+        }
         this.Conversation.Serialize(conv);
+        foreach (var dialogue in dialogues.Where(x => (int)x.DialogueType > 0))
+        {
+            var eventHolder = this.Conversation.GetNodeData((int)dialogue.DialogueType);
+            var uniEvent = eventHolder.Event;
+        }
     }
 }

@@ -1,7 +1,7 @@
-Prisoner Name	Murderer	Witness	Informant	Verifier	None
-P0	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.
-P1	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.
-P2	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.
-P3	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.
-P4	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.
-P5	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.
+Prisoner Name	Murderer-Suspicion	Witness-Suspicion	Informant-Suspicion	Verifier-Suspicion	None-Suspicion	Murderer-Alibi	Witness-Alibi	Informant-Alibi	Verifier-Alibi	None-Alibi	Murderer-Clue	Witness-Clue	Informant-Clue	Verifier-Clue	None-Clue
+P0	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.	I did it, I have none!	A	G	M	V					
+P1	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.	I did it, I have none!	B	H	N	W					
+P2	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.	I did it, I have none!	C	I	O	X					
+P3	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.	I did it, I have none!	D	J	P	Y					
+P4	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.	I did it, I have none!	E	K	T	Z					
+P5	I did it! ;I might have done that, yea.	I saw {0}. ;{0} did it.	{0} might know something. ;Ask {0}.	It wasn't {0}. ;It couldn't be {0}!	I didn't do it. ;I don't know anything.	I did it, I have none!	F	L	U	AA					

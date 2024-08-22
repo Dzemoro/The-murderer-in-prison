@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public enum PrisonerRole
@@ -30,17 +31,51 @@ public enum PrisonerRole
 
 public class Prisoner
 {
-    public Prisoner(string name, PrisonerRole role, string roleDialogue)
+    public Prisoner(string name, PrisonerRole role, IEnumerable<Dialogue> roleDialogues, string? relatesTo)
     {
         Name = name;
         Role = role;
-        RoleDialogue = roleDialogue;
+        RoleDialogues = roleDialogues;
+        RelatesTo = relatesTo;
     }
 
     public string Name { get; }
     public PrisonerRole Role { get; }
-    public string RoleDialogue { get; }
+    public string? RelatesTo { get; }
+    public IEnumerable<Dialogue> RoleDialogues { get; }
+}
 
+
+public enum DialogueType
+{
+    /// <summary>
+    /// Characters alibi
+    /// </summary>
+    Alibi = 3,
+
+    /// <summary>
+    /// Starting clue pointing to character
+    /// </summary>
+    Clue = -1,
+
+    /// <summary>
+    /// Dialogue for asking about additional information
+    /// </summary>
+    Suspicion = 5
+}
+
+public class Dialogue
+{
+    public Dialogue(string text, string notebookSummary, DialogueType dialogueType)
+    {
+        Text = text;
+        NotebookSummary = notebookSummary;
+        DialogueType = dialogueType;
+    }
+
+    public string Text { get; }
+    public string NotebookSummary { get; }
+    public DialogueType DialogueType { get; } 
 }
 
 public class sGameHandler : MonoBehaviour
@@ -48,7 +83,7 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int WitnessCount;
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
-    private IReadOnlyDictionary<string, IReadOnlyDictionary<PrisonerRole, string[]>> _dialogueDictionary = ReadDialogueFile();
+    private Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
 
 
     private IReadOnlyDictionary<string, Prisoner> _prisoners = new Dictionary<string, Prisoner>();
@@ -90,12 +125,19 @@ public class sGameHandler : MonoBehaviour
         } // Debug to check list of prisoners*/
     }
 
-    private string GetRandomDialogue(string name, PrisonerRole role, string relationName)
+    private IEnumerable<Dialogue> GetRandomDialogues(string name, PrisonerRole role, string relationName)
     {
-        var templates = _dialogueDictionary[name][role];
-        if (string.IsNullOrWhiteSpace(relationName))
-            return templates[Random.Range(0, templates.Length)];
-        return string.Format(templates[Random.Range(0, templates.Length)], relationName);
+        var roleTexts = _dialogueDictionary[name][role];
+        var result = new List<Dialogue>();
+        foreach (var dialogueType in System.Enum.GetValues(typeof(DialogueType)).OfType<DialogueType>())
+        {
+            var templates = roleTexts[dialogueType];
+            var text = string.IsNullOrWhiteSpace(relationName) ?
+                templates[Random.Range(0, templates.Length)] :
+                string.Format(templates[Random.Range(0, templates.Length)], relationName);
+            result.Add(new Dialogue(text, "", dialogueType));
+        }
+        return result;
     }
 
     private IReadOnlyDictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
@@ -120,7 +162,7 @@ public class sGameHandler : MonoBehaviour
                 var nameIndex = Random.Range(0, namesList.Count);
                 var name = namesList[nameIndex];
                 var relation = GetRandomRelation(prisonersDictionary.Values, role);
-                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogue(name, role, relation)));
+                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogues(name, role, relation), string.IsNullOrEmpty(relation) ? null : relation));
                 System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {relation}.");
                 namesList.RemoveAt(nameIndex);
                 availableRoles[role]--;
@@ -150,7 +192,7 @@ public class sGameHandler : MonoBehaviour
         }
     }
 
-    private static IReadOnlyDictionary<string, IReadOnlyDictionary<PrisonerRole, string[]>> ReadDialogueFile()
+    private static Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> ReadDialogueFile()
     {
         var text = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialogues.tsv")).Select(x => x.Split('\t'));
         var headerIndexes = text.First()
@@ -158,10 +200,10 @@ public class sGameHandler : MonoBehaviour
             .ToDictionary(x => x.Index, x => x.Value);
         var lines = text.Skip(1)
             .Select(x => x.Select((value, index) => new { Value = value, Header = headerIndexes[index] }));
-        var result = new Dictionary<string, IReadOnlyDictionary<PrisonerRole, string[]>>();
+        var result = new Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>>();
         foreach (var line in lines)
         {
-            var prisonerDict = new Dictionary<PrisonerRole, string[]>();
+            var prisonerDict = new Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>();
             string key = string.Empty;
             foreach (var item in line)
             {
@@ -169,8 +211,12 @@ public class sGameHandler : MonoBehaviour
                     key = item.Value;
                 else
                 {
-                    var role = (PrisonerRole)System.Enum.Parse(typeof(PrisonerRole), item.Header);
-                    prisonerDict.Add(role, item.Value.Split(';'));
+                    var splitHeader = item.Header.Split('-');
+                    var role = (PrisonerRole)System.Enum.Parse(typeof(PrisonerRole), splitHeader[0]);
+                    var dialogueType = (DialogueType)System.Enum.Parse(typeof(DialogueType), splitHeader[1]);
+                    if (!prisonerDict.ContainsKey(role))
+                        prisonerDict.Add(role, new Dictionary<DialogueType, string[]>());
+                    prisonerDict[role].Add(dialogueType, item.Value.Split(';'));
                 }
             }
             result.Add(key, prisonerDict);
