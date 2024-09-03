@@ -52,6 +52,7 @@ public class sNPC : MonoBehaviour
     public void GetPrisonerData(Prisoner _prisonerData)
     {
         PrisonerData = _prisonerData;
+        //Debug.Log(Name + " was: " + PrisonerData.Role);
     }
 
     public void FillConversation(string text)

@@ -135,4 +135,11 @@ public class sGameHandler : MonoBehaviour
             NumberLeft = numberLeft;
         }
     }
+
+    public bool CheckPrisoner(string _name)
+    {
+        if ( Prisoners.GetValueOrDefault(_name).Role == PrisonerRole.Murderer) return true;
+
+        return false;
+    }
 }

@@ -5,8 +5,9 @@ using UnityEngine;
 public class sPoliceman : MonoBehaviour
 {
 
-    [SerializeField] GameObject _player;
-    [SerializeField] GameObject _canvas;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _results;
 
     private bool _playerIsClose;
 
@@ -24,7 +25,7 @@ public class sPoliceman : MonoBehaviour
             _canvas.transform.localScale = new Vector3(1f, 1f, 1f);
             _player.GetComponent<sMovement>()._freeToAct = false;
         }
-        else if (!_player.GetComponent<sMovement>()._freeToAct && Input.GetKeyDown(KeyCode.E))
+        else if (!_player.GetComponent<sMovement>()._freeToAct && Input.GetKeyDown(KeyCode.E) && !_results.GetComponent<sResultVariables>()._open)
         {
             _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
             _player.GetComponent<sMovement>()._freeToAct = true;
