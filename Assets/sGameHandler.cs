@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -51,7 +52,7 @@ public enum DialogueType
     /// <summary>
     /// Characters alibi
     /// </summary>
-    Alibi = 3,
+    Alibi = 5,
 
     /// <summary>
     /// Starting clue pointing to character
@@ -61,7 +62,7 @@ public enum DialogueType
     /// <summary>
     /// Dialogue for asking about additional information
     /// </summary>
-    Suspicion = 5
+    Suspicion = 4
 }
 
 public class Dialogue
@@ -142,7 +143,7 @@ public class sGameHandler : MonoBehaviour
 
     private IReadOnlyDictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
     {
-        IList<string> namesList = names is IList<string> ? names as IList<string> : names.ToList();
+        IList<string> namesList = names is IList<string> ? (IList<string>)names : names.ToList();
 
         var availableRoles = new Dictionary<PrisonerRole, int>() //WARNING: The order of entries here is important!
         {

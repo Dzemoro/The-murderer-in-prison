@@ -8,12 +8,12 @@ public class sMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 movementDirection;
-    public bool _freeToAct;
+    public bool FreeToAct { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        _freeToAct = true;
+        FreeToAct = true;
     }
 
     void Awake()
@@ -24,7 +24,7 @@ public class sMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_freeToAct)
+        if (FreeToAct)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -37,13 +37,16 @@ public class sMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_freeToAct && Input.GetKey(KeyCode.LeftShift))
+        if (FreeToAct && Input.GetKey(KeyCode.LeftShift))
         {
             rb.MovePosition(rb.position + movementDirection * (speed / 3) * Time.fixedDeltaTime);
         }
-        else if (_freeToAct)
+        else if (FreeToAct)
         {
             rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
         }
     }
+
+    public void StopMovement() => FreeToAct = false;
+    public void StartMovement() => FreeToAct = true;
 }
