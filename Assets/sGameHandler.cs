@@ -208,6 +208,14 @@ public class sGameHandler : MonoBehaviour
         }
     }
 
+    public bool CheckPrisoner(string _name)
+    {
+        if ( Prisoners.GetValueOrDefault(_name).Role == PrisonerRole.Murderer) return true;
+
+        return false;
+
+    }
+    
     private static Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> ReadDialogueFile()
     {
         var text = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialogues.tsv")).Select(x => x.Split('\t'));
