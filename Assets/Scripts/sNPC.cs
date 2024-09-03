@@ -1,4 +1,6 @@
 using DialogueEditor;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,11 +12,16 @@ public class sNPC : MonoBehaviour
     public Prisoner PrisonerData;
     [SerializeField] private string Name;
 
+    //NPC Information for notebook
+    public string _location;
+    public string _background;
+    public string _crime;
+
     // Start is called before the first frame update
     void Start()
     {
-        //PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().GetPrisoner(Name);
-        //FillConversation(PrisonerData.RoleDialogue);
+        PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().Prisoners[Name];
+        FillConversation(PrisonerData.RoleDialogues);
     }
 
     // Update is called once per frame
@@ -44,17 +51,15 @@ public class sNPC : MonoBehaviour
         return Name;
     }
 
-    public void GetPrisonerData(Prisoner _prisonerData)
-    {
-        PrisonerData = _prisonerData;
-    }
-
-    public void FillConversation(string text)
+    private void FillConversation(IEnumerable<Dialogue> dialogues)
     {
         var conv = this.Conversation.DeserializeForEditor();
         conv.GetRootNode().Name = Name;
-        var speechNode = conv.SpeechNodes.Single(x => x.Text == "0");
-        speechNode.Text = text;
+        foreach (var dialogue in dialogues.Where(x => (int)x.DialogueType > 0))
+        {
+            var speechNode = conv.GetSpeechByUID((int)dialogue.DialogueType);
+            speechNode.Text = dialogue.Text;
+        }
         this.Conversation.Serialize(conv);
     }
 }
