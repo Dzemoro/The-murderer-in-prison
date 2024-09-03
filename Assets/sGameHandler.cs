@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
@@ -67,16 +68,20 @@ public enum DialogueType
 
 public class Dialogue
 {
-    public Dialogue(string text, string notebookSummary, DialogueType dialogueType)
+    public Dialogue(string text, string notebookSummary, DialogueType dialogueType, bool addedToNotebook = false)
     {
         Text = text;
         NotebookSummary = notebookSummary;
         DialogueType = dialogueType;
+        AddedToNotebook = addedToNotebook;
     }
 
     public string Text { get; }
     public string NotebookSummary { get; }
     public DialogueType DialogueType { get; } 
+    public bool AddedToNotebook { get; private set; }
+
+    public void SetAsAdded() => AddedToNotebook = true;
 }
 
 public class sGameHandler : MonoBehaviour
@@ -85,7 +90,7 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int InformantCount;
     [SerializeField] private DialogueEditor.NPCConversation BaseConversation;
     [SerializeField] private int VerifierCount;
-    private Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
+    private readonly Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
 
 
     private IReadOnlyDictionary<string, Prisoner> _prisoners = new Dictionary<string, Prisoner>();
@@ -138,9 +143,17 @@ public class sGameHandler : MonoBehaviour
             var text = string.IsNullOrWhiteSpace(relationName) ?
                 templates[Random.Range(0, templates.Length)] :
                 string.Format(templates[Random.Range(0, templates.Length)], relationName);
-            result.Add(new Dialogue(text, "", dialogueType));
+            result.Add(new Dialogue(text, GetSummary(text, relationName), dialogueType));
         }
         return result;
+
+        string GetSummary(string text, string relationName)
+        {
+            var summary = $"\"{text}\"";
+            if (!string.IsNullOrWhiteSpace(relationName))
+                summary += $"regarding {relationName}";
+            return summary;
+        }
     }
 
     private IReadOnlyDictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
