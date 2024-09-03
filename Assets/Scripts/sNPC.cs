@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class sNPC : MonoBehaviour
 {
-    public NPCConversation Conversation;
+    private NPCConversation Conversation;
     private bool _playerIsClose;
     public Prisoner PrisonerData;
     [SerializeField] private string Name;
@@ -20,7 +20,9 @@ public class sNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().Prisoners[Name];
+        var gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>();
+        this.Conversation = gameHandler.GetBaseConversation();
+        PrisonerData = gameHandler.Prisoners[Name];
         FillConversation(PrisonerData.RoleDialogues);
     }
 
@@ -54,12 +56,12 @@ public class sNPC : MonoBehaviour
     private void FillConversation(IEnumerable<Dialogue> dialogues)
     {
         var conv = this.Conversation.DeserializeForEditor();
-        conv.GetRootNode().Name = Name;
         foreach (var dialogue in dialogues.Where(x => (int)x.DialogueType > 0))
         {
             var speechNode = conv.GetSpeechByUID((int)dialogue.DialogueType);
             speechNode.Text = dialogue.Text;
         }
         this.Conversation.Serialize(conv);
+        this.Conversation.DefaultName = Name;
     }
 }

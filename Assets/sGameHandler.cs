@@ -83,6 +83,7 @@ public class sGameHandler : MonoBehaviour
 {
     [SerializeField] private int WitnessCount;
     [SerializeField] private int InformantCount;
+    [SerializeField] private DialogueEditor.NPCConversation BaseConversation;
     [SerializeField] private int VerifierCount;
     private Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
 
@@ -102,6 +103,7 @@ public class sGameHandler : MonoBehaviour
         } 
     }
     
+    public DialogueEditor.NPCConversation GetBaseConversation() => Object.Instantiate(BaseConversation);
 
     // Start is called before the first frame update
     void Start()
