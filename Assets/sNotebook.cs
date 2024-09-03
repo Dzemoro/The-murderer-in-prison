@@ -32,25 +32,25 @@ public class sNotebook : MonoBehaviour
     void Update()
     {
 
-        if (_player.GetComponent<sMovement>()._freeToAct && Input.GetKeyDown(KeyCode.Q) && !GetComponent<CanvasGroup>().interactable)
+        if (_player.GetComponent<sMovement>().FreeToAct && Input.GetKeyDown(KeyCode.Q) && !GetComponent<CanvasGroup>().interactable)
         {
             GetComponent<CanvasGroup>().alpha = 1.0f;
             GetComponent<CanvasGroup>().interactable = true;
             transform.localScale = new Vector3(1f, 1f, 1f);
-            _player.GetComponent<sMovement>()._freeToAct = false;
+            _player.GetComponent<sMovement>().StopMovement();
         }
-        else if (!_player.GetComponent<sMovement>()._freeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
+        else if (!_player.GetComponent<sMovement>().FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
         {
             GetComponent<CanvasGroup>().alpha = 0.0f;
             GetComponent<CanvasGroup>().interactable = false;
             transform.localScale = new Vector3(0f, 1f, 1f);
-            _player.GetComponent<sMovement>()._freeToAct = true;
+            _player.GetComponent<sMovement>().StartMovement();
         }
     }
 
     private void FillNotebook()
     {
-        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was bruttaly murdered. " +
+        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was brutally murdered. " +
                                                                                          "We are sure that is was one of the other inmates but we currently don't know who might have done such a thing. " +
                                                                                          "Please help us find out before future crimes are commited.\nWe might have a clue:" +
                                                                                          _crimeClue + "\n\n\n";

@@ -1,11 +1,14 @@
 using DialogueEditor;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class sNPC : MonoBehaviour
 {
-    public NPCConversation Conversation;
+    private NPCConversation Conversation;
     private bool _playerIsClose;
     public Prisoner PrisonerData;
     [SerializeField] private string Name;
@@ -18,8 +21,10 @@ public class sNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PrisonerData = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().GetPrisoner(Name);
-        //FillConversation(PrisonerData.RoleDialogue);
+        var gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>();
+        this.Conversation = gameHandler.GetBaseConversation();
+        PrisonerData = gameHandler.Prisoners[Name];
+        FillConversation(PrisonerData.RoleDialogues);
     }
 
     // Update is called once per frame
@@ -49,18 +54,27 @@ public class sNPC : MonoBehaviour
         return Name;
     }
 
-    public void GetPrisonerData(Prisoner _prisonerData)
-    {
-        PrisonerData = _prisonerData;
-        //Debug.Log(Name + " was: " + PrisonerData.Role);
-    }
-
-    public void FillConversation(string text)
+    private void FillConversation(IEnumerable<Dialogue> dialogues)
     {
         var conv = this.Conversation.DeserializeForEditor();
-        conv.GetRootNode().Name = Name;
-        var speechNode = conv.SpeechNodes.Single(x => x.Text == "0");
-        speechNode.Text = text;
+        conv.SpeechNodes.ForEach(speech => speech.Name = PrisonerData.Name);
+        foreach (var dialogue in dialogues.Where(x => (int)x.DialogueType > 0))
+        {
+            var speechNode = conv.GetSpeechByUID((int)dialogue.DialogueType);
+            speechNode.Text = dialogue.Text;
+            var eventHolder = Conversation.GetNodeData((int)dialogue.DialogueType);
+            eventHolder.Event.AddListener(new(() => AddToNotebook(dialogue)));
+        }
         this.Conversation.Serialize(conv);
+        this.Conversation.DefaultName = Name;
+    }
+
+    private void AddToNotebook(Dialogue dialogue)
+    {
+        if (dialogue.AddedToNotebook)
+            return;
+        dialogue.SetAsAdded();
+        var notebook = GameObject.FindGameObjectWithTag("Notebook").GetComponent<sNotebook>();
+        notebook.UpdateNotebook(PrisonerData.Name, dialogue.NotebookSummary);
     }
 }
