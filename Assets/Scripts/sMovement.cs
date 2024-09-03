@@ -8,7 +8,7 @@ public class sMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 movementDirection;
-    public bool FreeToAct { get; private set; }
+    public bool FreeToAct { get; set; }
 
     // Start is called before the first frame update
     void Start()

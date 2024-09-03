@@ -25,6 +25,6 @@ public class sNoCulprit : MonoBehaviour
     public void NoCulprit()
     {
         _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
-        _player.GetComponent<sMovement>()._freeToAct = true;
+        _player.GetComponent<sMovement>().FreeToAct = true;
     }
 }
