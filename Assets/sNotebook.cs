@@ -50,7 +50,7 @@ public class sNotebook : MonoBehaviour
 
     private void FillNotebook()
     {
-        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was bruttaly murdered. " +
+        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was brutally murdered. " +
                                                                                          "We are sure that is was one of the other inmates but we currently don't know who might have done such a thing. " +
                                                                                          "Please help us find out before future crimes are commited.\nWe might have a clue:" +
                                                                                          _crimeClue + "\n\n\n";
