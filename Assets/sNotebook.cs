@@ -38,6 +38,7 @@ public class sNotebook : MonoBehaviour
             GetComponent<CanvasGroup>().interactable = true;
             transform.localScale = new Vector3(1f, 1f, 1f);
             _player.GetComponent<sMovement>().StopMovement();
+            _player.GetComponent<sMovement>().timeRunning = false;
         }
         else if (!_player.GetComponent<sMovement>().FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
         {
@@ -45,6 +46,7 @@ public class sNotebook : MonoBehaviour
             GetComponent<CanvasGroup>().interactable = false;
             transform.localScale = new Vector3(0f, 1f, 1f);
             _player.GetComponent<sMovement>().StartMovement();
+            _player.GetComponent<sMovement>().timeRunning = true;
         }
     }
 
