@@ -109,7 +109,10 @@ public class sGameHandler : MonoBehaviour
 
     #region This object management
 
+#pragma warning disable CS8618 // Non-nullable variable must contain a non-null value when exiting constructor
     public static sGameHandler Instance { get; private set; }
+#pragma warning restore CS8618 
+
 
     // Start is called before the first frame update
     void Start()
@@ -135,7 +138,7 @@ public class sGameHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instance = null;
+        Instance = null!;
     }
     #endregion
 
