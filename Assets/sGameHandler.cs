@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
@@ -91,17 +92,6 @@ public class Dialogue
 
 public class sGameHandler : MonoBehaviour
 {
-    [SerializeField] private int WitnessCount;
-    [SerializeField] private int InformantCount;
-    [SerializeField] private int VerifierCount;
-
-#pragma warning disable CS8618 // Non-nullable variable must contain a non-null value when exiting constructor
-    [SerializeField] private DialogueEditor.NPCConversation BaseConversation;
-#pragma warning restore CS8618 
-    
-    private readonly Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
-
-
     private Dictionary<string, Prisoner> _prisoners = new();
 
     /// <summary>
@@ -116,8 +106,10 @@ public class sGameHandler : MonoBehaviour
             return _prisoners;
         } 
     }
-    
-    public DialogueEditor.NPCConversation GetBaseConversation() => Object.Instantiate(BaseConversation);
+
+    #region This object management
+
+    public static sGameHandler Instance { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -126,6 +118,13 @@ public class sGameHandler : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
         DontDestroyOnLoad(transform.gameObject);
     }
 
@@ -134,93 +133,19 @@ public class sGameHandler : MonoBehaviour
     {
     }
 
-    private IEnumerable<Dialogue> GetRandomDialogues(string name, PrisonerRole role, string relationName)
+    private void OnDestroy()
     {
-        var roleTexts = _dialogueDictionary[name][role];
-        var result = new List<Dialogue>();
-        foreach (var dialogueType in System.Enum.GetValues(typeof(DialogueType)).OfType<DialogueType>())
-        {
-            var templates = roleTexts[dialogueType];
-            var text = string.IsNullOrWhiteSpace(relationName) ?
-                templates[Random.Range(0, templates.Length)] :
-                string.Format(templates[Random.Range(0, templates.Length)], relationName);
-            result.Add(new Dialogue(text, GetSummary(text, relationName), dialogueType));
-        }
-        return result;
-
-        string GetSummary(string text, string relationName)
-        {
-            var summary = $"\"{text}\"";
-            if (!string.IsNullOrWhiteSpace(relationName))
-                summary += $"regarding {relationName}";
-            return summary;
-        }
+        Instance = null;
     }
+    #endregion
 
-    private Dictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
-    {
-        IList<string> namesList = names is IList<string> ? (IList<string>)names : names.ToList();
+    #region Initial prisoner data randomization
+    [SerializeField] private int WitnessCount;
+    [SerializeField] private int InformantCount;
+    [SerializeField] private int VerifierCount;
 
-        var availableRoles = new Dictionary<PrisonerRole, int>() //WARNING: The order of entries here is important!
-        {
-            { PrisonerRole.Murderer, 1 },
-            { PrisonerRole.Witness, WitnessCount },
-            { PrisonerRole.Informant, InformantCount },
-            { PrisonerRole.None, namesList.Count - (1 + WitnessCount + InformantCount + VerifierCount)},
-            { PrisonerRole.Verifier, VerifierCount }
-        };
+    private readonly Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
 
-        var prisonersDictionary = new Dictionary<string, Prisoner>();
-        
-        foreach (var role in availableRoles.Keys.ToList())
-        {
-            while (availableRoles[role] > 0)
-            {
-                var nameIndex = Random.Range(0, namesList.Count);
-                var name = namesList[nameIndex];
-                var relation = GetRandomRelation(prisonersDictionary.Values, role);
-                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogues(name, role, relation), string.IsNullOrEmpty(relation) ? null : relation, true));
-                System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {relation}.");
-                namesList.RemoveAt(nameIndex);
-                availableRoles[role]--;
-            }
-        }
-
-        return prisonersDictionary;
-    }
-
-    /// <summary>
-    /// Generates random relation from list of prisoners for a prisoner with given role.
-    /// </summary>
-    /// <returns>
-    /// Name of a random prisoner the role can relate to.
-    /// </returns>
-    private string GetRandomRelation(IEnumerable<Prisoner> prisoners, PrisonerRole role)
-    {
-        return role switch
-        {
-            PrisonerRole.Witness => PickName(p => p.Role == PrisonerRole.Murderer), 
-            PrisonerRole.Informant => PickName(p => p.Role == PrisonerRole.Witness),
-            PrisonerRole.Verifier => PickName(p => p.Role != PrisonerRole.Murderer), //WARNING: The usage of this function without full list of prisoners and their roles makes some of the combinations impossible
-            _ => string.Empty
-        };
-
-
-        string PickName(System.Func<Prisoner, bool> predicate)
-        {
-            if (predicate is null)
-                return prisoners.ElementAt(Random.Range(0, prisoners.Count())).Name;
-            var list = prisoners.Where(p => predicate(p) && p.IsAlive).ToList();
-            return list[Random.Range(0, list.Count)].Name;
-        }
-    }
-
-    /// <summary>
-    /// Checks if prisoner is a murderer
-    /// </summary>
-    public bool CheckPrisoner(string name)
-        => Prisoners[name].Role == PrisonerRole.Murderer;
-    
     private static Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> ReadDialogueFile()
     {
         var text = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialogues.tsv")).Select(x => x.Split('\t'));
@@ -253,25 +178,133 @@ public class sGameHandler : MonoBehaviour
         return result;
     }
 
+    private Dictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
+    {
+        IList<string> namesList = names is IList<string> ? (IList<string>)names : names.ToList();
+
+        var availableRoles = new Dictionary<PrisonerRole, int>() //WARNING: The order of entries here is important!
+        {
+            { PrisonerRole.Murderer, 1 },
+            { PrisonerRole.Witness, WitnessCount },
+            { PrisonerRole.Informant, InformantCount },
+            { PrisonerRole.None, namesList.Count - (1 + WitnessCount + InformantCount + VerifierCount)},
+            { PrisonerRole.Verifier, VerifierCount }
+        };
+
+        var prisonersDictionary = new Dictionary<string, Prisoner>();
+
+        foreach (var role in availableRoles.Keys.ToList())
+        {
+            while (availableRoles[role] > 0)
+            {
+                var nameIndex = Random.Range(0, namesList.Count);
+                var name = namesList[nameIndex];
+                var prisonerData = CreatePrisonerData(prisonersDictionary.Values, role, name);
+                prisonersDictionary.Add(name, prisonerData);
+                System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {prisonerData.RelatesTo}.");
+                namesList.RemoveAt(nameIndex);
+                availableRoles[role]--;
+            }
+        }
+
+        return prisonersDictionary;
+    }
+    #endregion
+
+    #region Handle new murder cases
     public void AddMurderCase()
     {
         var victimsSource = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.IsAlive && p.Value.Role != PrisonerRole.Witness);
-        var victim = victimsSource.ElementAt(Random.Range(0, victimsSource.Count()));
-        _prisoners[victim.Key] = new Prisoner(victim.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, true);
-        var victimNPC = GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == victim.Key);
-        victimNPC.UpdatePrisonerData();
+        var victim = UpdateRandomPrisoner(victimsSource, PrisonerRole.None, isAlive: false);
 
-        var newRolesSource = victimsSource.Where(x => x.Key != victim.Key && x.Value.Role == PrisonerRole.None);
-        var newWitness = Prisoners.ElementAt(Random.Range(0, newRolesSource.Count()));
-        var witnessRelation = GetRandomRelation(Prisoners.Values, PrisonerRole.Witness);
-        _prisoners[newWitness.Key] = new Prisoner(newWitness.Key, PrisonerRole.Witness, GetRandomDialogues(name, PrisonerRole.Witness, witnessRelation), witnessRelation, true);
-        GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == newWitness.Key).UpdatePrisonerData();
+        var newRolesSource = victimsSource.Where(x => x.Key != victim.Name && x.Value.Role == PrisonerRole.None);
+        var newWitness = UpdateRandomPrisoner(newRolesSource, PrisonerRole.Witness);
 
-
-        var verifierRolesSource = victimsSource.Where(x => x.Key != newWitness.Key && x.Value.Role == PrisonerRole.None);
-        var newVerifier = Prisoners.ElementAt(Random.Range(0, newRolesSource.Count()));
-        var verifierRelation = GetRandomRelation(Prisoners.Values, PrisonerRole.Verifier);
-        _prisoners[newVerifier.Key] = new Prisoner(newVerifier.Key, PrisonerRole.Verifier, GetRandomDialogues(name, PrisonerRole.Verifier, verifierRelation), witnessRelation, true);
-        GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == newVerifier.Key).UpdatePrisonerData();
+        var verifierRolesSource = victimsSource.Where(x => x.Key != newWitness.Name);
+        UpdateRandomPrisoner(verifierRolesSource, PrisonerRole.Verifier);
     }
+    
+    private Prisoner UpdateRandomPrisoner(IEnumerable<KeyValuePair<string, Prisoner>> sourceCollection, PrisonerRole targetRole, bool isAlive = true)
+    {
+        var targetNpc = Prisoners.ElementAt(Random.Range(0, sourceCollection.Count()));
+        var newData = isAlive ? 
+            CreatePrisonerData(sourceCollection.Where(x => x.Key != targetNpc.Key).Select(x => x.Value), targetRole, targetNpc.Key) :
+            new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, true);
+        _prisoners[targetNpc.Key] = newData;
+        GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == targetNpc.Key).UpdatePrisonerData();
+        return newData;
+    }
+    #endregion
+
+    #region Randomized data helpers
+    private Prisoner CreatePrisonerData(IEnumerable<Prisoner> prisoners, PrisonerRole role, string name)
+    {
+        var relation = GetRandomRelation(prisoners, role);
+        return new Prisoner(name, role, GetRandomDialogues(name, role, relation), string.IsNullOrEmpty(relation) ? null : relation, true);
+    }
+
+    /// <summary>
+    /// Generates random relation from list of prisoners for a prisoner with given role.
+    /// </summary>
+    /// <returns>
+    /// Name of a random prisoner the role can relate to.
+    /// </returns>
+    private string GetRandomRelation(IEnumerable<Prisoner> prisoners, PrisonerRole role)
+    {
+        return role switch
+        {
+            PrisonerRole.Witness => PickName(p => p.Role == PrisonerRole.Murderer),
+            PrisonerRole.Informant => PickName(p => p.Role == PrisonerRole.Witness),
+            PrisonerRole.Verifier => PickName(p => p.Role != PrisonerRole.Murderer), //WARNING: The usage of this function without full list of prisoners and their roles makes some of the combinations impossible
+            _ => string.Empty
+        };
+
+
+        string PickName(System.Func<Prisoner, bool> predicate)
+        {
+            if (predicate is null)
+                return prisoners.ElementAt(Random.Range(0, prisoners.Count())).Name;
+            var list = prisoners.Where(p => predicate(p) && p.IsAlive).ToList();
+            return list[Random.Range(0, list.Count)].Name;
+        }
+    }
+
+    private IEnumerable<Dialogue> GetRandomDialogues(string name, PrisonerRole role, string relationName)
+    {
+        var roleTexts = _dialogueDictionary[name][role];
+        var result = new List<Dialogue>();
+        foreach (var dialogueType in System.Enum.GetValues(typeof(DialogueType)).OfType<DialogueType>())
+        {
+            var templates = roleTexts[dialogueType];
+            var text = string.IsNullOrWhiteSpace(relationName) ?
+                templates[Random.Range(0, templates.Length)] :
+                string.Format(templates[Random.Range(0, templates.Length)], relationName);
+            result.Add(new Dialogue(text, GetSummary(text, relationName), dialogueType));
+        }
+        return result;
+
+        string GetSummary(string text, string relationName)
+        {
+            var summary = $"\"{text}\"";
+            if (!string.IsNullOrWhiteSpace(relationName))
+                summary += $"regarding {relationName}";
+            return summary;
+        }
+    }
+    #endregion
+
+    #region Public helping functions
+
+#pragma warning disable CS8618 // Non-nullable variable must contain a non-null value when exiting constructor
+    [SerializeField] private DialogueEditor.NPCConversation BaseConversation;
+#pragma warning restore CS8618 
+
+    public DialogueEditor.NPCConversation GetBaseConversation() => Object.Instantiate(BaseConversation);
+
+    /// <summary>
+    /// Checks if prisoner is a murderer
+    /// </summary>
+    public bool CheckPrisoner(string name)
+        => Prisoners[name].Role == PrisonerRole.Murderer;
+    #endregion
 }
