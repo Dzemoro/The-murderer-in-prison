@@ -33,7 +33,7 @@ public class sAccuse : MonoBehaviour
 
     public void Accuse()
     {
-        bool final = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>().CheckPrisoner(_name);
+        bool final = sGameHandler.Instance.CheckPrisoner(_name);
 
         _accuseMenu.transform.localScale = new Vector3(0f, 1f, 1f);
         _resultScreen.transform.localScale = new Vector3(1f, 1f, 1f);

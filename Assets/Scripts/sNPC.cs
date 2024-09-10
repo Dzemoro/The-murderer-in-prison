@@ -24,8 +24,7 @@ public class sNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>();
-        this.Conversation = gameHandler.GetBaseConversation();
+        this.Conversation = sGameHandler.Instance.GetBaseConversation();
         UpdatePrisonerData();
     }
 
@@ -76,14 +75,12 @@ public class sNPC : MonoBehaviour
         if (dialogue.AddedToNotebook)
             return;
         dialogue.SetAsAdded();
-        var notebook = GameObject.FindGameObjectWithTag("Notebook").GetComponent<sNotebook>();
-        notebook.UpdateNotebook(PrisonerData.Name, dialogue.NotebookSummary);
+        sNotebook.Instance.UpdateNotebook(PrisonerData.Name, dialogue.NotebookSummary);
     }
 
     public void UpdatePrisonerData()
     {
-        var gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>();
-        PrisonerData = gameHandler.Prisoners[Name];
+        PrisonerData = sGameHandler.Instance.Prisoners[Name];
         FillConversation(PrisonerData.RoleDialogues);
     }
 }

@@ -8,9 +8,26 @@ public class sNotebook : MonoBehaviour
 {
     [SerializeField] GameObject _player;
 
+    public static sNotebook Instance { get; private set; }
     public Dictionary<string, string> _entries = new ();
     private string _tempEntryConsolidate;
     private string _crimeClue;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
 
     // Start is called before the first frame update
     void Start()
