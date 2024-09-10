@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
+#region Prisoner Data
 public enum PrisonerRole
 {
     /// <summary>
@@ -33,21 +34,24 @@ public enum PrisonerRole
 
 public class Prisoner
 {
-    public Prisoner(string name, PrisonerRole role, IEnumerable<Dialogue> roleDialogues, string? relatesTo)
+    public Prisoner(string name, PrisonerRole role, IEnumerable<Dialogue> roleDialogues, string? relatesTo, bool isAlive)
     {
         Name = name;
         Role = role;
         RoleDialogues = roleDialogues;
         RelatesTo = relatesTo;
+        IsAlive = isAlive;
     }
 
     public string Name { get; }
     public PrisonerRole Role { get; }
     public string? RelatesTo { get; }
     public IEnumerable<Dialogue> RoleDialogues { get; }
+    public bool IsAlive { get; }
 }
+#endregion
 
-
+#region Dialogues Structures
 public enum DialogueType
 {
     /// <summary>
@@ -83,17 +87,22 @@ public class Dialogue
 
     public void SetAsAdded() => AddedToNotebook = true;
 }
+#endregion
 
 public class sGameHandler : MonoBehaviour
 {
     [SerializeField] private int WitnessCount;
     [SerializeField] private int InformantCount;
-    [SerializeField] private DialogueEditor.NPCConversation BaseConversation;
     [SerializeField] private int VerifierCount;
+
+#pragma warning disable CS8618 // Non-nullable variable must contain a non-null value when exiting constructor
+    [SerializeField] private DialogueEditor.NPCConversation BaseConversation;
+#pragma warning restore CS8618 
+    
     private readonly Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
 
 
-    private IReadOnlyDictionary<string, Prisoner> _prisoners = new Dictionary<string, Prisoner>();
+    private Dictionary<string, Prisoner> _prisoners = new();
 
     /// <summary>
     /// Dictionary of all prisoners names with roles assigned to them.
@@ -113,7 +122,6 @@ public class sGameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     void Awake()
@@ -124,13 +132,6 @@ public class sGameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.P))
-        {
-            foreach (var entry in PrisonerList)
-            {
-                Debug.Log(entry.Prisoner + " " + entry.Role);
-            }
-        } // Debug to check list of prisoners*/
     }
 
     private IEnumerable<Dialogue> GetRandomDialogues(string name, PrisonerRole role, string relationName)
@@ -156,7 +157,7 @@ public class sGameHandler : MonoBehaviour
         }
     }
 
-    private IReadOnlyDictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
+    private Dictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
     {
         IList<string> namesList = names is IList<string> ? (IList<string>)names : names.ToList();
 
@@ -178,7 +179,7 @@ public class sGameHandler : MonoBehaviour
                 var nameIndex = Random.Range(0, namesList.Count);
                 var name = namesList[nameIndex];
                 var relation = GetRandomRelation(prisonersDictionary.Values, role);
-                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogues(name, role, relation), string.IsNullOrEmpty(relation) ? null : relation));
+                prisonersDictionary.Add(name, new Prisoner(name, role, GetRandomDialogues(name, role, relation), string.IsNullOrEmpty(relation) ? null : relation, true));
                 System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {relation}.");
                 namesList.RemoveAt(nameIndex);
                 availableRoles[role]--;
@@ -188,6 +189,12 @@ public class sGameHandler : MonoBehaviour
         return prisonersDictionary;
     }
 
+    /// <summary>
+    /// Generates random relation from list of prisoners for a prisoner with given role.
+    /// </summary>
+    /// <returns>
+    /// Name of a random prisoner the role can relate to.
+    /// </returns>
     private string GetRandomRelation(IEnumerable<Prisoner> prisoners, PrisonerRole role)
     {
         return role switch
@@ -203,18 +210,16 @@ public class sGameHandler : MonoBehaviour
         {
             if (predicate is null)
                 return prisoners.ElementAt(Random.Range(0, prisoners.Count())).Name;
-            var list = prisoners.Where(p => predicate(p)).ToList();
+            var list = prisoners.Where(p => predicate(p) && p.IsAlive).ToList();
             return list[Random.Range(0, list.Count)].Name;
         }
     }
 
-    public bool CheckPrisoner(string _name)
-    {
-        if ( Prisoners.GetValueOrDefault(_name).Role == PrisonerRole.Murderer) return true;
-
-        return false;
-
-    }
+    /// <summary>
+    /// Checks if prisoner is a murderer
+    /// </summary>
+    public bool CheckPrisoner(string name)
+        => Prisoners[name].Role == PrisonerRole.Murderer;
     
     private static Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> ReadDialogueFile()
     {
@@ -246,5 +251,27 @@ public class sGameHandler : MonoBehaviour
             result.Add(key, prisonerDict);
         }
         return result;
+    }
+
+    public void AddMurderCase()
+    {
+        var victimsSource = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.IsAlive && p.Value.Role != PrisonerRole.Witness);
+        var victim = victimsSource.ElementAt(Random.Range(0, victimsSource.Count()));
+        _prisoners[victim.Key] = new Prisoner(victim.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, true);
+        var victimNPC = GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == victim.Key);
+        victimNPC.UpdatePrisonerData();
+
+        var newRolesSource = victimsSource.Where(x => x.Key != victim.Key && x.Value.Role == PrisonerRole.None);
+        var newWitness = Prisoners.ElementAt(Random.Range(0, newRolesSource.Count()));
+        var witnessRelation = GetRandomRelation(Prisoners.Values, PrisonerRole.Witness);
+        _prisoners[newWitness.Key] = new Prisoner(newWitness.Key, PrisonerRole.Witness, GetRandomDialogues(name, PrisonerRole.Witness, witnessRelation), witnessRelation, true);
+        GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == newWitness.Key).UpdatePrisonerData();
+
+
+        var verifierRolesSource = victimsSource.Where(x => x.Key != newWitness.Key && x.Value.Role == PrisonerRole.None);
+        var newVerifier = Prisoners.ElementAt(Random.Range(0, newRolesSource.Count()));
+        var verifierRelation = GetRandomRelation(Prisoners.Values, PrisonerRole.Verifier);
+        _prisoners[newVerifier.Key] = new Prisoner(newVerifier.Key, PrisonerRole.Verifier, GetRandomDialogues(name, PrisonerRole.Verifier, verifierRelation), witnessRelation, true);
+        GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == newVerifier.Key).UpdatePrisonerData();
     }
 }

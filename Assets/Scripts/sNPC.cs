@@ -10,8 +10,11 @@ public class sNPC : MonoBehaviour
 {
     private NPCConversation Conversation;
     private bool _playerIsClose;
+    
     public Prisoner PrisonerData;
+    
     [SerializeField] private string Name;
+
 
     //NPC Information for notebook
     public string _location;
@@ -23,14 +26,13 @@ public class sNPC : MonoBehaviour
     {
         var gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>();
         this.Conversation = gameHandler.GetBaseConversation();
-        PrisonerData = gameHandler.Prisoners[Name];
-        FillConversation(PrisonerData.RoleDialogues);
+        UpdatePrisonerData();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose)
+        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && PrisonerData.IsAlive)
             ConversationManager.Instance.StartConversation(Conversation);
     }
 
@@ -76,5 +78,12 @@ public class sNPC : MonoBehaviour
         dialogue.SetAsAdded();
         var notebook = GameObject.FindGameObjectWithTag("Notebook").GetComponent<sNotebook>();
         notebook.UpdateNotebook(PrisonerData.Name, dialogue.NotebookSummary);
+    }
+
+    public void UpdatePrisonerData()
+    {
+        var gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<sGameHandler>();
+        PrisonerData = gameHandler.Prisoners[Name];
+        FillConversation(PrisonerData.RoleDialogues);
     }
 }
