@@ -22,11 +22,6 @@ public class sNotebook : MonoBehaviour
         Instance = this;
     }
 
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
     // Start is called before the first frame update
     void Start()
     {

@@ -49,6 +49,9 @@ public class Prisoner
     public string? RelatesTo { get; }
     public IEnumerable<Dialogue> RoleDialogues { get; }
     public bool IsAlive { get; }
+
+    public override string ToString()
+        => string.Format("Name: {0} Role: {1} Status: {2} Relation: {3}", Name, Role, IsAlive ? "Alive" : "Dead", RelatesTo);
 }
 #endregion
 
@@ -117,6 +120,7 @@ public class sGameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sMovement.Instance.TimerEvent.AddListener(new(AddMurderCaseEvent));
     }
 
     void Awake()
@@ -215,27 +219,40 @@ public class sGameHandler : MonoBehaviour
     #endregion
 
     #region Handle new murder cases
+    private List<float> _executionPoints = new List<float>() { 1150, 600 };
+
     public void AddMurderCase()
     {
         var victimsSource = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.IsAlive && p.Value.Role != PrisonerRole.Witness);
-        var victim = UpdateRandomPrisoner(victimsSource, PrisonerRole.None, isAlive: false);
+        var victim = UpdateRandomPrisoner(victimsSource, Enumerable.Empty<KeyValuePair<string, Prisoner>>(), PrisonerRole.None, isAlive: false);
+        System.Diagnostics.Debug.WriteLine($"{victim} has been killed.");
 
         var newRolesSource = victimsSource.Where(x => x.Key != victim.Name && x.Value.Role == PrisonerRole.None);
-        var newWitness = UpdateRandomPrisoner(newRolesSource, PrisonerRole.Witness);
+        var newWitness = UpdateRandomPrisoner(newRolesSource, Prisoners, PrisonerRole.Witness);
+        System.Diagnostics.Debug.WriteLine($"{newWitness} is the new witness.");
 
         var verifierRolesSource = victimsSource.Where(x => x.Key != newWitness.Name);
-        UpdateRandomPrisoner(verifierRolesSource, PrisonerRole.Verifier);
+        UpdateRandomPrisoner(verifierRolesSource, Prisoners, PrisonerRole.Verifier);
     }
-    
-    private Prisoner UpdateRandomPrisoner(IEnumerable<KeyValuePair<string, Prisoner>> sourceCollection, PrisonerRole targetRole, bool isAlive = true)
+
+    private Prisoner UpdateRandomPrisoner(IEnumerable<KeyValuePair<string, Prisoner>> sourceCollection, IEnumerable<KeyValuePair<string, Prisoner>> relationSourceCollection, PrisonerRole targetRole, bool isAlive = true)
     {
-        var targetNpc = Prisoners.ElementAt(Random.Range(0, sourceCollection.Count()));
+        var targetNpc = sourceCollection.ElementAt(Random.Range(0, sourceCollection.Count()));
         var newData = isAlive ? 
-            CreatePrisonerData(sourceCollection.Where(x => x.Key != targetNpc.Key).Select(x => x.Value), targetRole, targetNpc.Key) :
-            new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, true);
+            CreatePrisonerData(relationSourceCollection.Where(x => x.Key != targetNpc.Key).Select(x => x.Value), targetRole, targetNpc.Key) :
+            new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, false);
         _prisoners[targetNpc.Key] = newData;
         GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == targetNpc.Key).UpdatePrisonerData();
         return newData;
+    }
+
+    public void AddMurderCaseEvent(float timeLeft)
+    {
+        if (_executionPoints.Count > 0 && timeLeft < _executionPoints[0])
+        {
+            _executionPoints.RemoveAt(0);
+            AddMurderCase();
+        }
     }
     #endregion
 
