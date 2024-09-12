@@ -7,6 +7,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class sMovement : MonoBehaviour
 {
+    public static sMovement Instance { get; private set; }
 
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
@@ -32,7 +33,19 @@ public class sMovement : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
         DontDestroyOnLoad(transform.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     // Update is called once per frame

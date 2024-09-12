@@ -5,7 +5,6 @@ using UnityEngine;
 public class sPoliceman : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _results;
 
@@ -20,15 +19,15 @@ public class sPoliceman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && _player.GetComponent<sMovement>().FreeToAct)
+        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && sMovement.Instance.FreeToAct)
         {
             _canvas.transform.localScale = new Vector3(1f, 1f, 1f);
-            _player.GetComponent<sMovement>().FreeToAct = false;
+            sMovement.Instance.FreeToAct = false;
         }
-        else if (!_player.GetComponent<sMovement>().FreeToAct && Input.GetKeyDown(KeyCode.E) && !_results.GetComponent<sResultVariables>()._open)
+        else if (!sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.E) && !_results.GetComponent<sResultVariables>()._open && _playerIsClose)
         {
             _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
-            _player.GetComponent<sMovement>().FreeToAct = true;
+            sMovement.Instance.FreeToAct = true;
         }
     }
 

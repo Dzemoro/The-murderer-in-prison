@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class sNotebook : MonoBehaviour
 {
-    [SerializeField] GameObject _player;
-
     public static sNotebook Instance { get; private set; }
     public Dictionary<string, string> _entries = new ();
     private string _tempEntryConsolidate;
@@ -49,21 +47,21 @@ public class sNotebook : MonoBehaviour
     void Update()
     {
 
-        if (_player.GetComponent<sMovement>().FreeToAct && Input.GetKeyDown(KeyCode.Q) && !GetComponent<CanvasGroup>().interactable)
+        if (sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && !GetComponent<CanvasGroup>().interactable)
         {
             GetComponent<CanvasGroup>().alpha = 1.0f;
             GetComponent<CanvasGroup>().interactable = true;
             transform.localScale = new Vector3(1f, 1f, 1f);
-            _player.GetComponent<sMovement>().StopMovement();
-            _player.GetComponent<sMovement>().timeRunning = false;
+            sMovement.Instance.StopMovement();
+            sMovement.Instance.timeRunning = false;
         }
-        else if (!_player.GetComponent<sMovement>().FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
+        else if (!sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
         {
             GetComponent<CanvasGroup>().alpha = 0.0f;
             GetComponent<CanvasGroup>().interactable = false;
             transform.localScale = new Vector3(0f, 1f, 1f);
-            _player.GetComponent<sMovement>().StartMovement();
-            _player.GetComponent<sMovement>().timeRunning = true;
+            sMovement.Instance.StartMovement();
+            sMovement.Instance.timeRunning = true;
         }
     }
 

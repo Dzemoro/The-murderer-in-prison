@@ -31,7 +31,7 @@ public class sNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && PrisonerData.IsAlive)
+        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && PrisonerData.IsAlive && !ConversationManager.Instance.IsConversationActive)
             ConversationManager.Instance.StartConversation(Conversation);
     }
 
