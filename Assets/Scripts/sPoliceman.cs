@@ -19,15 +19,18 @@ public class sPoliceman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && sMovement.Instance.FreeToAct)
+        if (_playerIsClose && Input.GetKeyDown(KeyCode.E))
         {
-            _canvas.transform.localScale = new Vector3(1f, 1f, 1f);
-            sMovement.Instance.FreeToAct = false;
-        }
-        else if (!sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.E) && !_results.GetComponent<sResultVariables>()._open && _playerIsClose)
-        {
-            _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
-            sMovement.Instance.FreeToAct = true;
+            if (sMovement.Instance.FreeToAct)
+            {
+                _canvas.transform.localScale = new Vector3(1f, 1f, 1f);
+                sMovement.Instance.FreeToAct = false;
+            }
+            else if (!_results.GetComponent<sResultVariables>()._open)
+            {
+                _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
+                sMovement.Instance.FreeToAct = true;
+            }
         }
     }
 
