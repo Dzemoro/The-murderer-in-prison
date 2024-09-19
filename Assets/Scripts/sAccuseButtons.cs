@@ -9,12 +9,12 @@ public class sAccuseButtons : MonoBehaviour
 
     public GameObject scrollViewContent;
     public GameObject buttonTemplate;
-    private int i;
+    private bool notCreated;
 
     // Start is called before the first frame update
     void Start()
     {
-        i = -20;
+        notCreated = true;
     }
 
     private void Awake()
@@ -36,17 +36,17 @@ public class sAccuseButtons : MonoBehaviour
 
     public void CreateButtons()
     {
-        GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
-        foreach (GameObject _tempPrisoner in _allPrisoners)
+        if(notCreated)
         {
-            GameObject button = (GameObject)Instantiate(buttonTemplate);
-            button.transform.SetParent(scrollViewContent.transform, false);
+            GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
+            foreach (GameObject _tempPrisoner in _allPrisoners)
+            {
+                GameObject button = (GameObject)Instantiate(buttonTemplate);
+                button.transform.SetParent(scrollViewContent.transform, false);
 
-            //I don't know why it needs to be these magic numbers but it finally works so who am I to judge?
-            button.transform.position = new Vector2(button.transform.position.x, button.transform.position.y + i);
-            i -= 50;
-
-            button.GetComponent<sAccuse>()._name = _tempPrisoner.GetComponent<sNPC>().GetNPCName();
+                button.GetComponent<sAccuse>()._name = _tempPrisoner.GetComponent<sNPC>().GetNPCName();
+            }
+            notCreated = false;
         }
     }
 }
