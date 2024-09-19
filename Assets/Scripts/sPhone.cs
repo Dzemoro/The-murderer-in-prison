@@ -7,7 +7,6 @@ using UnityEngine;
 public class sPhone : MonoBehaviour
 {
     [SerializeField] private NPCConversation Conversation;
-    [SerializeField] private GameObject player;
     [SerializeField] private GameObject notebook;
     private bool _playerIsClose;
 
@@ -21,7 +20,10 @@ public class sPhone : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && !ConversationManager.Instance.IsConversationActive)
+        {
+            sMovement.Instance.StopMovement();
             ConversationManager.Instance.StartConversation(Conversation);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -42,5 +44,7 @@ public class sPhone : MonoBehaviour
     public void EndCall()
     {
         notebook.GetComponent<CanvasGroup>().interactable = true;
+        sMovement.Instance.StartMovement();
+        sMovement.Instance.timeRunning = true;
     }    
 }
