@@ -121,6 +121,7 @@ public class sGameHandler : MonoBehaviour
     void Start()
     {
         sMovement.Instance.TimerEvent.AddListener(new(AddMurderCaseEvent));
+        sNotebook.Instance.UpdateClue(GetRandomClue().Text);
     }
 
     void Awake()
@@ -187,7 +188,7 @@ public class sGameHandler : MonoBehaviour
 
     private Dictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
     {
-        IList<string> namesList = names is IList<string> ? (IList<string>)names : names.ToList();
+        IList<string> namesList = names is IList<string> list ? list : names.ToList();
 
         var availableRoles = new Dictionary<PrisonerRole, int>() //WARNING: The order of entries here is important!
         {
@@ -204,17 +205,22 @@ public class sGameHandler : MonoBehaviour
         {
             while (availableRoles[role] > 0)
             {
-                var nameIndex = Random.Range(0, namesList.Count);
-                var name = namesList[nameIndex];
+                var name = GetRandomElement(namesList);
                 var prisonerData = CreatePrisonerData(prisonersDictionary.Values, role, name);
                 prisonersDictionary.Add(name, prisonerData);
                 System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {prisonerData.RelatesTo}.");
-                namesList.RemoveAt(nameIndex);
+                namesList.Remove(name);
                 availableRoles[role]--;
             }
         }
 
         return prisonersDictionary;
+    }
+
+    private Dialogue GetRandomClue()
+    {
+        var candidates = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.Role != PrisonerRole.None);
+        return GetRandomElement(candidates).Value.RoleDialogues.Where(x => x.DialogueType == DialogueType.Clue).Single();
     }
     #endregion
 
@@ -237,7 +243,7 @@ public class sGameHandler : MonoBehaviour
 
     private Prisoner UpdateRandomPrisoner(IEnumerable<KeyValuePair<string, Prisoner>> sourceCollection, IEnumerable<KeyValuePair<string, Prisoner>> relationSourceCollection, PrisonerRole targetRole, bool isAlive = true)
     {
-        var targetNpc = sourceCollection.ElementAt(Random.Range(0, sourceCollection.Count()));
+        var targetNpc = GetRandomElement(sourceCollection);
         var newData = isAlive ? 
             CreatePrisonerData(relationSourceCollection.Where(x => x.Key != targetNpc.Key).Select(x => x.Value), targetRole, targetNpc.Key) :
             new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, false);
@@ -257,6 +263,11 @@ public class sGameHandler : MonoBehaviour
     #endregion
 
     #region Randomized data helpers
+    public static T GetRandomElement<T>(IEnumerable<T> source)
+    {
+        var list = source is IList<T> sourceList ? sourceList : source.ToList();
+        return list[Random.Range(0, list.Count)];
+    }
     private Prisoner CreatePrisonerData(IEnumerable<Prisoner> prisoners, PrisonerRole role, string name)
     {
         var relation = GetRandomRelation(prisoners, role);
@@ -283,9 +294,8 @@ public class sGameHandler : MonoBehaviour
         string PickName(System.Func<Prisoner, bool> predicate)
         {
             if (predicate is null)
-                return prisoners.ElementAt(Random.Range(0, prisoners.Count())).Name;
-            var list = prisoners.Where(p => predicate(p) && p.IsAlive).ToList();
-            return list[Random.Range(0, list.Count)].Name;
+                return GetRandomElement(prisoners).Name;
+            return GetRandomElement(prisoners.Where(p => predicate(p) && p.IsAlive)).Name;
         }
     }
 
@@ -297,8 +307,8 @@ public class sGameHandler : MonoBehaviour
         {
             var templates = roleTexts[dialogueType];
             var text = string.IsNullOrWhiteSpace(relationName) ?
-                templates[Random.Range(0, templates.Length)] :
-                string.Format(templates[Random.Range(0, templates.Length)], relationName);
+                GetRandomElement(templates) :
+                string.Format(GetRandomElement(templates), relationName);
             result.Add(new Dialogue(text, GetSummary(text, relationName), dialogueType));
         }
         return result;
