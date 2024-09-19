@@ -25,11 +25,14 @@ public class sPoliceman : MonoBehaviour
             {
                 _canvas.transform.localScale = new Vector3(1f, 1f, 1f);
                 sMovement.Instance.FreeToAct = false;
+                sMovement.Instance.timeRunning = false;
+                sAccuseButtons.Instance.CreateButtons();
             }
             else if (!_results.GetComponent<sResultVariables>()._open)
             {
                 _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
                 sMovement.Instance.FreeToAct = true;
+                sMovement.Instance.timeRunning = true;
             }
         }
     }

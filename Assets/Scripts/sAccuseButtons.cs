@@ -1,18 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class sAccuseButtons : MonoBehaviour
 {
+    public static sAccuseButtons Instance { get; private set; }
 
     public GameObject scrollViewContent;
     public GameObject buttonTemplate;
+    private int i;
 
     // Start is called before the first frame update
     void Start()
     {
-        int i = -20;
+        i = -20;
+    }
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void CreateButtons()
+    {
         GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
         foreach (GameObject _tempPrisoner in _allPrisoners)
         {
@@ -25,11 +48,5 @@ public class sAccuseButtons : MonoBehaviour
 
             button.GetComponent<sAccuse>()._name = _tempPrisoner.GetComponent<sNPC>().GetNPCName();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

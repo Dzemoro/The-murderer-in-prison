@@ -2788,7 +2788,7 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6653116651847141752, guid: cbde0adbd66686c40988c1c81b5b6ee0, type: 3}
+      - m_Target: {fileID: 1508460758}
         m_TargetAssemblyTypeName: sPhone, Assembly-CSharp
         m_MethodName: EndCall
         m_Mode: 1
@@ -3315,6 +3315,17 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1415941267}
+--- !u!114 &1508460758 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6653116651847141752, guid: cbde0adbd66686c40988c1c81b5b6ee0, type: 3}
+  m_PrefabInstance: {fileID: 713450262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42dffbc9d2dbf24bbff3d438cff7f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1508460762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2531119998919613413, guid: cbde0adbd66686c40988c1c81b5b6ee0, type: 3}
@@ -4666,7 +4677,7 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6653116651847141752, guid: cbde0adbd66686c40988c1c81b5b6ee0, type: 3}
+      - m_Target: {fileID: 1508460758}
         m_TargetAssemblyTypeName: sPhone, Assembly-CSharp
         m_MethodName: EndCall
         m_Mode: 1
