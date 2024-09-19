@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3567309061591315749}
   - component: {fileID: 5579609271993358825}
   - component: {fileID: 2169460881954791510}
-  - component: {fileID: 4348304559966825734}
+  - component: {fileID: 6653116651847141752}
   m_Layer: 0
   m_Name: Phone
   m_TagString: Untagged
@@ -167,19 +167,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4, y: 1.4}
   m_EdgeRadius: 0
---- !u!114 &4348304559966825734
+--- !u!114 &6653116651847141752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631601997427524036}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de5e0e580d2511142b25e45ccc47f89f, type: 3}
+  m_Script: {fileID: 11500000, guid: a42dffbc9d2dbf24bbff3d438cff7f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  _location: 
-  _background: 
-  _crime: 
+  Conversation: {fileID: 0}

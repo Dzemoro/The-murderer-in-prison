@@ -10,6 +10,7 @@ public class sNotebook : MonoBehaviour
     public Dictionary<string, string> _entries = new ();
     private string _tempEntryConsolidate;
     private string _crimeClue;
+    private bool windowIsOpen;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class sNotebook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        windowIsOpen = false;
         GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
         foreach (GameObject _tempPrisoner in _allPrisoners)
         {
@@ -42,21 +44,19 @@ public class sNotebook : MonoBehaviour
     void Update()
     {
 
-        if (sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && !GetComponent<CanvasGroup>().interactable)
+        if (sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable == true && !windowIsOpen)
         {
-            GetComponent<CanvasGroup>().alpha = 1.0f;
-            GetComponent<CanvasGroup>().interactable = true;
             transform.localScale = new Vector3(1f, 1f, 1f);
             sMovement.Instance.StopMovement();
             sMovement.Instance.timeRunning = false;
+            windowIsOpen = true;
         }
-        else if (!sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
+        else if (!sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable == true && windowIsOpen)
         {
-            GetComponent<CanvasGroup>().alpha = 0.0f;
-            GetComponent<CanvasGroup>().interactable = false;
             transform.localScale = new Vector3(0f, 1f, 1f);
             sMovement.Instance.StartMovement();
             sMovement.Instance.timeRunning = true;
+            windowIsOpen = false;
         }
     }
 
