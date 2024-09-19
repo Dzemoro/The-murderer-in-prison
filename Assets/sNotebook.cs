@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class sNotebook : MonoBehaviour
 {
     public static sNotebook Instance { get; private set; }
     public Dictionary<string, string> _entries = new ();
-    private string _tempEntryConsolidate;
+    private TMP_Text _notebookText;
     private string _crimeClue;
 
     private void Awake()
@@ -25,14 +26,15 @@ public class sNotebook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] _allPrisoners = GameObject.FindGameObjectsWithTag("NPC");
-        foreach (GameObject _tempPrisoner in _allPrisoners)
+        _notebookText = GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>();
+        var allPrisoners = GameObject.FindGameObjectsWithTag("NPC").Select(p => p.GetComponent<sNPC>());
+        foreach (var prisoner in allPrisoners)
         {
-            _tempEntryConsolidate = "\nPrisoner is located in: " + _tempPrisoner.GetComponent<sNPC>()._location +
-                                    "\nPrisoner was previously: " + _tempPrisoner.GetComponent<sNPC>()._background +
-                                    "\nPrisoner convited of: " + _tempPrisoner.GetComponent<sNPC>()._crime;
+            var tempEntryConsolidate = "\nPrisoner is located in: " + prisoner.Location +
+                                    "\nPrisoner was previously: " + prisoner.Background +
+                                    "\nPrisoner convited of: " + prisoner.Crime;
 
-            _entries.Add(_tempPrisoner.GetComponent<sNPC>().GetNPCName(), _tempEntryConsolidate);
+            _entries.Add(prisoner.GetNPCName(), tempEntryConsolidate);
         }
 
         FillNotebook();
@@ -62,26 +64,26 @@ public class sNotebook : MonoBehaviour
 
     private void FillNotebook()
     {
-        GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was brutally murdered. " +
+        _notebookText.text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was brutally murdered. " +
                                                                                          "We are sure that is was one of the other inmates but we currently don't know who might have done such a thing. " +
                                                                                          "Please help us find out before future crimes are commited.\nWe might have a clue:" +
                                                                                          _crimeClue + "\n\n\n";
-        foreach (var _entry in _entries)
+        foreach (var entry in _entries)
         {
-            GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>().text += "<u>" + _entry.Key + "</u>\n" + _entry.Value + "\n\n\n";
+            _notebookText.text += "<u>" + entry.Key + "</u>\n" + entry.Value + "\n\n\n";
         }
     }
     
-    public void UpdateNotebook(string _prisonerName, string _stringAppend)
+    public void UpdateNotebook(string prisonerName, string stringAppend)
     {
-        _entries[_prisonerName] += "\nHeard from: " + _stringAppend;
+        _entries[prisonerName] += stringAppend;
 
         FillNotebook();
     }
     
-    public void UpdateClue(string _clue)
+    public void UpdateClue(string clue)
     {
-        _crimeClue = _clue;
+        _crimeClue = clue;
 
         FillNotebook() ;
     }
