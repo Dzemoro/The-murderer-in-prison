@@ -17,9 +17,9 @@ public class sNPC : MonoBehaviour
 
 
     //NPC Information for notebook
-    public string _location;
-    public string _background;
-    public string _crime;
+    public string Location;
+    public string Background;
+    public string Crime;
 
     // Start is called before the first frame update
     void Start()
