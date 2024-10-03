@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 #region Prisoner Data
@@ -220,7 +217,10 @@ public class sGameHandler : MonoBehaviour
     private Dialogue GetRandomClue()
     {
         var candidates = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.Role != PrisonerRole.None);
-        return GetRandomElement(candidates).Value.RoleDialogues.Where(x => x.DialogueType == DialogueType.Clue).Single();
+        var chosen = GetRandomElement(candidates);
+        var clue = chosen.Value.RoleDialogues.Where(x => x.DialogueType == DialogueType.Clue).Single();
+        System.Diagnostics.Debug.WriteLine($"Clue from {chosen.Key}: '{clue.Text}'");
+        return clue;
     }
     #endregion
 
@@ -306,19 +306,39 @@ public class sGameHandler : MonoBehaviour
         foreach (var dialogueType in System.Enum.GetValues(typeof(DialogueType)).OfType<DialogueType>())
         {
             var templates = roleTexts[dialogueType];
-            var text = string.IsNullOrWhiteSpace(relationName) ?
-                GetRandomElement(templates) :
-                string.Format(GetRandomElement(templates), relationName);
-            result.Add(new Dialogue(text, GetSummary(text, relationName), dialogueType));
+            string text;
+            if (dialogueType == DialogueType.Clue)
+            {
+                text = string.Format(GetRandomElement(templates), name);
+            }
+            else
+            {
+                text = string.IsNullOrWhiteSpace(relationName) ?
+                    GetRandomElement(templates) :
+                    string.Format(GetRandomElement(templates), relationName);
+            }
+            result.Add(new Dialogue(text, GetSummary(text, relationName, role, dialogueType), dialogueType));
         }
         return result;
 
-        string GetSummary(string text, string relationName)
+        string GetSummary(string text, string relationName, PrisonerRole prisonerRole, DialogueType dialogueType)
         {
-            var summary = $"\"{text}\"";
-            if (!string.IsNullOrWhiteSpace(relationName))
-                summary += $"regarding {relationName}";
-            return summary;
+            if (dialogueType == DialogueType.Clue)
+                return string.Empty;
+            if (dialogueType == DialogueType.Alibi)
+                return $"Alibi: {text}";
+            if (dialogueType == DialogueType.Suspicion)
+            {
+                return prisonerRole switch
+                {
+                    PrisonerRole.None => "They didn't know anything about murder.",
+                    PrisonerRole.Verifier => $"They have verified {relationName}'s allibi.",
+                    PrisonerRole.Informant => $"They suggested to ask {relationName}.",
+                    PrisonerRole.Witness => $"They suggested {relationName} might be the culprit.",
+                    PrisonerRole.Murderer => $"They said \"{text}\""
+                };
+            }
+            return $"\"{text}\"";
         }
     }
     #endregion

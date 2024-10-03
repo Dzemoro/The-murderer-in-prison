@@ -45,20 +45,22 @@ public class sNotebook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable == true && !windowIsOpen)
+        if (Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-            sMovement.Instance.StopMovement();
-            sMovement.Instance.timeRunning = false;
-            windowIsOpen = true;
-        }
-        else if (!sMovement.Instance.FreeToAct && Input.GetKeyDown(KeyCode.Q) && GetComponent<CanvasGroup>().interactable == true && windowIsOpen)
-        {
-            transform.localScale = new Vector3(0f, 1f, 1f);
-            sMovement.Instance.StartMovement();
-            sMovement.Instance.timeRunning = true;
-            windowIsOpen = false;
+            if (sMovement.Instance.FreeToAct && !windowIsOpen)
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                sMovement.Instance.StopMovement();
+                sMovement.Instance.timeRunning = false;
+                windowIsOpen = true;
+            }
+            else if (!sMovement.Instance.FreeToAct && windowIsOpen)
+            {
+                transform.localScale = new Vector3(0f, 1f, 1f);
+                sMovement.Instance.StartMovement();
+                sMovement.Instance.timeRunning = true;
+                windowIsOpen = false;
+            }
         }
     }
 
@@ -66,7 +68,7 @@ public class sNotebook : MonoBehaviour
     {
         _notebookText.text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was brutally murdered. " +
                                                                                          "We are sure that is was one of the other inmates but we currently don't know who might have done such a thing. " +
-                                                                                         "Please help us find out before future crimes are commited.\nWe might have a clue:" +
+                                                                                         "Please help us find out before future crimes are commited.\nWe might have a clue:\n" +
                                                                                          _crimeClue + "\n\n\n";
         foreach (var entry in _entries)
         {
@@ -76,15 +78,13 @@ public class sNotebook : MonoBehaviour
     
     public void UpdateNotebook(string prisonerName, string stringAppend)
     {
-        _entries[prisonerName] += stringAppend;
-
+        _entries[prisonerName] += $"\n{stringAppend}";
         FillNotebook();
     }
     
     public void UpdateClue(string clue)
     {
         _crimeClue = clue;
-
         FillNotebook() ;
     }
 }
