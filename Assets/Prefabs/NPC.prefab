@@ -182,6 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversation: {fileID: 7807158731777009988}
   Name: 
+  _location: 
+  _background: 
+  _crime: 
 --- !u!1 &4980838508684157214
 GameObject:
   m_ObjectHideFlags: 0
