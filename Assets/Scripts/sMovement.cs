@@ -28,7 +28,7 @@ public class sMovement : MonoBehaviour
 
         //TIME RUNNING WILL BE ACTIVATED UPON FINISHING THE CONVERSATION WITH THE TELEPHONE!!!
         TimerEvent.AddListener(new UnityAction<float>(TimeEnd));
-        timeRunning = true;
+        //timeRunning = true;
     }
 
     void Awake()
