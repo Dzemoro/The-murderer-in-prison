@@ -10,6 +10,7 @@ public class sNotebook : MonoBehaviour
     public static sNotebook Instance { get; private set; }
     public Dictionary<string, string> _entries = new ();
     private TMP_Text _notebookText;
+    [SerializeField] private TMP_Text _search;
     private string _crimeClue;
     private bool windowIsOpen;
 
@@ -64,7 +65,7 @@ public class sNotebook : MonoBehaviour
         }
     }
 
-    private void FillNotebook()
+    public void FillNotebook()
     {
         _notebookText.text = "<u>A crime was commited!</u>\nIn our local prison, one of the inmates was brutally murdered. " +
                                                                                          "We are sure that is was one of the other inmates but we currently don't know who might have done such a thing. " +
@@ -72,7 +73,9 @@ public class sNotebook : MonoBehaviour
                                                                                          _crimeClue + "\n\n\n";
         foreach (var entry in _entries)
         {
-            _notebookText.text += "<u>" + entry.Key + "</u>\n" + entry.Value + "\n\n\n";
+            Debug.Log(_search.text);
+            if( entry.Key.Contains( _search.text.Replace("\u200B", string.Empty)))
+                _notebookText.text += "<u>" + entry.Key + "</u>\n" + entry.Value + "\n\n\n";
         }
     }
     
