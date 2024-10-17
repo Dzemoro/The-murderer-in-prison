@@ -14,6 +14,8 @@ public class sNotebook : MonoBehaviour
     private string _crimeClue;
     private bool windowIsOpen;
 
+    public bool searchIsActive;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,6 +30,7 @@ public class sNotebook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        searchIsActive = false;
         windowIsOpen = false;
         _notebookText = GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>();
         var allPrisoners = GameObject.FindGameObjectsWithTag("NPC").Select(p => p.GetComponent<sNPC>());
@@ -55,7 +58,7 @@ public class sNotebook : MonoBehaviour
                 sMovement.Instance.timeRunning = false;
                 windowIsOpen = true;
             }
-            else if (!sMovement.Instance.FreeToAct && windowIsOpen)
+            else if (!sMovement.Instance.FreeToAct && windowIsOpen && !searchIsActive)
             {
                 transform.localScale = new Vector3(0f, 1f, 1f);
                 sMovement.Instance.StartMovement();
@@ -73,7 +76,6 @@ public class sNotebook : MonoBehaviour
                                                                                          _crimeClue + "\n\n\n";
         foreach (var entry in _entries)
         {
-            Debug.Log(_search.text);
             if( entry.Key.Contains( _search.text.Replace("\u200B", string.Empty)))
                 _notebookText.text += "<u>" + entry.Key + "</u>\n" + entry.Value + "\n\n\n";
         }

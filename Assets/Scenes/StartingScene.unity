@@ -2092,6 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _search: {fileID: 680786874}
+  searchIsActive: 0
 --- !u!225 &851037431
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3115,6 +3116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _search: {fileID: 0}
+  searchIsActive: 0
 --- !u!114 &1198413190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5158,7 +5160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04601eea2032f484d8c768ab2768e928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  search: {fileID: 2036952329}
+  notebook: {fileID: 851037425}
 --- !u!1001 &2080640227
 PrefabInstance:
   m_ObjectHideFlags: 0

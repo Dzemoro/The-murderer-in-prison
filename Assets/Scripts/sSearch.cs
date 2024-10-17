@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class sSearch : MonoBehaviour
 {
+
+    [SerializeField] GameObject notebook;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,7 @@ public class sSearch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (transform.GetComponent<TMP_InputField>().isFocused) Debug.Log("Dupa");
-       // else Debug.Log("Stop");
+        if (transform.GetComponent<TMP_InputField>().isFocused) notebook.GetComponent<sNotebook>().searchIsActive = true;
+        else notebook.GetComponent<sNotebook>().searchIsActive = false;
     }
 }
