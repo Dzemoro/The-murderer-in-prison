@@ -40,7 +40,7 @@ public class sMovement : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(transform.gameObject);
+        //DontDestroyOnLoad(transform.gameObject);
     }
 
     private void OnDestroy()

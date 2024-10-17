@@ -12,7 +12,7 @@ public class sConstantObj : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        //DontDestroyOnLoad(transform.gameObject);
     }
 
     // Update is called once per frame
