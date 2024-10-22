@@ -92,4 +92,12 @@ public class sNotebook : MonoBehaviour
         _crimeClue = clue;
         FillNotebook() ;
     }
+
+    public void CreateNewEntry(string entryKey, string entryText)
+    {
+        string _key = "Item: " + entryKey;
+        string _text = "\n" + entryText;
+        _entries.Add(_key, _text);
+        FillNotebook();
+    }
 }
