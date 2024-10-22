@@ -25,5 +25,6 @@ public class sNoCulprit : MonoBehaviour
     {
         _canvas.transform.localScale = new Vector3(0f, 1f, 1f);
         sMovement.Instance.FreeToAct = true;
+        sMovement.Instance.timeRunning = true;
     }
 }
