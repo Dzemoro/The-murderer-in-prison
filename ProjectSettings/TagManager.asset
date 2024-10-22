@@ -53,3 +53,6 @@ TagManager:
   - name: Walls
     uniqueID: 266535579
     locked: 0
+  - name: InWorldUI
+    uniqueID: 2951610649
+    locked: 0
