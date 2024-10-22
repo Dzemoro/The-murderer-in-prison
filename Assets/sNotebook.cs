@@ -66,6 +66,11 @@ public class sNotebook : MonoBehaviour
                 windowIsOpen = false;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Return) && GetComponent<CanvasGroup>().interactable && searchIsActive)
+        {
+            FillNotebook();
+        }
     }
 
     public void FillNotebook()
