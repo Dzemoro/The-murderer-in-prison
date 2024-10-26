@@ -3082,7 +3082,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961293337}
   m_HandleRect: {fileID: 961293336}
   m_Direction: 2
-  m_Value: 1.0000008
+  m_Value: 1.000001
   m_Size: 0.27726123
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5673,38 +5673,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: timeLeft
-      value: 1200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2592471043272796782}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TimeEnd
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: sMovement, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
-      propertyPath: TimerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3801390215729098820, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
       propertyPath: m_LocalPosition.x
       value: 763.4
