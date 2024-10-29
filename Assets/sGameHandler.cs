@@ -1,4 +1,6 @@
 #nullable enable
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -32,13 +34,15 @@ public enum PrisonerRole
 
 public class Prisoner
 {
-    public Prisoner(string name, PrisonerRole role, IEnumerable<Dialogue> roleDialogues, string? relatesTo, bool isAlive)
+    public Prisoner(string name, PrisonerRole role, IEnumerable<Dialogue> roleDialogues, string? relatesTo, bool isAlive, string crime, string background)
     {
         Name = name;
         Role = role;
         RoleDialogues = roleDialogues;
         RelatesTo = relatesTo;
         IsAlive = isAlive;
+        Crime = crime;
+        Background = background;
     }
 
     public string Name { get; }
@@ -46,9 +50,28 @@ public class Prisoner
     public string? RelatesTo { get; }
     public IEnumerable<Dialogue> RoleDialogues { get; }
     public bool IsAlive { get; }
+    public string Crime { get; }
+    public string Background { get; }
 
     public override string ToString()
         => string.Format("Name: {0} Role: {1} Status: {2} Relation: {3}", Name, Role, IsAlive ? "Alive" : "Dead", RelatesTo);
+}
+
+public class PrisonerFileData
+{
+    public PrisonerFileData(string name, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>> dialogues, string crime, string background)
+    {
+        Name = name;
+        Dialogues = dialogues;
+        Crime = crime;
+        Background = background;
+    }
+
+    public string Name { get; }
+    public Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>> Dialogues { get; }
+    public string Crime { get; }
+    public string Background { get; }
+
 }
 #endregion
 
@@ -149,9 +172,9 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
 
-    private readonly Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> _dialogueDictionary = ReadDialogueFile();
+    private readonly Dictionary<string, PrisonerFileData> _prisonersFileData = ReadTsvDialogueFile();
 
-    private static Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>> ReadDialogueFile()
+    private static Dictionary<string, PrisonerFileData> ReadTsvDialogueFile()
     {
         var text = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialogues.tsv")).Select(x => x.Split('\t'));
         var headerIndexes = text.First()
@@ -159,7 +182,7 @@ public class sGameHandler : MonoBehaviour
             .ToDictionary(x => x.Index, x => x.Value);
         var lines = text.Skip(1)
             .Select(x => x.Select((value, index) => new { Value = value, Header = headerIndexes[index] }));
-        var result = new Dictionary<string, Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>>();
+        var result = new Dictionary<string, PrisonerFileData>();
         foreach (var line in lines)
         {
             var prisonerDict = new Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>();
@@ -178,9 +201,50 @@ public class sGameHandler : MonoBehaviour
                     prisonerDict[role].Add(dialogueType, item.Value.Split(';'));
                 }
             }
-            result.Add(key, prisonerDict);
+            result.Add(key, new PrisonerFileData(key, prisonerDict, string.Empty, string.Empty));
         }
         return result;
+    }
+
+    private static Dictionary<string, PrisonerFileData> ReadJsonDialogueFile(string filePath)
+    {
+        var json = JsonConvert.DeserializeObject<IEnumerable<JsonRecord>>(File.ReadAllText(filePath));
+        return json.ToDictionary(x => x.Name,
+            x => new PrisonerFileData(x.Name, GetDialoguesDict(x), x.Crime, x.Background));
+
+        Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>> GetDialoguesDict(JsonRecord jsonRecord)
+        {
+            string splitter = ";";
+            var result = new Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>()
+            {
+                { PrisonerRole.Murderer, new Dictionary<DialogueType, string[]>() },
+                { PrisonerRole.Verifier, new Dictionary<DialogueType, string[]>() },
+                { PrisonerRole.Informant, new Dictionary<DialogueType, string[]>() },
+                { PrisonerRole.None, new Dictionary<DialogueType, string[]>() },
+                { PrisonerRole.Witness, new Dictionary<DialogueType, string[]>() }
+            };
+            result[PrisonerRole.Murderer].Add(DialogueType.Suspicion, jsonRecord.DialogueTexts.Suspicion.Murderer.Split(splitter));
+            result[PrisonerRole.Murderer].Add(DialogueType.Alibi, jsonRecord.DialogueTexts.Alibi.Murderer.Split(splitter));
+            result[PrisonerRole.Murderer].Add(DialogueType.Clue, new[] { jsonRecord.Clue });
+
+            result[PrisonerRole.Verifier].Add(DialogueType.Suspicion, jsonRecord.DialogueTexts.Suspicion.Verifier.Split(splitter));
+            result[PrisonerRole.Verifier].Add(DialogueType.Alibi, jsonRecord.DialogueTexts.Alibi.Verifier.Split(splitter));
+            result[PrisonerRole.Verifier].Add(DialogueType.Clue, new[] { jsonRecord.Clue });
+
+            result[PrisonerRole.Witness].Add(DialogueType.Suspicion, jsonRecord.DialogueTexts.Suspicion.Witness.Split(splitter));
+            result[PrisonerRole.Witness].Add(DialogueType.Alibi, jsonRecord.DialogueTexts.Alibi.Witness.Split(splitter));
+            result[PrisonerRole.Witness].Add(DialogueType.Clue, new[] { jsonRecord.Clue });
+
+            result[PrisonerRole.Informant].Add(DialogueType.Suspicion, jsonRecord.DialogueTexts.Suspicion.Informant.Split(splitter));
+            result[PrisonerRole.Informant].Add(DialogueType.Alibi, jsonRecord.DialogueTexts.Alibi.Informant.Split(splitter));
+            result[PrisonerRole.Informant].Add(DialogueType.Clue, new[] { jsonRecord.Clue });
+
+            result[PrisonerRole.None].Add(DialogueType.Suspicion, jsonRecord.DialogueTexts.Suspicion.None.Split(splitter));
+            result[PrisonerRole.None].Add(DialogueType.Alibi, jsonRecord.DialogueTexts.Alibi.None.Split(splitter));
+            result[PrisonerRole.None].Add(DialogueType.Clue, new[] { jsonRecord.Clue });
+            return result;
+        }
+
     }
 
     private Dictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
@@ -246,7 +310,7 @@ public class sGameHandler : MonoBehaviour
         var targetNpc = GetRandomElement(sourceCollection);
         var newData = isAlive ? 
             CreatePrisonerData(relationSourceCollection.Where(x => x.Key != targetNpc.Key).Select(x => x.Value), targetRole, targetNpc.Key) :
-            new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, false);
+            new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, false, targetNpc.Value.Crime, targetNpc.Value.Background);
         _prisoners[targetNpc.Key] = newData;
         GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == targetNpc.Key).UpdatePrisonerData();
         return newData;
@@ -271,7 +335,14 @@ public class sGameHandler : MonoBehaviour
     private Prisoner CreatePrisonerData(IEnumerable<Prisoner> prisoners, PrisonerRole role, string name)
     {
         var relation = GetRandomRelation(prisoners, role);
-        return new Prisoner(name, role, GetRandomDialogues(name, role, relation), string.IsNullOrEmpty(relation) ? null : relation, true);
+        return new Prisoner(
+            name, 
+            role, 
+            GetRandomDialogues(name, role, relation), 
+            string.IsNullOrEmpty(relation) ? null : relation, 
+            true, 
+            _prisonersFileData[name].Crime, 
+            _prisonersFileData[name].Background);
     }
 
     /// <summary>
@@ -301,7 +372,7 @@ public class sGameHandler : MonoBehaviour
 
     private IEnumerable<Dialogue> GetRandomDialogues(string name, PrisonerRole role, string relationName)
     {
-        var roleTexts = _dialogueDictionary[name][role];
+        var roleTexts = _prisonersFileData[name].Dialogues[role];
         var result = new List<Dialogue>();
         foreach (var dialogueType in System.Enum.GetValues(typeof(DialogueType)).OfType<DialogueType>())
         {
@@ -335,7 +406,8 @@ public class sGameHandler : MonoBehaviour
                     PrisonerRole.Verifier => $"They have verified {relationName}'s allibi.",
                     PrisonerRole.Informant => $"They suggested to ask {relationName}.",
                     PrisonerRole.Witness => $"They suggested {relationName} might be the culprit.",
-                    PrisonerRole.Murderer => $"They said \"{text}\""
+                    PrisonerRole.Murderer => $"They said \"{text}\"",
+                    _ => throw new System.ArgumentException($"Unknown role {prisonerRole}")
                 };
             }
             return $"\"{text}\"";
@@ -357,4 +429,52 @@ public class sGameHandler : MonoBehaviour
     public bool CheckPrisoner(string name)
         => Prisoners[name].Role == PrisonerRole.Murderer;
     #endregion
+}
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+public class GPTJsonRecord
+{
+    public IEnumerable<JsonRecord> Prisoners { get; set; }
+}
+public class JsonRecord
+{
+    public string Name { get; set; }
+    public string Background { get; set; }
+    public string Crime { get; set; }
+    public string Clue { get; set; }
+
+    [JsonProperty("dialogues")]
+    public DialoguesTexts? DialoguesGPT { get; set; }
+
+
+    [JsonProperty("dialogue")]
+    public DialoguesTexts? DialoguesGemini { get; set; }
+
+    [JsonIgnore]
+    public DialoguesTexts DialogueTexts => DialoguesGemini is null ? DialoguesGPT : DialoguesGemini;
+
+    public class DialoguesTexts
+    {
+        [JsonIgnore]
+        public RolesTexts Suspicion => KnowAnythingGemini is null ? KnowAnythingGPT : KnowAnythingGemini;
+
+        public RolesTexts Alibi { get; set; }
+
+        [JsonProperty("knowAnything")]
+        public RolesTexts? KnowAnythingGemini { get; set; }
+
+
+        [JsonProperty("knows_anything")]
+        public RolesTexts? KnowAnythingGPT { get; set; }
+    }
+
+    public class RolesTexts
+    {
+        public string Murderer { get; set; }
+        public string Witness { get; set; }
+        public string Informant { get; set; }
+        public string Verifier { get; set; }
+        public string None { get; set; }
+    }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 }

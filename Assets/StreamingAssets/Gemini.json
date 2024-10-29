@@ -1,0 +1,140 @@
+[
+    {
+        "name": "The Silent Man",
+        "role": "Witness",
+        "background": "A solitary figure, known for his quiet demeanor.",
+        "crime": "Theft",
+        "dialogue": {
+            "knowAnything": {
+                "murderer": "I know nothing. I was just trying to mind my own business.",
+                "witness": "I saw {0} do it. They were so cold-blooded.",
+                "informant": "I've been keeping an eye on {0}. Something about them seems off, like they're hiding something.",
+                "verifier": "I can confirm {0}'s alibi. We were together all night.",
+                "none": "I have no idea who did it. I was asleep in my cell."
+            },
+            "alibi": {
+                "murderer": "I was in my cell. You can ask the guard.",
+                "witness": "I was with {0}. We were both in the library, studying late.",
+                "informant": "I was in my cell. I have no alibi.",
+                "verifier": "I was with {0}. We were both in the chapel, praying.",
+                "none": "I was in my cell. You can ask the guard."
+            }
+        },
+        "clue": "A torn piece of paper found in his cell."
+    },
+    {
+        "name": "The Gambler",
+        "role": "Informant",
+        "background": "Known for his gambling habits and quick wit.",
+        "crime": "Fraud",
+        "dialogue": {
+            "knowAnything": {
+                "murderer": "I know nothing. I was just trying to mind my own business.",
+                "witness": "I saw {0} do it. They were so calm, like it was nothing.",
+                "informant": "I've seen {0} lurking around the crime scene a few times. They seem awfully interested in the victim.",
+                "verifier": "I can confirm {0}'s alibi. We were together all night.",
+                "none": "I have no idea who did it. I was asleep in my cell."
+            },
+            "alibi": {
+                "murderer": "I was in my cell. You can ask the guard.",
+                "witness": "I was with {0}. We were both in the library, studying late.",
+                "informant": "I was in my cell. I have no alibi.",
+                "verifier": "I was with {0}. We were both in the chapel, praying.",
+                "none": "I was in my cell. You can ask the guard."
+            }
+        },
+        "clue": "A stack of playing cards found in his pocket."
+    },
+    {
+        "name": "The Muscle",
+        "role": "Verifier",
+        "background": "A hulking figure, known for his strength.",
+        "crime": "Assault",
+        "dialogue": {
+            "knowAnything": {
+                "murderer": "I know nothing. I was just trying to mind my own business.",
+                "witness": "I saw {0} do it. They were so cold-blooded.",
+                "informant": "I've overheard {0} talking about wanting to get revenge on someone. It sounded personal.",
+                "verifier": "I can confirm {0}'s alibi. We were together all night.",
+                "none": "I have no idea who did it. I was asleep in my cell."
+            },
+            "alibi": {
+                "murderer": "I was in my cell. You can ask the guard.",
+                "witness": "I was with {0}. We were both in the library, studying late.",
+                "informant": "I was in my cell. I have no alibi.",
+                "verifier": "I was with {0}. We were both in the chapel, praying.",
+                "none": "I was in my cell. You can ask the guard."
+            }
+        },
+        "clue": "A weightlifting belt found in his locker."
+    },
+    {
+        "name": "The Snake",
+        "role": "Murderer",
+        "background": "A cunning and manipulative individual.",
+        "crime": "Murder",
+        "dialogue": {
+            "knowAnything": {
+                "murderer": "I know nothing. I was just trying to mind my own business.",
+                "witness": "I saw {0} do it. They were so calm, like it was nothing.",
+                "informant": "I've seen {0} acting suspicious lately. They've been avoiding everyone and seem very tense.",
+                "verifier": "I can confirm {0}'s alibi. We were together all night.",
+                "none": "I have no idea who did it. I was asleep in my cell."
+            },
+            "alibi": {
+                "murderer": "I was in my cell. You can ask the guard.",
+                "witness": "I was with {0}. We were both in the library, studying late.",
+                "informant": "I was in my cell. I have no alibi.",
+                "verifier": "I was with {0}. We were both in the chapel, praying.",
+                "none": "I was in my cell. You can ask the guard."
+            }
+        },
+        "clue": "A bloodied knife found under his mattress."
+    },
+    {
+        "name": "The Preacher",
+        "role": "None",
+        "background": "A pious individual, known for his sermons.",
+        "crime": "Arson",
+        "dialogue": {
+            "knowAnything": {
+                "murderer": "I know nothing. I was just trying to mind my own business.",
+                "witness": "I saw {0} do it. They were so cold-blooded.",
+                "informant": "I've heard {0} talking about having a grudge against someone. They seem really angry.",
+                "verifier": "I can confirm {0}'s alibi. We were together all night.",
+                "none": "I have no idea who did it. I was asleep in my cell."
+            },
+            "alibi": {
+                "murderer": "I was in my cell. You can ask the guard.",
+                "witness": "I was with {0}. We were both in the library, studying late.",
+                "informant": "I was in my cell. I have no alibi.",
+                "verifier": "I was with {0}. We were both in the chapel, praying.",
+                "none": "I was in my cell. You can ask the guard."
+            }
+        },
+        "clue": "A Bible with a strange marking found in his cell."
+    },
+    {
+        "name": "The Artist",
+        "role": "None",
+        "background": "A talented artist, known for his eccentric behavior.",
+        "crime": "Vandalism",
+        "dialogue": {
+            "knowAnything": {
+                "murderer": "I know nothing. I was just trying to mind my own business.",
+                "witness": "I saw {0} do it. They were so calm, like it was nothing.",
+                "informant": "I've seen {0} acting strangely lately. They seem really stressed and withdrawn.",
+                "verifier": "I can confirm {0}'s alibi. We were together all night.",
+                "none": "I have no idea who did it. I was asleep in my cell."
+            },
+            "alibi": {
+                "murderer": "I was in my cell. You can ask the guard.",
+                "witness": "I was with {0}. We were both in the library, studying late.",
+                "informant": "I was in my cell. I have no alibi.",
+                "verifier": "I was with {0}. We were both in the chapel, praying.",
+                "none": "I was in my cell. You can ask the guard."
+            }
+        },
+        "clue": "A sketch of the victim found in his sketchbook."
+    }
+]

@@ -1,0 +1,137 @@
+{
+    "prisoners": [
+      {
+        "name": "Jack 'Snake' Davis",
+        "background": "Jack was a notorious con artist with a reputation for smooth-talking his way out of trouble. Grew up in a rough neighborhood and got into petty crimes before landing himself in bigger schemes.",
+        "crime": "Fraud and grand theft.",
+        "clue": "Jack often brags about seeing things others miss, making him a potential lead for key information.",
+        "dialogues": {
+          "knows_anything": {
+            "Murderer": "Know something? Ha! You really think I'd spill? Whatever happened, it ain't got nothin' to do with me.",
+            "Witness": "I don’t know if I should say this… but I saw {0} sneaking around the corridor just before it happened.",
+            "Informant": "I hear things, y'know. Word is, someone like {0} might've seen something.",
+            "Verifier": "I didn’t see the killing, but I can vouch for {0}. They were with me the whole time.",
+            "None": "I don't know nothin' about this mess. I keep my nose clean nowadays, believe it or not."
+          },
+          "alibi": {
+            "Murderer": "Alibi? Who cares about that when you're inside a place like this? You're barkin' up the wrong tree.",
+            "Witness": "Me? I was playin' cards with {0}. Ask 'em if you don't believe me.",
+            "Informant": "I was alone in my cell, but you can check the logs, it’s all there.",
+            "Verifier": "I was shootin' the breeze with {0}. We were together all night.",
+            "None": "I was in my cell, doin' my time quietly. Guards can confirm that."
+          }
+        }
+      },
+      {
+        "name": "Emily 'Razor' Carter",
+        "background": "Emily is a former street fighter turned enforcer for a gang. She's tough, quick with her fists, and feared by many inside and outside of prison.",
+        "crime": "Assault and battery.",
+        "clue": "Her reputation for always being aware of her surroundings suggests she might have seen something crucial.",
+        "dialogues": {
+          "knows_anything": {
+            "Murderer": "Even if I knew something, you wouldn’t catch me talking. People who snitch end up worse than dead.",
+            "Witness": "Yeah, I saw {0} goin' somewhere they shouldn’t have been. Didn't think much of it until now.",
+            "Informant": "I've heard whispers, and from what I know, {0} could have seen the whole thing.",
+            "Verifier": "I wasn’t involved, but I know {0} couldn’t have done it. We were together all night.",
+            "None": "I don’t get into stuff that ain’t my business. Try someone else."
+          },
+          "alibi": {
+            "Murderer": "What, you think I'm dumb enough to give you an alibi? I ain't saying nothin'.",
+            "Witness": "I was sparring with {0} when it went down. They’ll back me up.",
+            "Informant": "I was alone, but I bet the guards will say they saw me in my cell.",
+            "Verifier": "I was with {0} all night. Ask them if you don’t believe me.",
+            "None": "I was in the gym at the time, guards can tell you that."
+          }
+        }
+      },
+      {
+        "name": "Leon 'Ghost' Hawkins",
+        "background": "Leon is a quiet and reserved hacker. He keeps to himself, but his hacking skills made him infamous. Despite his calm demeanor, he’s always aware of what’s happening.",
+        "crime": "Cybercrime and identity theft.",
+        "clue": "Leon tends to observe everything in silence, making him a likely candidate to have witnessed something important.",
+        "dialogues": {
+          "knows_anything": {
+            "Murderer": "I’m not answering any questions. You’ll never get anything out of me.",
+            "Witness": "I saw {0} near the scene. Didn’t think much of it at first, but now... it seems suspicious.",
+            "Informant": "You might want to talk to {0}. I’ve got reason to believe they saw something.",
+            "Verifier": "I know {0} didn’t do it. We were working on something together in the library.",
+            "None": "I keep to myself. I don’t know anything that could help you."
+          },
+          "alibi": {
+            "Murderer": "I don’t need an alibi. I’m not saying anything. Let the evidence speak.",
+            "Witness": "I was in my cell, reading. Check the cameras if you need proof.",
+            "Informant": "I was in the library, on my own. You can check with the guards.",
+            "Verifier": "I was with {0} when it all went down. They’ll confirm that.",
+            "None": "I was in the tech lab. No way I could’ve been involved."
+          }
+        }
+      },
+      {
+        "name": "Big Joe Richardson",
+        "background": "Big Joe is a former bouncer with a history of violent outbursts. Though intimidating, he’s often more bark than bite. Many think he’s a softie at heart.",
+        "crime": "Manslaughter.",
+        "clue": "His imposing size and history of violence make him someone worth questioning about what he might have seen.",
+        "dialogues": {
+          "knows_anything": {
+            "Murderer": "I ain't tellin' you a damn thing. You're wastin' your time with me.",
+            "Witness": "I saw {0} sneakin' around the yard. Looked suspicious if you ask me.",
+            "Informant": "I overheard {0} talkin' about somethin’ fishy. Might wanna check with them.",
+            "Verifier": "I know {0} didn’t do it. We were playin’ cards together the whole night.",
+            "None": "I don’t stick my nose where it don’t belong. I’ve got nothin’ for ya."
+          },
+          "alibi": {
+            "Murderer": "Alibi? You ain’t gonna get one from me.",
+            "Witness": "I was liftin' weights in the gym. Ask {0}, they were there too.",
+            "Informant": "I was by myself in the yard, but the cameras can vouch for me.",
+            "Verifier": "I was playin' cards with {0}. Ask them, they’ll confirm.",
+            "None": "I was in the gym, guards will back that up."
+          }
+        }
+      },
+      {
+        "name": "Mia 'Fox' Delgado",
+        "background": "Mia is a former getaway driver with a knack for fast thinking. She’s sharp, quick-witted, and always seems to know more than she lets on.",
+        "crime": "Armed robbery.",
+        "clue": "Mia’s tendency to listen in on conversations might have given her vital knowledge about the murder.",
+        "dialogues": {
+          "knows_anything": {
+            "Murderer": "Do I know anything? Nah. And even if I did, I wouldn’t tell you.",
+            "Witness": "I saw {0} hangin' around the showers, actin' all shady.",
+            "Informant": "I’ve heard talk. {0} might know somethin'.",
+            "Verifier": "I was with {0} when it went down. They’ll tell you the same.",
+            "None": "I don’t know anything. Try askin’ someone else."
+          },
+          "alibi": {
+            "Murderer": "Alibi? Yeah, right. Like I’d give you one.",
+            "Witness": "I was talkin' to {0} when it happened. They’ll back me up.",
+            "Informant": "I was in my cell, nobody saw me, but that doesn’t make me guilty.",
+            "Verifier": "I was with {0}, plain and simple. Ask them.",
+            "None": "I was in the mess hall, guards saw me."
+          }
+        }
+      },
+      {
+        "name": "Harry 'Brains' O'Connor",
+        "background": "Harry is a former white-collar criminal, a smooth-talking mastermind known for his charm and intellect. Despite his non-violent past, he has learned to navigate the tough world inside prison.",
+        "crime": "Embezzlement.",
+        "clue": "His manipulative nature might make him someone who knows more than he reveals at first.",
+        "dialogues": {
+          "knows_anything": {
+            "Murderer": "Why would I tell you anything? You wouldn’t believe me anyway.",
+            "Witness": "I saw {0} where they shouldn’t have been. Could be a lead.",
+            "Informant": "I’ve heard rumors, and from what I gather, {0} knows something important.",
+            "Verifier": "I can vouch for {0}. We were in the library all night.",
+            "None": "I keep my head down. Don’t know anything about this."
+          },
+          "alibi": {
+            "Murderer": "I don’t have an alibi, and I don’t need one.",
+            "Witness": "I was in my cell the whole time. Ask the guards.",
+            "Informant": "I was in the library. You can ask around if you don’t believe me.",
+            "Verifier": "I was with {0} the entire time. That’s my alibi.",
+            "None": "I was in the common room, plenty of people saw me."
+          }
+        }
+      }
+    ]
+  }
+  
