@@ -111,11 +111,13 @@ public class sGameMenu : MonoBehaviour
         {
             musicMute = false;
             _musicButton.text = "Mute Music";
+            sMovement.Instance.GetComponent<AudioSource>().mute = false;
         }
         else
         {
             musicMute = true;
             _musicButton.text = "Unmute Music";
+            sMovement.Instance.GetComponent<AudioSource>().mute = true;
         }
     }
 
