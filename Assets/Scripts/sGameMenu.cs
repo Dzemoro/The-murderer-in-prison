@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,10 +14,16 @@ public class sGameMenu : MonoBehaviour
     [SerializeField] private bool _playerWasActive;
     [SerializeField] private bool _timeWasRunning;
 
+    [SerializeField] private TMP_Text _musicButton;
+    public bool musicMute;
+    [SerializeField] private TMP_Text _soundButton;
+    public bool soundMute;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        musicMute = false;
+        soundMute = false;
     }
 
     void Awake()
@@ -97,4 +104,32 @@ public class sGameMenu : MonoBehaviour
     public void RestartGane() { SceneManager.LoadScene("StartingScene"); }
 
     public void QuitGame() { Application.Quit(); }
+
+    public void changeMusic()
+    {
+        if (musicMute)
+        {
+            musicMute = false;
+            _musicButton.text = "Mute Music";
+        }
+        else
+        {
+            musicMute = true;
+            _musicButton.text = "Unmute Music";
+        }
+    }
+
+    public void changeSound()
+    {
+        if (soundMute)
+        {
+            soundMute = false;
+            _soundButton.text = "Mute Sound";
+        }
+        else
+        {
+            soundMute = true;
+            _soundButton.text = "Unmute Sound";
+        }
+    }
 }
