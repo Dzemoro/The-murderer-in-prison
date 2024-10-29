@@ -1,9 +1,6 @@
 using DialogueEditor;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class sNPC : MonoBehaviour
@@ -81,6 +78,10 @@ public class sNPC : MonoBehaviour
     public void UpdatePrisonerData()
     {
         PrisonerData = sGameHandler.Instance.Prisoners[Name];
+        if (!string.IsNullOrEmpty(PrisonerData.Crime))
+            Crime = PrisonerData.Crime;
+        if (!string.IsNullOrEmpty(PrisonerData.Background))
+            Background = PrisonerData.Background;
         FillConversation(PrisonerData.RoleDialogues);
     }
 }

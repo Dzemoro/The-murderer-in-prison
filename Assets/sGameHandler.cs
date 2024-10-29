@@ -172,7 +172,7 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
 
-    private readonly Dictionary<string, PrisonerFileData> _prisonersFileData = ReadTsvDialogueFile();
+    private readonly Dictionary<string, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, "gpt.json"));
 
     private static Dictionary<string, PrisonerFileData> ReadTsvDialogueFile()
     {
@@ -208,7 +208,15 @@ public class sGameHandler : MonoBehaviour
 
     private static Dictionary<string, PrisonerFileData> ReadJsonDialogueFile(string filePath)
     {
-        var json = JsonConvert.DeserializeObject<IEnumerable<JsonRecord>>(File.ReadAllText(filePath));
+        IEnumerable<JsonRecord> json;
+        try
+        {
+            json = JsonConvert.DeserializeObject<IEnumerable<JsonRecord>>(File.ReadAllText(filePath));
+        }
+        catch (JsonSerializationException)
+        {
+            json = JsonConvert.DeserializeObject<GPTJsonRecord>(File.ReadAllText(filePath)).Prisoners;
+        }
         return json.ToDictionary(x => x.Name,
             x => new PrisonerFileData(x.Name, GetDialoguesDict(x), x.Crime, x.Background));
 
