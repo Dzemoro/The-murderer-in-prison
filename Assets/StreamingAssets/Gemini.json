@@ -1,6 +1,6 @@
 [
     {
-        "name": "The Silent Man",
+        "name": "P0",
         "role": "Witness",
         "background": "A solitary figure, known for his quiet demeanor.",
         "crime": "Theft",
@@ -23,7 +23,7 @@
         "clue": "A torn piece of paper found in his cell."
     },
     {
-        "name": "The Gambler",
+        "name": "P1",
         "role": "Informant",
         "background": "Known for his gambling habits and quick wit.",
         "crime": "Fraud",
@@ -46,7 +46,7 @@
         "clue": "A stack of playing cards found in his pocket."
     },
     {
-        "name": "The Muscle",
+        "name": "P2",
         "role": "Verifier",
         "background": "A hulking figure, known for his strength.",
         "crime": "Assault",
@@ -69,7 +69,7 @@
         "clue": "A weightlifting belt found in his locker."
     },
     {
-        "name": "The Snake",
+        "name": "P3",
         "role": "Murderer",
         "background": "A cunning and manipulative individual.",
         "crime": "Murder",
@@ -92,7 +92,7 @@
         "clue": "A bloodied knife found under his mattress."
     },
     {
-        "name": "The Preacher",
+        "name": "P4",
         "role": "None",
         "background": "A pious individual, known for his sermons.",
         "crime": "Arson",
@@ -115,7 +115,7 @@
         "clue": "A Bible with a strange marking found in his cell."
     },
     {
-        "name": "The Artist",
+        "name": "P5",
         "role": "None",
         "background": "A talented artist, known for his eccentric behavior.",
         "crime": "Vandalism",
