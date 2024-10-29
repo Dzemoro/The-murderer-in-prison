@@ -771,6 +771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuOpen: 0
+  _playerWasActive: 0
+  _timeWasRunning: 0
 --- !u!1 &225292217
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,7 +4350,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1225633227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 143490125}
+        m_TargetAssemblyTypeName: sGameMenu, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1225633227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6117,7 +6131,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1819109068}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 143490125}
+        m_TargetAssemblyTypeName: sGameMenu, Assembly-CSharp
+        m_MethodName: RestartGane
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1819109068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6403,7 +6429,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1952486297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 143490125}
+        m_TargetAssemblyTypeName: sGameMenu, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1952486297
 MonoBehaviour:
   m_ObjectHideFlags: 0

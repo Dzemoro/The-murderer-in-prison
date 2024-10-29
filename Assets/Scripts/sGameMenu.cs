@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class sGameMenu : MonoBehaviour
 {
@@ -72,4 +73,28 @@ public class sGameMenu : MonoBehaviour
             }
         }
     }
+
+    public void ResumeGame()
+    {
+        transform.localScale = new Vector3(0f, 1f, 1f);
+
+        if (_playerWasActive)
+        {
+            _playerWasActive = false;
+            sMovement.Instance.StartMovement();
+
+        }
+
+        if (_timeWasRunning)
+        {
+            _timeWasRunning = false;
+            sMovement.Instance.timeRunning = true;
+
+        }
+        _menuOpen = false;
+    }
+
+    public void RestartGane() { SceneManager.LoadScene("StartingScene"); }
+
+    public void QuitGame() { Application.Quit(); }
 }
