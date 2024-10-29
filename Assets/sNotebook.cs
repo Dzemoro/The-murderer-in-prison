@@ -93,7 +93,8 @@ public class sNotebook : MonoBehaviour
     public void UpdateNotebook(string prisonerName, string stringAppend)
     {
         _audioSource.clip = _scribble;
-        _audioSource.Play();
+
+        if( !sGameMenu.Instance.soundMute ) _audioSource.Play();
         _entries[prisonerName] += $"\n{stringAppend}";
         FillNotebook();
     }
@@ -107,7 +108,7 @@ public class sNotebook : MonoBehaviour
     public void CreateNewEntry(string entryKey, string entryText)
     {
         _audioSource.clip = _scribble;
-        _audioSource.Play();
+        if (!sGameMenu.Instance.soundMute) _audioSource.Play();
         string _key = "Item: " + entryKey;
         string _text = "\n" + entryText;
         _entries.Add(_key, _text);
