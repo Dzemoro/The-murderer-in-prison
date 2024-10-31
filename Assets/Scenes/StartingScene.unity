@@ -1115,6 +1115,10 @@ PrefabInstance:
       value: P5
       objectReference: {fileID: 0}
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
+      propertyPath: PrisonerId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Conversation
       value: 
       objectReference: {fileID: 0}
@@ -2474,6 +2478,10 @@ PrefabInstance:
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Name
       value: P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
+      propertyPath: PrisonerId
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Conversation
@@ -4268,7 +4276,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 961293336}
   m_Direction: 2
   m_Value: 1.0000008
-  m_Size: 0.27726123
+  m_Size: 0.2772612
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4786,6 +4794,10 @@ PrefabInstance:
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Name
       value: P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
+      propertyPath: PrisonerId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Conversation
@@ -5935,6 +5947,10 @@ PrefabInstance:
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Name
       value: P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
+      propertyPath: PrisonerId
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Conversation
@@ -7386,6 +7402,10 @@ PrefabInstance:
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Name
       value: P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
+      propertyPath: PrisonerId
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: Conversation

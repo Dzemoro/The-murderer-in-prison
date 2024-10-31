@@ -8,15 +8,16 @@ public class sNPC : MonoBehaviour
     private NPCConversation Conversation;
     private bool _playerIsClose;
     
-    public Prisoner PrisonerData;
-    
-    [SerializeField] private string Name;
+    public Prisoner PrisonerData {  get; private set; }
+
+    [SerializeField]
+    public int PrisonerId;
 
 
     //NPC Information for notebook
     public string Location;
-    public string Background;
-    public string Crime;
+    public string Background { get; private set; }
+    public string Crime { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -47,10 +48,7 @@ public class sNPC : MonoBehaviour
         }
     }
 
-    public string GetNPCName()
-    {
-        return Name;
-    }
+    public string GetNPCName() => PrisonerData.Name;
 
     private void FillConversation(IEnumerable<Dialogue> dialogues)
     {
@@ -64,7 +62,7 @@ public class sNPC : MonoBehaviour
             eventHolder.Event.AddListener(new(() => AddToNotebook(dialogue)));
         }
         this.Conversation.Serialize(conv);
-        this.Conversation.DefaultName = Name;
+        this.Conversation.DefaultName = PrisonerData.Name;
     }
 
     private void AddToNotebook(Dialogue dialogue)
@@ -77,11 +75,13 @@ public class sNPC : MonoBehaviour
 
     public void UpdatePrisonerData()
     {
-        PrisonerData = sGameHandler.Instance.Prisoners[Name];
+        PrisonerData = sGameHandler.Instance.Prisoners[PrisonerId];
         if (!string.IsNullOrEmpty(PrisonerData.Crime))
             Crime = PrisonerData.Crime;
         if (!string.IsNullOrEmpty(PrisonerData.Background))
             Background = PrisonerData.Background;
         FillConversation(PrisonerData.RoleDialogues);
     }
+
+    public static sNPC GetById(int id) => GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.PrisonerId == id);
 }
