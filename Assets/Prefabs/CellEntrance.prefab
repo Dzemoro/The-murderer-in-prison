@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9efe4e98c089a4a9989b1456321ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellEntranceAnimatorParamName: CellEntranceOpen
+  CellEntranceAnimatorParamName: EntranceOpen
 --- !u!1 &4841730113956617256
 GameObject:
   m_ObjectHideFlags: 0
