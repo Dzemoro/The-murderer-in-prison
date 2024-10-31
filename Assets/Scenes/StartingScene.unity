@@ -3055,6 +3055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _search: {fileID: 680786874}
   _scribble: {fileID: 8300000, guid: f2b265a3dfde3df4782aee14f07e4ef3, type: 3}
+  _notebookTextParent: {fileID: 1703884530}
   searchIsActive: 0
 --- !u!225 &851037431
 CanvasGroup:
@@ -4275,8 +4276,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961293337}
   m_HandleRect: {fileID: 961293336}
   m_Direction: 2
-  m_Value: 1.0000008
-  m_Size: 0.2772612
+  m_Value: 1.000001
+  m_Size: 0.27726123
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4387,6 +4388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _search: {fileID: 0}
   _scribble: {fileID: 0}
+  _notebookTextParent: {fileID: 0}
   searchIsActive: 0
 --- !u!114 &1198413190
 MonoBehaviour:
