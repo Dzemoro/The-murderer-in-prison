@@ -115,17 +115,17 @@ public class Dialogue
 
 public class sGameHandler : MonoBehaviour
 {
-    private Dictionary<string, Prisoner> _prisoners = new();
+    private Dictionary<int, Prisoner> _prisoners = new();
 
     /// <summary>
-    /// Dictionary of all prisoners names with roles assigned to them.
+    /// Dictionary of all prisoners with roles assigned to them.
     /// </summary>
-    public IReadOnlyDictionary<string, Prisoner> Prisoners
+    public IReadOnlyDictionary<int, Prisoner> Prisoners
     {
         get 
         {
             if (!_prisoners.Any())
-                _prisoners = CreateRolesDictionary(GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>().GetNPCName()));
+                _prisoners = CreateRolesDictionary(GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>().PrisonerId));
             return _prisoners;
         } 
     }
@@ -172,9 +172,9 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
 
-    private readonly Dictionary<string, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, "gpt.json"));
+    private readonly Dictionary<int, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, "gpt.json"));
 
-    private static Dictionary<string, PrisonerFileData> ReadTsvDialogueFile()
+    private static Dictionary<int, PrisonerFileData> ReadTsvDialogueFile()
     {
         var text = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialogues.tsv")).Select(x => x.Split('\t'));
         var headerIndexes = text.First()
@@ -182,7 +182,8 @@ public class sGameHandler : MonoBehaviour
             .ToDictionary(x => x.Index, x => x.Value);
         var lines = text.Skip(1)
             .Select(x => x.Select((value, index) => new { Value = value, Header = headerIndexes[index] }));
-        var result = new Dictionary<string, PrisonerFileData>();
+        var result = new Dictionary<int, PrisonerFileData>();
+        var lineNumber = 0;
         foreach (var line in lines)
         {
             var prisonerDict = new Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>>();
@@ -201,12 +202,13 @@ public class sGameHandler : MonoBehaviour
                     prisonerDict[role].Add(dialogueType, item.Value.Split(';'));
                 }
             }
-            result.Add(key, new PrisonerFileData(key, prisonerDict, string.Empty, string.Empty));
+            result.Add(lineNumber, new PrisonerFileData(key, prisonerDict, string.Empty, string.Empty));
+            lineNumber++;
         }
         return result;
     }
 
-    private static Dictionary<string, PrisonerFileData> ReadJsonDialogueFile(string filePath)
+    private static Dictionary<int, PrisonerFileData> ReadJsonDialogueFile(string filePath)
     {
         IEnumerable<JsonRecord> json;
         try
@@ -217,8 +219,8 @@ public class sGameHandler : MonoBehaviour
         {
             json = JsonConvert.DeserializeObject<GPTJsonRecord>(File.ReadAllText(filePath)).Prisoners;
         }
-        return json.ToDictionary(x => x.Name,
-            x => new PrisonerFileData(x.Name, GetDialoguesDict(x), x.Crime, x.Background));
+        return json.Select((x , i) => new KeyValuePair<int, JsonRecord>(i, x)).ToDictionary(x => x.Key,
+            x => new PrisonerFileData(x.Value.Name, GetDialoguesDict(x.Value), x.Value.Crime, x.Value.Background));
 
         Dictionary<PrisonerRole, Dictionary<DialogueType, string[]>> GetDialoguesDict(JsonRecord jsonRecord)
         {
@@ -255,30 +257,30 @@ public class sGameHandler : MonoBehaviour
 
     }
 
-    private Dictionary<string, Prisoner> CreateRolesDictionary(IEnumerable<string> names)
+    private Dictionary<int, Prisoner> CreateRolesDictionary(IEnumerable<int> ids)
     {
-        IList<string> namesList = names is IList<string> list ? list : names.ToList();
+        IList<int> idsList = ids is IList<int> list ? list : ids.ToList();
 
         var availableRoles = new Dictionary<PrisonerRole, int>() //WARNING: The order of entries here is important!
         {
             { PrisonerRole.Murderer, 1 },
             { PrisonerRole.Witness, WitnessCount },
             { PrisonerRole.Informant, InformantCount },
-            { PrisonerRole.None, namesList.Count - (1 + WitnessCount + InformantCount + VerifierCount)},
+            { PrisonerRole.None, idsList.Count - (1 + WitnessCount + InformantCount + VerifierCount)},
             { PrisonerRole.Verifier, VerifierCount }
         };
 
-        var prisonersDictionary = new Dictionary<string, Prisoner>();
+        var prisonersDictionary = new Dictionary<int, Prisoner>();
 
         foreach (var role in availableRoles.Keys.ToList())
         {
             while (availableRoles[role] > 0)
             {
-                var name = GetRandomElement(namesList);
-                var prisonerData = CreatePrisonerData(prisonersDictionary.Values, role, name);
-                prisonersDictionary.Add(name, prisonerData);
-                System.Diagnostics.Debug.WriteLine($"{name} is {role} in relation to {prisonerData.RelatesTo}.");
-                namesList.Remove(name);
+                var id = GetRandomElement(idsList);
+                var prisonerData = CreatePrisonerData(prisonersDictionary.Values, role, id);
+                prisonersDictionary.Add(id, prisonerData);
+                System.Diagnostics.Debug.WriteLine($"{prisonerData.Name} ({id}) is {role} in relation to {prisonerData.RelatesTo}.");
+                idsList.Remove(id);
                 availableRoles[role]--;
             }
         }
@@ -291,7 +293,7 @@ public class sGameHandler : MonoBehaviour
         var candidates = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.Role != PrisonerRole.None);
         var chosen = GetRandomElement(candidates);
         var clue = chosen.Value.RoleDialogues.Where(x => x.DialogueType == DialogueType.Clue).Single();
-        System.Diagnostics.Debug.WriteLine($"Clue from {chosen.Key}: '{clue.Text}'");
+        System.Diagnostics.Debug.WriteLine($"Clue from {chosen.Value.Name}: '{clue.Text}'");
         return clue;
     }
     #endregion
@@ -302,26 +304,26 @@ public class sGameHandler : MonoBehaviour
     public void AddMurderCase()
     {
         var victimsSource = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.IsAlive && p.Value.Role != PrisonerRole.Witness);
-        var victim = UpdateRandomPrisoner(victimsSource, Enumerable.Empty<KeyValuePair<string, Prisoner>>(), PrisonerRole.None, isAlive: false);
-        System.Diagnostics.Debug.WriteLine($"{victim} has been killed.");
+        var victimId = UpdateRandomPrisoner(victimsSource, Enumerable.Empty<KeyValuePair<int, Prisoner>>(), PrisonerRole.None, isAlive: false);
+        System.Diagnostics.Debug.WriteLine($"{_prisoners[victimId].Name} ({victimId}) has been killed.");
 
-        var newRolesSource = victimsSource.Where(x => x.Key != victim.Name && x.Value.Role == PrisonerRole.None);
-        var newWitness = UpdateRandomPrisoner(newRolesSource, Prisoners, PrisonerRole.Witness);
-        System.Diagnostics.Debug.WriteLine($"{newWitness} is the new witness.");
+        var newRolesSource = victimsSource.Where(x => x.Key != victimId && x.Value.Role == PrisonerRole.None);
+        var newWitnessId = UpdateRandomPrisoner(newRolesSource, Prisoners, PrisonerRole.Witness);
+        System.Diagnostics.Debug.WriteLine($"{_prisoners[newWitnessId].Name} ({newWitnessId}) is the new witness.");
 
-        var verifierRolesSource = victimsSource.Where(x => x.Key != newWitness.Name);
+        var verifierRolesSource = victimsSource.Where(x => x.Key != newWitnessId);
         UpdateRandomPrisoner(verifierRolesSource, Prisoners, PrisonerRole.Verifier);
     }
 
-    private Prisoner UpdateRandomPrisoner(IEnumerable<KeyValuePair<string, Prisoner>> sourceCollection, IEnumerable<KeyValuePair<string, Prisoner>> relationSourceCollection, PrisonerRole targetRole, bool isAlive = true)
+    private int UpdateRandomPrisoner(IEnumerable<KeyValuePair<int, Prisoner>> sourceCollection, IEnumerable<KeyValuePair<int, Prisoner>> relationSourceCollection, PrisonerRole targetRole, bool isAlive = true)
     {
         var targetNpc = GetRandomElement(sourceCollection);
         var newData = isAlive ? 
             CreatePrisonerData(relationSourceCollection.Where(x => x.Key != targetNpc.Key).Select(x => x.Value), targetRole, targetNpc.Key) :
-            new Prisoner(targetNpc.Key, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, false, targetNpc.Value.Crime, targetNpc.Value.Background);
+            new Prisoner(targetNpc.Value.Name, PrisonerRole.None, Enumerable.Empty<Dialogue>(), null, false, targetNpc.Value.Crime, targetNpc.Value.Background);
         _prisoners[targetNpc.Key] = newData;
-        GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.GetNPCName() == targetNpc.Key).UpdatePrisonerData();
-        return newData;
+        sNPC.GetById(targetNpc.Key).UpdatePrisonerData();
+        return targetNpc.Key;
     }
 
     public void AddMurderCaseEvent(float timeLeft)
@@ -340,17 +342,17 @@ public class sGameHandler : MonoBehaviour
         var list = source is IList<T> sourceList ? sourceList : source.ToList();
         return list[Random.Range(0, list.Count)];
     }
-    private Prisoner CreatePrisonerData(IEnumerable<Prisoner> prisoners, PrisonerRole role, string name)
+    private Prisoner CreatePrisonerData(IEnumerable<Prisoner> prisoners, PrisonerRole role, int id)
     {
         var relation = GetRandomRelation(prisoners, role);
         return new Prisoner(
-            name, 
+            _prisonersFileData[id].Name, 
             role, 
-            GetRandomDialogues(name, role, relation), 
+            GetRandomDialogues(id, role, relation), 
             string.IsNullOrEmpty(relation) ? null : relation, 
             true, 
-            _prisonersFileData[name].Crime, 
-            _prisonersFileData[name].Background);
+            _prisonersFileData[id].Crime, 
+            _prisonersFileData[id].Background);
     }
 
     /// <summary>
@@ -378,9 +380,9 @@ public class sGameHandler : MonoBehaviour
         }
     }
 
-    private IEnumerable<Dialogue> GetRandomDialogues(string name, PrisonerRole role, string relationName)
+    private IEnumerable<Dialogue> GetRandomDialogues(int id, PrisonerRole role, string relationName)
     {
-        var roleTexts = _prisonersFileData[name].Dialogues[role];
+        var roleTexts = _prisonersFileData[id].Dialogues[role];
         var result = new List<Dialogue>();
         foreach (var dialogueType in System.Enum.GetValues(typeof(DialogueType)).OfType<DialogueType>())
         {
@@ -430,12 +432,6 @@ public class sGameHandler : MonoBehaviour
 #pragma warning restore CS8618 
 
     public DialogueEditor.NPCConversation GetBaseConversation() => Object.Instantiate(BaseConversation);
-
-    /// <summary>
-    /// Checks if prisoner is a murderer
-    /// </summary>
-    public bool CheckPrisoner(string name)
-        => Prisoners[name].Role == PrisonerRole.Murderer;
     #endregion
 }
 

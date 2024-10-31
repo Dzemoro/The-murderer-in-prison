@@ -1,7 +1,7 @@
 {
     "prisoners": [
       {
-        "name": "P0",
+        "name": "Jack",
         "background": "Jack was a notorious con artist with a reputation for smooth-talking his way out of trouble. Grew up in a rough neighborhood and got into petty crimes before landing himself in bigger schemes.",
         "crime": "Fraud and grand theft.",
         "clue": "Jack often brags about seeing things others miss, making him a potential lead for key information.",
@@ -23,7 +23,7 @@
         }
       },
       {
-        "name": "P1",
+        "name": "Emily",
         "background": "Emily is a former street fighter turned enforcer for a gang. She's tough, quick with her fists, and feared by many inside and outside of prison.",
         "crime": "Assault and battery.",
         "clue": "Her reputation for always being aware of her surroundings suggests she might have seen something crucial.",
@@ -45,7 +45,7 @@
         }
       },
       {
-        "name": "P2",
+        "name": "Leon",
         "background": "Leon is a quiet and reserved hacker. He keeps to himself, but his hacking skills made him infamous. Despite his calm demeanor, he’s always aware of what’s happening.",
         "crime": "Cybercrime and identity theft.",
         "clue": "Leon tends to observe everything in silence, making him a likely candidate to have witnessed something important.",
@@ -67,7 +67,7 @@
         }
       },
       {
-        "name": "P3",
+        "name": "Big Joe",
         "background": "Big Joe is a former bouncer with a history of violent outbursts. Though intimidating, he’s often more bark than bite. Many think he’s a softie at heart.",
         "crime": "Manslaughter.",
         "clue": "His imposing size and history of violence make him someone worth questioning about what he might have seen.",
@@ -89,7 +89,7 @@
         }
       },
       {
-        "name": "P4",
+        "name": "Mia",
         "background": "Mia is a former getaway driver with a knack for fast thinking. She’s sharp, quick-witted, and always seems to know more than she lets on.",
         "crime": "Armed robbery.",
         "clue": "Mia’s tendency to listen in on conversations might have given her vital knowledge about the murder.",
@@ -111,7 +111,7 @@
         }
       },
       {
-        "name": "P5",
+        "name": "Harry",
         "background": "Harry is a former white-collar criminal, a smooth-talking mastermind known for his charm and intellect. Despite his non-violent past, he has learned to navigate the tough world inside prison.",
         "crime": "Embezzlement.",
         "clue": "His manipulative nature might make him someone who knows more than he reveals at first.",

@@ -8,7 +8,8 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class sAccuse : MonoBehaviour
 {
 
-    public string _name;
+    public string PrisonerName;
+    public int PrisonerId;
     [SerializeField] private GameObject _buttonText;
     [SerializeField] private GameObject _resultScreen;
     [SerializeField] private GameObject _resultText;
@@ -17,7 +18,7 @@ public class sAccuse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _buttonText.GetComponent<TMP_Text>().text += _name;
+        _buttonText.GetComponent<TMP_Text>().text += PrisonerName;
 
         _resultScreen = GameObject.Find("PanelResult");
         _resultText = GameObject.Find("ResultText");
@@ -31,7 +32,7 @@ public class sAccuse : MonoBehaviour
 
     public void Accuse()
     {
-        bool final = sGameHandler.Instance.CheckPrisoner(_name);
+        bool final = sGameHandler.Instance.Prisoners[PrisonerId].Role == PrisonerRole.Murderer;
 
         _accuseMenu.transform.localScale = new Vector3(0f, 1f, 1f);
         _resultScreen.transform.localScale = new Vector3(1f, 1f, 1f);

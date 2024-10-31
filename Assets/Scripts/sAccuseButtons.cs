@@ -44,7 +44,12 @@ public class sAccuseButtons : MonoBehaviour
                 GameObject button = (GameObject)Instantiate(buttonTemplate);
                 button.transform.SetParent(scrollViewContent.transform, false);
 
-                button.GetComponent<sAccuse>()._name = _tempPrisoner.GetComponent<sNPC>().GetNPCName();
+                var npc = _tempPrisoner.GetComponent<sNPC>();
+                var accuse = button.GetComponent<sAccuse>();
+
+                accuse.PrisonerName = npc.GetNPCName();
+                accuse.PrisonerId = npc.PrisonerId;
+
             }
             notCreated = false;
         }
