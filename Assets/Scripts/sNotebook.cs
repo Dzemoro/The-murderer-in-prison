@@ -9,7 +9,7 @@ public class sNotebook : MonoBehaviour
 {
     public static sNotebook Instance { get; private set; }
     public Dictionary<string, string> _entries = new ();
-    private TMP_Text _notebookText;
+    private TMP_Text _notebookText => _notebookTextParent.GetComponent<TMP_Text>();
     [SerializeField] private TMP_Text _search;
     [SerializeField] private AudioClip _scribble;
     [SerializeField] private GameObject _notebookTextParent;
@@ -37,7 +37,7 @@ public class sNotebook : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         searchIsActive = false;
         windowIsOpen = false;
-        _notebookText = _notebookTextParent.GetComponent<TMP_Text>();
+        //_notebookText = _notebookTextParent.GetComponent<TMP_Text>();
         var allPrisoners = GameObject.FindGameObjectsWithTag("NPC").Select(p => p.GetComponent<sNPC>());
         foreach (var prisoner in allPrisoners)
         {
