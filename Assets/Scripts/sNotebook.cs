@@ -12,6 +12,7 @@ public class sNotebook : MonoBehaviour
     private TMP_Text _notebookText;
     [SerializeField] private TMP_Text _search;
     [SerializeField] private AudioClip _scribble;
+    [SerializeField] private GameObject _notebookTextParent;
     private string _crimeClue;
     private bool windowIsOpen;
 
@@ -36,7 +37,7 @@ public class sNotebook : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         searchIsActive = false;
         windowIsOpen = false;
-        _notebookText = GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>();
+        _notebookText = _notebookTextParent.GetComponent<TMP_Text>();
         var allPrisoners = GameObject.FindGameObjectsWithTag("NPC").Select(p => p.GetComponent<sNPC>());
         foreach (var prisoner in allPrisoners)
         {
