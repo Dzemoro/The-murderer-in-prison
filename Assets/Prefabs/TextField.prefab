@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 8603569515317897968}
   - component: {fileID: 4648217144838737893}
   - component: {fileID: 7779976624808198304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 1238073868036016996}
   - component: {fileID: 7778012331047542480}
   - component: {fileID: 564407237070071505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1343356647
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7778012331047542480

@@ -11,6 +11,7 @@ public class sMovement : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator animator;
 
     /// <summary>
     /// Is invoked every time the timer value is updated.
@@ -20,12 +21,12 @@ public class sMovement : MonoBehaviour
     public bool FreeToAct { get; set; }
     public bool timeRunning;
     public float timeLeft;
+    private bool moving;
 
     // Start is called before the first frame update
     void Start()
     {
         FreeToAct = true;
-
         //TIME RUNNING WILL BE ACTIVATED UPON FINISHING THE CONVERSATION WITH THE TELEPHONE!!!
         TimerEvent.AddListener(new UnityAction<float>(TimeEnd));
         //timeRunning = true;
@@ -53,12 +54,9 @@ public class sMovement : MonoBehaviour
     {
         if (FreeToAct)
         {
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            transform.up = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-
             movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             movementDirection.Normalize();
+            Animate();
         }
 
         if (timeRunning)
@@ -98,5 +96,21 @@ public class sMovement : MonoBehaviour
             FreeToAct = false;
             _resultText.GetComponent<TMP_Text>().text = "The murderer escaped! You failed!";
         }
+    }
+
+    private void Animate()
+    {
+        if (movementDirection.magnitude > 0.1f || movementDirection.magnitude < -0.1f)
+            moving = true;
+        else
+            moving = false;
+
+        if (moving)
+        {
+            animator.SetFloat("X", movementDirection.x);
+            animator.SetFloat ("Y", movementDirection.y);
+        }
+
+        animator.SetBool("Moving", moving);
     }
 }

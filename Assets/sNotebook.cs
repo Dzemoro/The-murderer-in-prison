@@ -11,8 +11,11 @@ public class sNotebook : MonoBehaviour
     public Dictionary<string, string> _entries = new ();
     private TMP_Text _notebookText;
     [SerializeField] private TMP_Text _search;
+    [SerializeField] private AudioClip _scribble;
     private string _crimeClue;
     private bool windowIsOpen;
+
+    private AudioSource _audioSource;
 
     public bool searchIsActive;
 
@@ -30,6 +33,7 @@ public class sNotebook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         searchIsActive = false;
         windowIsOpen = false;
         _notebookText = GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>();
@@ -66,6 +70,11 @@ public class sNotebook : MonoBehaviour
                 windowIsOpen = false;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Return) && GetComponent<CanvasGroup>().interactable && searchIsActive)
+        {
+            FillNotebook();
+        }
     }
 
     public void FillNotebook()
@@ -83,6 +92,9 @@ public class sNotebook : MonoBehaviour
     
     public void UpdateNotebook(string prisonerName, string stringAppend)
     {
+        _audioSource.clip = _scribble;
+
+        if( !sGameMenu.Instance.soundMute ) _audioSource.Play();
         _entries[prisonerName] += $"\n{stringAppend}";
         FillNotebook();
     }
@@ -91,5 +103,15 @@ public class sNotebook : MonoBehaviour
     {
         _crimeClue = clue;
         FillNotebook() ;
+    }
+
+    public void CreateNewEntry(string entryKey, string entryText)
+    {
+        _audioSource.clip = _scribble;
+        if (!sGameMenu.Instance.soundMute) _audioSource.Play();
+        string _key = "Item: " + entryKey;
+        string _text = "\n" + entryText;
+        _entries.Add(_key, _text);
+        FillNotebook();
     }
 }
