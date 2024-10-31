@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class sCellEntranceTrigger : MonoBehaviour
 {
-    public string CellEntranceAnimatorParamName = "CellEntranceOpen";
+    public string CellEntranceAnimatorParamName = "EntranceOpen";
     private bool playerIsClose;
     private Animator animator;
 
