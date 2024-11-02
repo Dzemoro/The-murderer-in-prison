@@ -243,7 +243,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2331,6 +2331,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (11)
@@ -2773,6 +2777,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (25)
@@ -25313,6 +25321,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (10)
@@ -25529,6 +25541,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (27)
@@ -25586,6 +25602,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (20)
@@ -25973,6 +25993,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (13)
@@ -62100,6 +62124,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (8)
@@ -62292,6 +62320,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (4)
@@ -63664,6 +63696,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (12)
@@ -63721,6 +63757,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (26)
@@ -64240,6 +64280,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (9)
@@ -64431,6 +64475,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (5)
@@ -64858,6 +64906,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (7)
@@ -66995,6 +67047,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (21)
@@ -82622,6 +82678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (24)
@@ -83738,6 +83798,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227728675562814284, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance (6)
