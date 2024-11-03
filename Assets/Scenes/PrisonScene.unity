@@ -243,7 +243,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -61364,6 +61364,14 @@ PrefabInstance:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3642102814737685476, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6463089
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642102814737685476, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0006942749
+      objectReference: {fileID: 0}
     - target: {fileID: 3801390215729098820, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -84625,6 +84633,66 @@ PrefabInstance:
     - target: {fileID: 2711075333185254078, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_Name
       value: CellEntrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480305467988828732, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Size.x
+      value: 0.31827193
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480305467988828732, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480305467988828732, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.32193717
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635352060031068638, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
+      value: -0.15992536
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
+      value: -0.43998584
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
+      value: -0.093198635
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
+      value: -0.43968335
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].x
+      value: -0.09003157
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].y
+      value: -0.28864408
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[7].x
+      value: -0.08870859
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472746675994241233, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[7].y
+      value: -0.1408984
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497976007595227090, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7607213906549282206, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
       propertyPath: m_LocalPosition.x
