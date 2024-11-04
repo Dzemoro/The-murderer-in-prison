@@ -59979,6 +59979,10 @@ PrefabInstance:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: prisonDestination
+      value: 
+      objectReference: {fileID: 1495044764}
     - target: {fileID: 3642102814737685476, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
       propertyPath: m_Size.x
       value: 0.6463089
