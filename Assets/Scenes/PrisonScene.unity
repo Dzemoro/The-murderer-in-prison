@@ -24730,6 +24730,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3567309061591315749, guid: 48494207e73f7b648ba011eb12c44c84, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567309061591315749, guid: 48494207e73f7b648ba011eb12c44c84, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567309061591315749, guid: 48494207e73f7b648ba011eb12c44c84, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -58156,26 +58168,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2169460881954791510, guid: 42d4909f65f00544b84b38076869b549, type: 3}
-      propertyPath: m_Size.x
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2169460881954791510, guid: 42d4909f65f00544b84b38076869b549, type: 3}
-      propertyPath: m_Size.y
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2169460881954791510, guid: 42d4909f65f00544b84b38076869b549, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.023
-      objectReference: {fileID: 0}
-    - target: {fileID: 2169460881954791510, guid: 42d4909f65f00544b84b38076869b549, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.26
-      objectReference: {fileID: 0}
-    - target: {fileID: 2169460881954791510, guid: 42d4909f65f00544b84b38076869b549, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2531119998919613413, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -58275,10 +58267,6 @@ PrefabInstance:
     - target: {fileID: 4348304559966825734, guid: 42d4909f65f00544b84b38076869b549, type: 3}
       propertyPath: PrisonerRole
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7408118507054830868, guid: 42d4909f65f00544b84b38076869b549, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
