@@ -71,11 +71,6 @@ public class sNotebook : MonoBehaviour
                 windowIsOpen = false;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Return) && GetComponent<CanvasGroup>().interactable && searchIsActive)
-        {
-            FillNotebook();
-        }
     }
 
     public void FillNotebook()
@@ -86,7 +81,7 @@ public class sNotebook : MonoBehaviour
                                                                                          _crimeClue + "\n\n\n";
         foreach (var entry in _entries)
         {
-            if( entry.Key.Contains( _search.text.Replace("\u200B", string.Empty)))
+            if( entry.Key.Contains( _search.text.Replace("\u200B", string.Empty),System.StringComparison.InvariantCultureIgnoreCase ) )
                 _notebookText.text += "<u>" + entry.Key + "</u>\n" + entry.Value + "\n\n\n";
         }
     }
