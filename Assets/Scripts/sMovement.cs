@@ -115,5 +115,5 @@ public class sMovement : MonoBehaviour
         animator.SetBool("Moving", moving);
     }
 
-    private void MovePlayerToPrison() => rb.position = prisonDestination.position;
+    public void MovePlayerToPrison() => rb.position = prisonDestination.position;
 }
