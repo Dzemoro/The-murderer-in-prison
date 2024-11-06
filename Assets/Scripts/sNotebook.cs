@@ -9,9 +9,10 @@ public class sNotebook : MonoBehaviour
 {
     public static sNotebook Instance { get; private set; }
     public Dictionary<string, string> _entries = new ();
-    private TMP_Text _notebookText;
+    private TMP_Text _notebookText => _notebookTextParent.GetComponent<TMP_Text>();
     [SerializeField] private TMP_Text _search;
     [SerializeField] private AudioClip _scribble;
+    [SerializeField] private GameObject _notebookTextParent;
     private string _crimeClue;
     private bool windowIsOpen;
 
@@ -36,7 +37,7 @@ public class sNotebook : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         searchIsActive = false;
         windowIsOpen = false;
-        _notebookText = GameObject.FindGameObjectWithTag("NotebookText").GetComponent<TMP_Text>();
+        //_notebookText = _notebookTextParent.GetComponent<TMP_Text>();
         var allPrisoners = GameObject.FindGameObjectsWithTag("NPC").Select(p => p.GetComponent<sNPC>());
         foreach (var prisoner in allPrisoners)
         {
@@ -70,11 +71,6 @@ public class sNotebook : MonoBehaviour
                 windowIsOpen = false;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Return) && GetComponent<CanvasGroup>().interactable && searchIsActive)
-        {
-            FillNotebook();
-        }
     }
 
     public void FillNotebook()
@@ -85,7 +81,7 @@ public class sNotebook : MonoBehaviour
                                                                                          _crimeClue + "\n\n\n";
         foreach (var entry in _entries)
         {
-            if( entry.Key.Contains( _search.text.Replace("\u200B", string.Empty)))
+            if( entry.Key.Contains( _search.text.Replace("\u200B", string.Empty),System.StringComparison.InvariantCultureIgnoreCase ) )
                 _notebookText.text += "<u>" + entry.Key + "</u>\n" + entry.Value + "\n\n\n";
         }
     }

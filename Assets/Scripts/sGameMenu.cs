@@ -101,7 +101,7 @@ public class sGameMenu : MonoBehaviour
         _menuOpen = false;
     }
 
-    public void RestartGane() { SceneManager.LoadScene("StartingScene"); }
+    public void RestartGane() { SceneManager.LoadScene("PrisonScene"); }
 
     public void QuitGame() { Application.Quit(); }
 
