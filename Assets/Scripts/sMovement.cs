@@ -12,6 +12,7 @@ public class sMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform prisonDestination;
 
     /// <summary>
     /// Is invoked every time the timer value is updated.
@@ -148,4 +149,6 @@ public class sMovement : MonoBehaviour
 
         animator.SetBool("Moving", moving);
     }
+
+    public void MovePlayerToPrison() => rb.position = prisonDestination.position;
 }

@@ -44,6 +44,7 @@ public class sPhone : MonoBehaviour
     public void EndCall()
     {
         notebook.GetComponent<CanvasGroup>().interactable = true;
+        sMovement.Instance.MovePlayerToPrison();
         sMovement.Instance.StartMovement();
         sMovement.Instance.timeRunning = true;
     }    
