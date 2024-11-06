@@ -64920,6 +64920,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3801390215729098820, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
   m_PrefabInstance: {fileID: 767029360}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1503055061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+  m_PrefabInstance: {fileID: 767029360}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503055050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804959ca46623014e9b45f03bf101886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1518089454
 GameObject:
   m_ObjectHideFlags: 0
@@ -83158,10 +83169,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1953756900189699460, guid: 9a461d7d9d22b4c40b8750ba9cd29355, type: 3}
+      propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1503055061}
     - target: {fileID: 2767022129309860347, guid: 9a461d7d9d22b4c40b8750ba9cd29355, type: 3}
       propertyPath: m_Name
       value: PrisonerConversationBase
       objectReference: {fileID: 0}
+    - target: {fileID: 3770717360909614878, guid: 9a461d7d9d22b4c40b8750ba9cd29355, type: 3}
+      propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1503055061}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
