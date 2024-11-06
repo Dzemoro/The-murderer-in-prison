@@ -1944,9 +1944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 32
-  m_RefResolutionX: 1280
-  m_RefResolutionY: 640
+  m_AssetsPPU: 64
+  m_RefResolutionX: 1440
+  m_RefResolutionY: 810
   m_UpscaleRT: 0
   m_PixelSnapping: 1
   m_CropFrameX: 1
@@ -2029,7 +2029,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7.2
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -59852,7 +59852,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1503055057}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 7.2
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -61362,8 +61362,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
       propertyPath: speed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: ac_music1
+      value: 
+      objectReference: {fileID: 8300000, guid: a650da65d6287cb418f5d0dd0fad2bd1, type: 3}
+    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: ac_music2
+      value: 
+      objectReference: {fileID: 8300000, guid: 66bb5032afe8ecb45a27a18e2d58dba6, type: 3}
+    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: ac_music3
+      value: 
+      objectReference: {fileID: 8300000, guid: d41c087eb86f2414dbd51960be949ccb, type: 3}
+    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: ac_music4
+      value: 
+      objectReference: {fileID: 8300000, guid: 010fb21af086ea142999eb30f5bde1f9, type: 3}
+    - target: {fileID: 2671786682489187490, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
+      propertyPath: _musicSource
+      value: 
+      objectReference: {fileID: 1503055051}
     - target: {fileID: 3801390215729098820, guid: fb31283fd9f046c41a5b60caaf943777, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -61587,11 +61607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8354653100269362219, guid: 9a2d20a7d2ed40f4e857b384f63f8487, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.138
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 8354653100269362219, guid: 9a2d20a7d2ed40f4e857b384f63f8487, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.1
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 8603569515317897968, guid: 9a2d20a7d2ed40f4e857b384f63f8487, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -65989,11 +66009,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2314c0ace68af8b4c82e9e77b13ded4f, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 66bb5032afe8ecb45a27a18e2d58dba6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -83130,7 +83150,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 421972669}
   m_HandleRect: {fileID: 421972668}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
