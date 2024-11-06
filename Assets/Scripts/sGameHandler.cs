@@ -172,7 +172,7 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
 
-    private readonly Dictionary<int, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, "gpt.json"));
+    private readonly Dictionary<int, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, "prisoners_data_gpt.json"));
 
     private static Dictionary<int, PrisonerFileData> ReadTsvDialogueFile()
     {
