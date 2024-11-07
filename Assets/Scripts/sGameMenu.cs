@@ -19,6 +19,9 @@ public class sGameMenu : MonoBehaviour
     [SerializeField] private TMP_Text _soundButton;
     public bool soundMute;
 
+    [SerializeField] private AudioSource _music;
+    [SerializeField] private AudioSource _phoneSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,13 +114,13 @@ public class sGameMenu : MonoBehaviour
         {
             musicMute = false;
             _musicButton.text = "Mute Music";
-            sMovement.Instance.GetComponent<AudioSource>().mute = false;
+            _music.mute = false;
         }
         else
         {
             musicMute = true;
             _musicButton.text = "Unmute Music";
-            sMovement.Instance.GetComponent<AudioSource>().mute = true;
+            _music.mute = true;
         }
     }
 
@@ -127,11 +130,13 @@ public class sGameMenu : MonoBehaviour
         {
             soundMute = false;
             _soundButton.text = "Mute Sound";
+            _phoneSound.mute = false;
         }
         else
         {
             soundMute = true;
             _soundButton.text = "Unmute Sound";
+            _phoneSound.mute = true;
         }
     }
 }
