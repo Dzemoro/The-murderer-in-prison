@@ -8,6 +8,7 @@ TagManager:
   - Notebook
   - NotebookText
   - Menu
+  - PageOfClue
   layers:
   - Default
   - TransparentFX

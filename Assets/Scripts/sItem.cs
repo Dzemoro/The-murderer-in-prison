@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class sItem : MonoBehaviour
 {
-
     private bool _playerIsClose;
-    public string _name;
-    public string _description;
+    public int id;
+    public string nameOfItem;
+    public string description;
     // Start is called before the first frame update
     void Start()
     {
         _playerIsClose = false;
+        nameOfItem = $"Page no. {id+1}";
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class sItem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && _playerIsClose)
         {
-            sNotebook.Instance.CreateNewEntry(_name, _description);
+            sNotebook.Instance.CreateNewEntry(nameOfItem, description);
             Destroy(gameObject);
         }
             
