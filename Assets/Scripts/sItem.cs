@@ -19,7 +19,7 @@ public class sItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose)
+        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && sMovement.Instance.FreeToAct)
         {
             sNotebook.Instance.CreateNewEntry(nameOfItem, description);
             Destroy(gameObject);
