@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 #region Prisoner Data
@@ -142,6 +143,7 @@ public class sGameHandler : MonoBehaviour
     {
         sMovement.Instance.TimerEvent.AddListener(new(AddMurderCaseEvent));
         sNotebook.Instance.UpdateClue(GetRandomClue().Text);
+        SetRandomLettersToCluePages();
     }
 
     void Awake()
@@ -342,6 +344,22 @@ public class sGameHandler : MonoBehaviour
         var list = source is IList<T> sourceList ? sourceList : source.ToList();
         return list[Random.Range(0, list.Count)];
     }
+
+    private static string GetRandomLettersFromPrisonName(string name)
+    {
+        var filteredName = name.ToUpper().Replace("\'", "").Replace(" ", "");
+        var amountOfLetters = filteredName.Length % 2 == 0 ? (filteredName.Length / 2) : (filteredName.Length + 1) / 2;
+        var result = new StringBuilder();
+        for (int i = 0; i < amountOfLetters; i++)
+        {
+            var index = Random.Range(0, filteredName.Length);
+            var letter = filteredName[index];
+            result.Append(letter);
+            filteredName = filteredName.Remove(index, 1);
+        }
+        return result.ToString();
+    }
+
     private Prisoner CreatePrisonerData(IEnumerable<Prisoner> prisoners, PrisonerRole role, int id)
     {
         var relation = GetRandomRelation(prisoners, role);
@@ -421,6 +439,28 @@ public class sGameHandler : MonoBehaviour
                 };
             }
             return $"\"{text}\"";
+        }
+    }
+
+    private void SetRandomLettersToCluePages()
+    {
+        var cluePages = GameObject.FindGameObjectsWithTag("PageOfClue").ToList();
+        var murdererName = _prisoners.Values.Single(x => x.Role == PrisonerRole.Murderer).Name;
+        var letters = GetRandomLettersFromPrisonName(murdererName);
+        var occupiedIds = new List<int>();
+        var count = 0;
+        var iterationLimit = letters.Length > cluePages.Count ? cluePages.Count : letters.Length;
+
+        while (occupiedIds.Count() < iterationLimit)
+        {
+            var id = Random.Range(0, cluePages.Count());
+            var letter = letters[count];
+            if (!occupiedIds.Contains(id))
+            {
+                occupiedIds.Add(id);
+                cluePages.Single(x => x.GetComponent<sItem>().id == id).GetComponent<sItem>().description = letter.ToString();
+                count++;
+            }
         }
     }
     #endregion

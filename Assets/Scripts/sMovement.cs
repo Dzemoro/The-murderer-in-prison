@@ -30,6 +30,7 @@ public class sMovement : MonoBehaviour
     public AudioClip ac_music4;
     public AudioSource _musicSource;
     public float musicTime;
+    public AudioSource _stepSource;
 
 
     // Start is called before the first frame update
@@ -100,6 +101,14 @@ public class sMovement : MonoBehaviour
                 }
             }
         }
+
+
+        if (!sGameMenu.Instance.soundMute &&
+            (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
+            || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.DownArrow))) _stepSource.mute = false;
+        else _stepSource.mute = true;
+
+
     }
 
     private void FixedUpdate()

@@ -13,8 +13,9 @@ public class sCellEntranceTrigger : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
+        if (Input.GetKeyDown(KeyCode.E) && playerIsClose && sMovement.Instance.FreeToAct)
         {
+            if (!sGameMenu.Instance.soundMute) GetComponent<AudioSource>().Play();
             var isCellEntranceOpen = animator.GetBool(CellEntranceAnimatorParamName);
             animator.SetBool(CellEntranceAnimatorParamName, !isCellEntranceOpen);
         }

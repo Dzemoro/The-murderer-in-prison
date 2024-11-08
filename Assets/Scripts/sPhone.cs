@@ -21,6 +21,7 @@ public class sPhone : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && _playerIsClose && !ConversationManager.Instance.IsConversationActive)
         {
+            GetComponent<AudioSource>().Stop();
             sMovement.Instance.StopMovement();
             ConversationManager.Instance.StartConversation(Conversation);
         }
