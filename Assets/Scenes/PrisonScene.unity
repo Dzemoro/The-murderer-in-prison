@@ -1734,6 +1734,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6d65de7bade134c9476b8c43c78907, type: 3}
+--- !u!1001 &202543218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 614435703848742825, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1503055061}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008997047605487304, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_Name
+      value: PrisonGuard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781433835375589777, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: leftPatrolX
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781433835375589777, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: rightPatrolX
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
 --- !u!1 &206898061
 GameObject:
   m_ObjectHideFlags: 0
@@ -66089,6 +66158,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1494912305
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 614435703848742825, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1503055061}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 59.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008997047605487304, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_Name
+      value: PrisonGuard (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781433835375589777, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: leftPatrolX
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781433835375589777, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: rightPatrolX
+      value: 79
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
 --- !u!1 &1495044763
 GameObject:
   m_ObjectHideFlags: 0
@@ -85828,15 +85966,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 6
-  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":664,"yPos":171},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I''m
-    here and ready.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":520,"yPos":435},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"I''ll
-    find out what I can.","parentUIDs":[2],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":821,"yPos":539},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Thank
-    you! I''m on my way.","parentUIDs":[4],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":544,"yPos":21},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
+  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":736.5,"yPos":173},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I''m
+    here and ready.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":592.5,"yPos":437},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"I''ll
+    find out what I can.","parentUIDs":[2],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":893.5,"yPos":541},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Thank
+    you! I''m on my way.","parentUIDs":[4],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":616.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
     We need your help immediately!","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
-    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":694,"yPos":314},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"This
+    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":766.5,"yPos":316},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"This
     is good, we had a murder at our prison and need your help solving it. Nobody
     knows what exactly happened and who might be the culprit.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
-    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":519,"yPos":527},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
+    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":591.5,"yPos":529},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
     quick and solve it before more people get hurt and the situation escalates out
     of control. I send you the most important information, you should find them in
     your notebook after pressing \"Q\".","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
@@ -86274,6 +86412,67 @@ Transform:
   - {fileID: 3850835249917405561}
   m_Father: {fileID: 2531120000272585390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7596875863706296631
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 614435703848742825, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1503055061}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -45.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912954060524803098, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008997047605487304, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_Name
+      value: PrisonGuard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
 --- !u!114 &7666456827935302296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86402,3 +86601,6 @@ SceneRoots:
   - {fileID: 107675887}
   - {fileID: 2531120000272585390}
   - {fileID: 837360595}
+  - {fileID: 7596875863706296631}
+  - {fileID: 202543218}
+  - {fileID: 1494912305}
