@@ -15,6 +15,9 @@ public class sAccuse : MonoBehaviour
     [SerializeField] private GameObject _resultText;
     [SerializeField] private GameObject _accuseMenu;
 
+    public AudioClip win;
+    public AudioClip loose;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +44,15 @@ public class sAccuse : MonoBehaviour
         if (final)
         {
             _resultText.GetComponent<TMP_Text>().text = "You have found the murderer!\nTime left: " + string.Format("{0:00} : {1:00}", (sMovement.Instance.timeLeft / 60 ), (sMovement.Instance.timeLeft % 60));
+            GetComponent<AudioSource>().clip = win;
         }
         else
         {
             _resultText.GetComponent<TMP_Text>().text = "You have accused the wrong person!";
+            GetComponent<AudioSource>().clip = loose;
         }
+
+        if (!sGameMenu.Instance.soundMute) GetComponent<AudioSource>().Play();
 
         //Debug.Log(_name + " was: " + final);
     }
