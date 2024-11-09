@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -43,7 +44,10 @@ public class sAccuse : MonoBehaviour
         sMovement.Instance.timeRunning = false;
         if (final)
         {
-            _resultText.GetComponent<TMP_Text>().text = "You have found the murderer!\nTime left: " + string.Format("{0:00} : {1:00}", (sMovement.Instance.timeLeft / 60 ), (sMovement.Instance.timeLeft % 60));
+            TimeSpan timeSpan = TimeSpan.FromSeconds(sMovement.Instance.timeLeft);
+            string timeText = timeSpan.ToString(@"mm\:ss");
+            _resultText.GetComponent<TMP_Text>().text = "You have found the murderer!\nTime left: " + timeText;
+            //string.Format("{0:00} : {1:00}", (sMovement.Instance.timeLeft / 60 ), (sMovement.Instance.timeLeft % 60))
             GetComponent<AudioSource>().clip = win;
         }
         else
