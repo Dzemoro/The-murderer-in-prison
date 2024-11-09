@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 2.3, y: 2.3}
   m_EdgeRadius: 0
 --- !u!114 &5781433835375589777
 MonoBehaviour:
@@ -174,13 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversation: {fileID: 7435486769116846171}
   rb: {fileID: 6321453041465764581}
+  animator: {fileID: 0}
   speed: 2
   leftPatrolX: -63
   rightPatrolX: -29
-  minPauseTime: 1
-  maxPauseTime: 2
-  minWalkTime: 3
-  maxWalkTime: 4
   facingDirection: -1
 --- !u!1 &3742215901840509581
 GameObject:

@@ -87042,10 +87042,6 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 476341666}
-    - target: {fileID: 6658822359048574973, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
