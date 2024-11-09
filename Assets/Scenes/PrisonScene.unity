@@ -300,7 +300,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 7
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2beb2f5220d2d3141ae02dff1032f8f6, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &12564575
 MonoBehaviour:
@@ -350,7 +350,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 5
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2beb2f5220d2d3141ae02dff1032f8f6, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &12564577
 MonoBehaviour:
@@ -369,7 +369,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 4
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2beb2f5220d2d3141ae02dff1032f8f6, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &12564578
 MonoBehaviour:
@@ -407,7 +407,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 2
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2beb2f5220d2d3141ae02dff1032f8f6, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &12564580
 MonoBehaviour:
@@ -445,7 +445,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 0
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2beb2f5220d2d3141ae02dff1032f8f6, type: 3}
   Audio: {fileID: 0}
 --- !u!1001 &12861506
 PrefabInstance:
@@ -2040,6 +2040,10 @@ PrefabInstance:
     - target: {fileID: 1008997047605487304, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
       propertyPath: m_Name
       value: PrisonGuard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313877670492066709, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4033998313089268116, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
       propertyPath: id
@@ -58887,7 +58891,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 7
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c01aeb105b8076a42822815b78abe66c, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &359471962
 MonoBehaviour:
@@ -58937,7 +58941,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 5
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c01aeb105b8076a42822815b78abe66c, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &359471964
 MonoBehaviour:
@@ -58956,7 +58960,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 4
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c01aeb105b8076a42822815b78abe66c, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &359471965
 MonoBehaviour:
@@ -58994,7 +58998,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 2
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c01aeb105b8076a42822815b78abe66c, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &359471967
 MonoBehaviour:
@@ -59032,7 +59036,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 0
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c01aeb105b8076a42822815b78abe66c, type: 3}
   Audio: {fileID: 0}
 --- !u!1001 &373094899
 PrefabInstance:
@@ -63033,7 +63037,7 @@ MonoBehaviour:
   CurrentIDCounter: 9
   json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":558,"yPos":179},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"How
     many guards are here?","parentUIDs":[0,5,7],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"IsItemDelivered","CheckType":0,"RequiredValue":false}],"NodeUID":4},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":820,"yPos":184},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"Do
-    you have something for me?","parentUIDs":[0,2],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":1195,"yPos":501},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Sure","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":98,"yPos":205},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"End.","parentUIDs":[0,2,5,7],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"IsItemDelivered","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
+    you have something for me?","parentUIDs":[0,2],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":1195,"yPos":501},"ID":6,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"IsItemDelivered","Value":true}],"TMPFontGUID":null,"Text":"Sure","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":98,"yPos":205},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"End.","parentUIDs":[0,2,5,7],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"IsItemDelivered","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
     What do you need?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
     Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":415,"yPos":438},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"One
     on each floor and one policeman in the canteen.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
@@ -63062,7 +63066,19 @@ MonoBehaviour:
   EndConversationFont: {fileID: 0}
   Event:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1049463596}
+        m_TargetAssemblyTypeName: sItem, Assembly-CSharp
+        m_MethodName: DeliverItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &988829433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63358,7 +63374,7 @@ MonoBehaviour:
   CurrentIDCounter: 9
   json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":558,"yPos":179},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"How
     many guards are here?","parentUIDs":[0,5,7],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"IsItemDelivered","CheckType":0,"RequiredValue":false}],"NodeUID":4},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":820,"yPos":184},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"Do
-    you have something for me?","parentUIDs":[0,2],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":1195,"yPos":501},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Sure","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":98,"yPos":205},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"End.","parentUIDs":[0,2,5,7],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"IsItemDelivered","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
+    you have something for me?","parentUIDs":[0,2],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":1195,"yPos":501},"ID":6,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"IsItemDelivered","Value":true}],"TMPFontGUID":null,"Text":"Sure","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":98,"yPos":205},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"End.","parentUIDs":[0,2,5,7],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"IsItemDelivered","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
     What do you need?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
     Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":415,"yPos":438},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"One
     on each floor and one policeman in the canteen.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
@@ -67184,6 +67200,10 @@ PrefabInstance:
     - target: {fileID: 1008997047605487304, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
       propertyPath: m_Name
       value: PrisonGuard (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313877670492066709, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4033998313089268116, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
       propertyPath: id
@@ -84137,7 +84157,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 7
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b1ac5a238a879b84c991eb14f007bc19, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &1874506424
 MonoBehaviour:
@@ -84187,7 +84207,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 5
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b1ac5a238a879b84c991eb14f007bc19, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &1874506426
 MonoBehaviour:
@@ -84206,7 +84226,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 4
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b1ac5a238a879b84c991eb14f007bc19, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &1874506427
 MonoBehaviour:
@@ -84244,7 +84264,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 2
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b1ac5a238a879b84c991eb14f007bc19, type: 3}
   Audio: {fileID: 0}
 --- !u!114 &1874506429
 MonoBehaviour:
@@ -84282,7 +84302,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 0
   TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b1ac5a238a879b84c991eb14f007bc19, type: 3}
   Audio: {fileID: 0}
 --- !u!4 &1883529708 stripped
 Transform:
@@ -84990,7 +85010,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 421972669}
   m_HandleRect: {fileID: 421972668}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -86517,22 +86537,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 9
-  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":558,"yPos":179},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"How
-    many guards are here?","parentUIDs":[0,5,7],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"IsItemDelivered","CheckType":0,"RequiredValue":false}],"NodeUID":4},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":820,"yPos":184},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"Do
-    you have something for me?","parentUIDs":[0,2],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":1195,"yPos":501},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Sure","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":98,"yPos":205},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"End.","parentUIDs":[0,2,5,7],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"IsItemDelivered","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
+  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":557,"yPos":175},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"How
+    many guards are here?","parentUIDs":[0,5,7],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"IsItemDelivered","CheckType":0,"RequiredValue":false}],"NodeUID":4},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":819,"yPos":180},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"Do
+    you have something for me?","parentUIDs":[0,2],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":1194,"yPos":497},"ID":6,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"IsItemDelivered","Value":true}],"TMPFontGUID":null,"Text":"Sure","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":97,"yPos":201},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"End.","parentUIDs":[0,2,5,7],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"IsItemDelivered","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":23},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
     What do you need?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
-    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":415,"yPos":438},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"One
+    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":414,"yPos":434},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"One
     on each floor and one policeman in the canteen.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
-    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":6}],"EditorInfo":{"isRoot":false,"xPos":1190,"yPos":168},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
+    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":6}],"EditorInfo":{"isRoot":false,"xPos":1189,"yPos":164},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
     quiet! Yes, I have something, but do not tell anyone, ok?","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
-    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":992,"yPos":304},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"I
+    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":991,"yPos":300},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"I
     already gave you everything what I had.","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
-    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":818,"yPos":473},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"Great,
+    Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":false,"xPos":817,"yPos":469},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"Great,
     that''s for you.","parentUIDs":[6],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Prison
     Guard","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: Prison Guard
-  DefaultSprite: {fileID: 0}
+  DefaultSprite: {fileID: 21300000, guid: 2beb2f5220d2d3141ae02dff1032f8f6, type: 3}
   DefaultFont: {fileID: 0}
   NodeSerializedDataList:
   - {fileID: 12564581}
@@ -87511,7 +87531,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 4
   TMPFont: {fileID: 0}
-  Icon: {fileID: 21300000, guid: 42c2fd255c6be5741b2b38173acf2f72, type: 3}
+  Icon: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
   Audio: {fileID: 8300000, guid: f97829d0a628d214bbdb77d57cfae716, type: 3}
 --- !u!212 &3567309060773608558
 SpriteRenderer:
@@ -87604,15 +87624,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 6
-  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":736.5,"yPos":173},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I''m
-    here and ready.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":592.5,"yPos":437},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"I''ll
-    find out what I can.","parentUIDs":[2],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":893.5,"yPos":541},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Thank
-    you! I''m on my way.","parentUIDs":[4],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":616.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
+  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":799.5,"yPos":173},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I''m
+    here and ready.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":655.5,"yPos":437},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"I''ll
+    find out what I can.","parentUIDs":[2],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":956.5,"yPos":541},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Thank
+    you! I''m on my way.","parentUIDs":[4],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
     We need your help immediately!","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
-    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":766.5,"yPos":316},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"This
+    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":829.5,"yPos":316},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"This
     is good, we had a murder at our prison and need your help solving it. Nobody
     knows what exactly happened and who might be the culprit.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
-    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":591.5,"yPos":529},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
+    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":654.5,"yPos":529},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
     quick and solve it before more people get hurt and the situation escalates out
     of control. I send you the most important information, you should find them in
     your notebook after pressing \"Q\".","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
@@ -88032,7 +88052,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 2
   TMPFont: {fileID: 0}
-  Icon: {fileID: 21300000, guid: 42c2fd255c6be5741b2b38173acf2f72, type: 3}
+  Icon: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
   Audio: {fileID: 8300000, guid: 0a843744eeece35469b00490045e9a5d, type: 3}
 --- !u!4 &7502611515876969312
 Transform:
@@ -88114,6 +88134,10 @@ PrefabInstance:
       propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1503055061}
+    - target: {fileID: 2313877670492066709, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2751624192650588180, guid: 938fbc004cf290a47b10ae0441e33f1a, type: 3}
       propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -88189,7 +88213,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 0
   TMPFont: {fileID: 0}
-  Icon: {fileID: 21300000, guid: 42c2fd255c6be5741b2b38173acf2f72, type: 3}
+  Icon: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
   Audio: {fileID: 8300000, guid: e9ecf845d9f5bcb42b6c78145994c3f1, type: 3}
 --- !u!1001 &8334696554885273247
 PrefabInstance:
