@@ -8,19 +8,22 @@ public class sGuard : MonoBehaviour
     [SerializeField] private NPCConversation Conversation;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject pageOfClue;
     [SerializeField] private float speed;
     [SerializeField] private float leftPatrolX;
     [SerializeField] private float rightPatrolX;
     [SerializeField] private int facingDirection = -1;
 
-    private bool _isWalking = true;
+    private bool _isWalking;
     private bool _playerIsClose;
-    private bool _isGuardAbleToMove = true;
+    private bool _isGuardAbleToMove;
     private bool _isChangingDirection;
 
     // Start is called before the first frame update
     void Start()
     {
+        _isWalking = true;
+        _isGuardAbleToMove = true;
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class sGuard : MonoBehaviour
             StopGuardMovement();
             sMovement.Instance.StopMovement();
             ConversationManager.Instance.StartConversation(Conversation);
+            UpdateDeliveryStatus();
         }
     }
 
@@ -48,6 +52,8 @@ public class sGuard : MonoBehaviour
                 rb.MovePosition(rb.position + Vector2.right * facingDirection * speed * Time.fixedDeltaTime);
         }
     }
+
+    public void UpdateDeliveryStatus() => ConversationManager.Instance.SetBool("IsItemDelivered", (pageOfClue == null));
 
     private void OnTriggerEnter2D(Collider2D other)
     {
