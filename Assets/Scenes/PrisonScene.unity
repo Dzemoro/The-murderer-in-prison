@@ -61444,7 +61444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c2a5be59b4a36648a911535c6e46ab8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -87531,7 +87531,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 4
   TMPFont: {fileID: 0}
-  Icon: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
+  Icon: {fileID: 21300000, guid: 9d6ad2bb14441ac4fa7f88481b225ea3, type: 3}
   Audio: {fileID: 8300000, guid: f97829d0a628d214bbdb77d57cfae716, type: 3}
 --- !u!212 &3567309060773608558
 SpriteRenderer:
@@ -88052,7 +88052,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 2
   TMPFont: {fileID: 0}
-  Icon: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
+  Icon: {fileID: 21300000, guid: 9d6ad2bb14441ac4fa7f88481b225ea3, type: 3}
   Audio: {fileID: 8300000, guid: 0a843744eeece35469b00490045e9a5d, type: 3}
 --- !u!4 &7502611515876969312
 Transform:
@@ -88213,7 +88213,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 0
   TMPFont: {fileID: 0}
-  Icon: {fileID: 21300000, guid: d04ed10d29e9af14987b21b8688f5961, type: 3}
+  Icon: {fileID: 21300000, guid: 9d6ad2bb14441ac4fa7f88481b225ea3, type: 3}
   Audio: {fileID: 8300000, guid: e9ecf845d9f5bcb42b6c78145994c3f1, type: 3}
 --- !u!1001 &8334696554885273247
 PrefabInstance:
