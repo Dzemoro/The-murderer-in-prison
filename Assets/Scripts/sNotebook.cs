@@ -63,7 +63,7 @@ public class sNotebook : MonoBehaviour
                 sMovement.Instance.timeRunning = false;
                 windowIsOpen = true;
             }
-            else if (!sMovement.Instance.FreeToAct && windowIsOpen && !searchIsActive)
+            else if (!sMovement.Instance.FreeToAct && windowIsOpen && !searchIsActive && sGameMenu.Instance.transform.localScale != new Vector3(1f, 1f, 1f))
             {
                 transform.localScale = new Vector3(0f, 1f, 1f);
                 sMovement.Instance.StartMovement();

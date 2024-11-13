@@ -5,26 +5,31 @@ using UnityEngine;
 
 public class sItem : MonoBehaviour
 {
-
     private bool _playerIsClose;
-    public string _name;
-    public string _description;
+    public int id;
+    public string nameOfItem;
+    public string description;
+    private bool _isItemDelivered;
+
     // Start is called before the first frame update
     void Start()
     {
         _playerIsClose = false;
+        nameOfItem = $"Page no. {id+1}";
+        _isItemDelivered = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _playerIsClose)
+        if ((Input.GetKeyDown(KeyCode.E) && _playerIsClose && sMovement.Instance.FreeToAct) || _isItemDelivered)
         {
-            sNotebook.Instance.CreateNewEntry(_name, _description);
+            sNotebook.Instance.CreateNewEntry(nameOfItem, description);
             Destroy(gameObject);
         }
-            
     }
+
+    public void DeliverItem() => _isItemDelivered = true;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

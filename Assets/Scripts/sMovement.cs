@@ -24,9 +24,19 @@ public class sMovement : MonoBehaviour
     public float timeLeft;
     private bool moving;
 
+    public AudioClip ac_music1;
+    public AudioClip ac_music2;
+    public AudioClip ac_music3;
+    public AudioClip ac_music4;
+    public AudioSource _musicSource;
+    public float musicTime;
+    public AudioSource _stepSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        musicTime = Random.Range(15.0f, 45.0f);
         FreeToAct = true;
         //TIME RUNNING WILL BE ACTIVATED UPON FINISHING THE CONVERSATION WITH THE TELEPHONE!!!
         TimerEvent.AddListener(new UnityAction<float>(TimeEnd));
@@ -65,13 +75,47 @@ public class sMovement : MonoBehaviour
             timeLeft -= Time.deltaTime;
             TimerEvent.Invoke(timeLeft);
         }
+
+        if (!_musicSource.isPlaying)
+        {
+
+            if (musicTime > 0)
+            {
+                musicTime -= Time.deltaTime;
+            }
+            else
+            {
+                int x = Random.Range(1, 5);
+                switch (x)
+                {
+                    case 1:
+                        _musicSource.clip = ac_music1; _musicSource.Play(); musicTime = Random.Range(15.0f, 45.0f); break;
+                    case 2:
+                        _musicSource.clip = ac_music2; _musicSource.Play(); musicTime = Random.Range(15.0f, 45.0f); break;
+                    case 3:
+                        _musicSource.clip = ac_music3; _musicSource.Play(); musicTime = Random.Range(15.0f, 45.0f); break;
+                    case 4:
+                        _musicSource.clip = ac_music4; _musicSource.Play(); musicTime = Random.Range(15.0f, 45.0f); break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        if (!sGameMenu.Instance.soundMute &&
+            (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
+            || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.DownArrow))) _stepSource.mute = false;
+        else _stepSource.mute = true;
+
+
     }
 
     private void FixedUpdate()
     {
         if (FreeToAct && Input.GetKey(KeyCode.LeftShift))
         {
-            rb.MovePosition(rb.position + movementDirection * (speed / 3) * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + movementDirection * (speed / 2) * Time.fixedDeltaTime);
         }
         else if (FreeToAct)
         {
