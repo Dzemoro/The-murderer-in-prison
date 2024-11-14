@@ -103,7 +103,7 @@ public class sMovement : MonoBehaviour
         }
 
 
-        if (!sGameMenu.Instance.soundMute &&
+        if (!sGameMenu.Instance.soundMute && FreeToAct &&
             (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
             || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.DownArrow))) _stepSource.mute = false;
         else _stepSource.mute = true;
