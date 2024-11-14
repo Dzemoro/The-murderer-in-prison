@@ -2288,9 +2288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d277c532d3ab440b35dd5d902c0819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WitnessCount: 5
-  InformantCount: 1
-  VerifierCount: 1
+  WitnessCount: 3
+  InformantCount: 8
+  VerifierCount: 14
   BaseConversation: {fileID: 4382351447599198894}
 --- !u!4 &138095067
 Transform:
