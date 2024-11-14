@@ -41,11 +41,12 @@ public class sNotebook : MonoBehaviour
         var allPrisoners = GameObject.FindGameObjectsWithTag("NPC").Select(p => p.GetComponent<sNPC>());
         foreach (var prisoner in allPrisoners)
         {
+            var prisonerData = sGameHandler.Instance.Prisoners[prisoner.PrisonerId];
             var tempEntryConsolidate = "\nPrisoner is located in: " + prisoner.Location +
-                                    "\nPrisoner was previously: " + prisoner.Background +
-                                    "\nPrisoner convited of: " + prisoner.Crime;
+                                    "\nPrisoner was previously: " + prisonerData.Background +
+                                    "\nPrisoner convited of: " + prisonerData.Crime;
 
-            _entries.Add(prisoner.GetNPCName(), tempEntryConsolidate);
+            _entries.Add(prisonerData.Name, tempEntryConsolidate);
         }
 
         FillNotebook();
@@ -90,7 +91,8 @@ public class sNotebook : MonoBehaviour
     {
         _audioSource.clip = _scribble;
 
-        if( !sGameMenu.Instance.soundMute ) _audioSource.Play();
+        if( !sGameMenu.Instance.soundMute ) 
+            _audioSource.Play();
         _entries[prisonerName] += $"\n{stringAppend}";
         FillNotebook();
     }
@@ -104,7 +106,8 @@ public class sNotebook : MonoBehaviour
     public void CreateNewEntry(string entryKey, string entryText)
     {
         _audioSource.clip = _scribble;
-        if (!sGameMenu.Instance.soundMute) _audioSource.Play();
+        if (!sGameMenu.Instance.soundMute) 
+            _audioSource.Play();
         string _key = "Item: " + entryKey;
         string _text = "\n" + entryText;
         _entries.Add(_key, _text);
