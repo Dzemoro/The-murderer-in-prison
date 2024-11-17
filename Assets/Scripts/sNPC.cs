@@ -87,4 +87,5 @@ public class sNPC : MonoBehaviour
     }
 
     public static sNPC GetById(int id) => GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.PrisonerId == id);
+    public static GameObject GetGameObjectById(int id) => GameObject.FindGameObjectsWithTag("NPC").Where(x => x.GetComponent<sNPC>().PrisonerId == id).Single();
 }

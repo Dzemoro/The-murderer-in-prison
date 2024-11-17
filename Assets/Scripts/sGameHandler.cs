@@ -301,19 +301,22 @@ public class sGameHandler : MonoBehaviour
     #endregion
 
     #region Handle new murder cases
-    private List<float> _executionPoints = new List<float>() { 1150, 600 };
+    private List<float> _executionPoints = new List<float>() { 800, 400 };
 
     public void AddMurderCase()
     {
         var victimsSource = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.IsAlive && p.Value.Role != PrisonerRole.Witness);
         var victimId = UpdateRandomPrisoner(victimsSource, Enumerable.Empty<KeyValuePair<int, Prisoner>>(), PrisonerRole.None, isAlive: false);
+        sNPC.GetGameObjectById(victimId).SetActive(false);
+        sNotebook.Instance.UpdateNotebook(Prisoners[victimId].Name, "They were murdered while I was working on the case! Someone might have some new information.");
         System.Diagnostics.Debug.WriteLine($"{_prisoners[victimId].Name} ({victimId}) has been killed.");
+
 
         var newRolesSource = victimsSource.Where(x => x.Key != victimId && x.Value.Role == PrisonerRole.None);
         var newWitnessId = UpdateRandomPrisoner(newRolesSource, Prisoners, PrisonerRole.Witness);
         System.Diagnostics.Debug.WriteLine($"{_prisoners[newWitnessId].Name} ({newWitnessId}) is the new witness.");
 
-        var verifierRolesSource = victimsSource.Where(x => x.Key != newWitnessId);
+        var verifierRolesSource = newRolesSource.Where(x => x.Key != newWitnessId);
         UpdateRandomPrisoner(verifierRolesSource, Prisoners, PrisonerRole.Verifier);
     }
 
