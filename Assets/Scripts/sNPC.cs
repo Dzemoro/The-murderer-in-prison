@@ -63,6 +63,19 @@ public class sNPC : MonoBehaviour
             speechNode.Text = dialogue.Text;
             var eventHolder = Conversation.GetNodeData((int)dialogue.DialogueType);
             eventHolder.Event.AddListener(new(() => AddToNotebook(dialogue)));
+            if (!string.IsNullOrWhiteSpace(dialogue.AudioFileName))
+            {
+                var audio = (AudioClip)Resources.Load(dialogue.AudioFileName);
+                if (audio != null)
+                {
+                    eventHolder.Audio = audio;
+                    speechNode.Volume = 1;
+                }
+                else
+                {
+                    Debug.LogWarning($"Missing audio clip resource: {dialogue.AudioFileName}.");
+                }
+            }
         }
         this.Conversation.Serialize(conv);
         this.Conversation.DefaultName = PrisonerData.Name;

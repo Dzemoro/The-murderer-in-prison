@@ -97,18 +97,20 @@ public enum DialogueType
 
 public class Dialogue
 {
-    public Dialogue(string text, string notebookSummary, DialogueType dialogueType, bool addedToNotebook = false)
+    public Dialogue(string text, string notebookSummary, DialogueType dialogueType, bool addedToNotebook = false, string? audioFileName = null)
     {
         Text = text;
         NotebookSummary = notebookSummary;
         DialogueType = dialogueType;
         AddedToNotebook = addedToNotebook;
+        AudioFileName = audioFileName;
     }
 
     public string Text { get; }
     public string NotebookSummary { get; }
     public DialogueType DialogueType { get; } 
     public bool AddedToNotebook { get; private set; }
+    public string? AudioFileName { get; private set; }
 
     public void SetAsAdded() => AddedToNotebook = true;
 }
@@ -116,6 +118,7 @@ public class Dialogue
 
 public class sGameHandler : MonoBehaviour
 {
+    private const string DialoguesFilePath = "prisoners_data_gpt.json";
     private Dictionary<int, Prisoner> _prisoners = new();
 
     /// <summary>
@@ -174,7 +177,7 @@ public class sGameHandler : MonoBehaviour
     [SerializeField] private int InformantCount;
     [SerializeField] private int VerifierCount;
 
-    private readonly Dictionary<int, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, "prisoners_data_gpt.json"));
+    private readonly Dictionary<int, PrisonerFileData> _prisonersFileData = ReadJsonDialogueFile(Path.Combine(Application.streamingAssetsPath, DialoguesFilePath));
 
     private static Dictionary<int, PrisonerFileData> ReadTsvDialogueFile()
     {
@@ -409,6 +412,7 @@ public class sGameHandler : MonoBehaviour
         {
             var templates = roleTexts[dialogueType];
             string text;
+            string? audioFileName = null;
             if (dialogueType == DialogueType.Clue)
             {
                 text = string.Format(GetRandomElement(templates), name);
@@ -418,8 +422,20 @@ public class sGameHandler : MonoBehaviour
                 text = string.IsNullOrWhiteSpace(relationName) ?
                     GetRandomElement(templates) :
                     string.Format(GetRandomElement(templates), relationName);
+                if (DialoguesFilePath == "prisoners_data_gpt.json")
+                {
+                    var name = _prisonersFileData[id].Name;
+                    var audioRoleName = dialogueType == DialogueType.Suspicion ? "Knows-Anything" : "Alibi";
+                    audioFileName = "PrisonersVA/" + 
+                        string.Join("_", 
+                            audioRoleName, 
+                            role.ToString(), 
+                            name.Replace("'", string.Empty).Replace(" ", "-"), 
+                            relationName.Replace("'", string.Empty).Replace(" ", "-"))
+                        .TrimEnd('_');
+                }
             }
-            result.Add(new Dialogue(text, GetSummary(text, relationName, role, dialogueType), dialogueType));
+            result.Add(new Dialogue(text, GetSummary(text, relationName, role, dialogueType), dialogueType, audioFileName: audioFileName));
         }
         return result;
 

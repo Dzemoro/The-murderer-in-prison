@@ -94903,7 +94903,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1663556195}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.27726123
+  m_Size: 0.2772612
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -97367,15 +97367,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 6
-  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":799.5,"yPos":173},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I''m
-    here and ready.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":655.5,"yPos":437},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"I''ll
-    find out what I can.","parentUIDs":[2],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":956.5,"yPos":541},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Thank
-    you! I''m on my way.","parentUIDs":[4],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":679.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
+  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":378.8,"yPos":173},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I''m
+    here and ready.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":234.799988,"yPos":437},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"I''ll
+    find out what I can.","parentUIDs":[2],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":535.8,"yPos":541},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Thank
+    you! I''m on my way.","parentUIDs":[4],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":258.8,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hello.
     We need your help immediately!","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
-    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":829.5,"yPos":316},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"This
+    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":408.8,"yPos":316},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"This
     is good, we had a murder at our prison and need your help solving it. Nobody
     knows what exactly happened and who might be the culprit.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
-    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":654.5,"yPos":529},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
+    Commander","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":233.799988,"yPos":529},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
     quick and solve it before more people get hurt and the situation escalates out
     of control. I send you the most important information, you should find them in
     your notebook after pressing \"Q\".","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Police
