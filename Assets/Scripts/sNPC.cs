@@ -63,6 +63,19 @@ public class sNPC : MonoBehaviour
             speechNode.Text = dialogue.Text;
             var eventHolder = Conversation.GetNodeData((int)dialogue.DialogueType);
             eventHolder.Event.AddListener(new(() => AddToNotebook(dialogue)));
+            if (!string.IsNullOrWhiteSpace(dialogue.AudioFileName))
+            {
+                var audio = (AudioClip)Resources.Load(dialogue.AudioFileName);
+                if (audio != null)
+                {
+                    eventHolder.Audio = audio;
+                    speechNode.Volume = 1;
+                }
+                else
+                {
+                    Debug.LogWarning($"Missing audio clip resource: {dialogue.AudioFileName}.");
+                }
+            }
         }
         this.Conversation.Serialize(conv);
         this.Conversation.DefaultName = PrisonerData.Name;
@@ -87,4 +100,5 @@ public class sNPC : MonoBehaviour
     }
 
     public static sNPC GetById(int id) => GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<sNPC>()).Single(p => p.PrisonerId == id);
+    public static GameObject GetGameObjectById(int id) => GameObject.FindGameObjectsWithTag("NPC").Where(x => x.GetComponent<sNPC>().PrisonerId == id).Single();
 }
