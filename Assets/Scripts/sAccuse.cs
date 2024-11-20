@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class sAccuse : MonoBehaviour
 {
@@ -44,15 +44,15 @@ public class sAccuse : MonoBehaviour
         sMovement.Instance.timeRunning = false;
         if (final)
         {
-            TimeSpan timeSpan = TimeSpan.FromSeconds(sMovement.Instance.timeLeft);
-            string timeText = timeSpan.ToString(@"mm\:ss");
-            _resultText.GetComponent<TMP_Text>().text = "You have found the murderer!\nTime left: " + timeText;
+            //TimeSpan timeSpan = TimeSpan.FromSeconds(sMovement.Instance.timeLeft);
+            //string timeText = timeSpan.ToString(@"mm\:ss");
+            _resultText.GetComponent<TMP_Text>().text = "Murderer found!\nPoints:\n" + (int)sMovement.Instance.timeLeft;
             //string.Format("{0:00} : {1:00}", (sMovement.Instance.timeLeft / 60 ), (sMovement.Instance.timeLeft % 60))
             GetComponent<AudioSource>().clip = win;
         }
         else
         {
-            _resultText.GetComponent<TMP_Text>().text = "You have accused the wrong person!";
+            _resultText.GetComponent<TMP_Text>().text = "You have accused\nthe wrong person!";
             GetComponent<AudioSource>().clip = loose;
         }
 
