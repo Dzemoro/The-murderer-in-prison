@@ -308,18 +308,26 @@ public class sGameHandler : MonoBehaviour
 
     public void AddMurderCase()
     {
-        var victimsSource = Prisoners.Where(p => p.Value.Role != PrisonerRole.Murderer && p.Value.IsAlive && p.Value.Role != PrisonerRole.Witness);
+        var basevictimsSource = Prisoners.Where(p =>
+            p.Value.Role != PrisonerRole.Murderer &&
+            p.Value.IsAlive &&
+            p.Value.Role != PrisonerRole.Witness);
+        var victimsSource = basevictimsSource.Where(p => !sNPC.GetGameObjectById(p.Key).GetComponent<Renderer>().isVisible);
+        victimsSource = victimsSource.Any() ? victimsSource : basevictimsSource;
         var victimId = UpdateRandomPrisoner(victimsSource, Enumerable.Empty<KeyValuePair<int, Prisoner>>(), PrisonerRole.None, isAlive: false);
         sNPC.GetGameObjectById(victimId).SetActive(false);
         sNotebook.Instance.UpdateNotebook(Prisoners[victimId].Name, "They were murdered while I was working on the case! Someone might have some new information.");
         System.Diagnostics.Debug.WriteLine($"{_prisoners[victimId].Name} ({victimId}) has been killed.");
 
-
         var newRolesSource = victimsSource.Where(x => x.Key != victimId && x.Value.Role == PrisonerRole.None);
+        if (!newRolesSource.Any())
+            newRolesSource = basevictimsSource.Where(x => x.Key != victimId && x.Value.Role == PrisonerRole.None);
         var newWitnessId = UpdateRandomPrisoner(newRolesSource, Prisoners, PrisonerRole.Witness);
         System.Diagnostics.Debug.WriteLine($"{_prisoners[newWitnessId].Name} ({newWitnessId}) is the new witness.");
 
         var verifierRolesSource = newRolesSource.Where(x => x.Key != newWitnessId);
+        if (!verifierRolesSource.Any())
+            verifierRolesSource = basevictimsSource.Where(x => x.Key != newWitnessId);
         UpdateRandomPrisoner(verifierRolesSource, Prisoners, PrisonerRole.Verifier);
     }
 
@@ -539,5 +547,5 @@ public class JsonRecord
         public string Verifier { get; set; }
         public string None { get; set; }
     }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
