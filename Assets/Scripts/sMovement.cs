@@ -31,6 +31,7 @@ public class sMovement : MonoBehaviour
     public AudioSource _musicSource;
     public float musicTime;
     public AudioSource _stepSource;
+    public AudioSource _timeOver;
 
 
     // Start is called before the first frame update
@@ -139,7 +140,8 @@ public class sMovement : MonoBehaviour
             _resultScreen.GetComponent<sResultVariables>()._open = true;
             timeRunning = false;
             FreeToAct = false;
-            _resultText.GetComponent<TMP_Text>().text = "The murderer escaped! You failed!";
+            _resultText.GetComponent<TMP_Text>().text = "The murderer escaped!\nYou failed!";
+            if (!sGameMenu.Instance.soundMute) _timeOver.Play();
         }
     }
 
