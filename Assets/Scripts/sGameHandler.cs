@@ -434,12 +434,13 @@ public class sGameHandler : MonoBehaviour
                 {
                     var name = _prisonersFileData[id].Name;
                     var audioRoleName = dialogueType == DialogueType.Suspicion ? "Knows-Anything" : "Alibi";
+                    var targetString = dialogueType == DialogueType.Alibi && (role == PrisonerRole.Informant || role == PrisonerRole.Witness) ? string.Empty : relationName.Replace("'", string.Empty).Replace(" ", "-");
                     audioFileName = "PrisonersVA/" + 
                         string.Join("_", 
                             audioRoleName, 
                             role.ToString(), 
-                            name.Replace("'", string.Empty).Replace(" ", "-"), 
-                            relationName.Replace("'", string.Empty).Replace(" ", "-"))
+                            "0",
+                            targetString)
                         .TrimEnd('_');
                 }
             }
