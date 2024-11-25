@@ -1,1 +1,3 @@
 # The-murderer-in-prison
+
+A massive prison and a serial killer. A detective unravels the mystery by questioning inmates and guards about their alibis and suspects. The culprit has no alibi and is pointed out as the prime suspect by the largest group of inmates. The player races against an AI detective to discover the killer first. The system incorporates random elements and is based on certain enhancements to increase gameplay intuitiveness. The Unity engine was used for implementation.
